@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>See It In Action — Virtual Archive</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div style="width: 100%; display: flex; flex-direction: column; align-items: stretch; background: #f6f1e7;">
+
+<!-- NAV -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-bottom: 1px solid #e3d8bf;">
+    <a href="index.html" style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #0d2a63;">Virtual Archive</a>
+    <div style="display: flex; gap: 24px; font-size: 14px;">
+      <a href="features.html" style="font-weight:700;color:#0d2a63;">See it in action</a>
+      <a href="what-it-does.html" style="font-weight:500;color:#251f14;">What it does</a>
+      <a href="pricing.html" style="font-weight:500;color:#251f14;">Personal &amp; Museum</a>
+      <a href="help.html" style="font-weight:500;color:#251f14;">Help</a>
+      <a href="download.html" style="font-weight:500;color:#251f14;">Get it</a>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div id="gallery" style="padding: 48px 48px 64px 48px; max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+    <h2 style="font-size: 30px; color: #251f14; margin-bottom: 10px;">See it in action</h2>
+    <p style="font-size: 15px; color: #4a4330; margin-bottom: 32px; max-width: 560px;">Real screens from the program — click any one to see it full size.</p>
+    <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px;"></div>
+  </div>
+
+  <div id="lightboxOverlay" class="lightbox-overlay" style="display:none;">
+    <div style="max-width: 1100px; max-height: 90vh; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+      <img id="lightboxImg" src="" alt="" style="max-width: 100%; max-height: 78vh; object-fit: contain; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+      <div id="lightboxCaption" style="color: #fff; font-size: 14px; font-weight: 600;"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #8a7f63; border-top: 1px solid #e3d8bf;">
+    <div>virtualarchive.org</div>
+    <div>Virtual Archive &copy; 2026</div>
+  </div>
+</div>
+
+<script>
+  var GALLERY = [
+    { src: 'images/f78a366eca59b6e8c3d89802015e0943.png', caption: 'Adding an item — blank form', alt: 'A blank Add Item form, ready for input, with the location directory alongside it' },
+    { src: 'images/f4b1a30f23171f9133131fada3fd0ec1.jpg', caption: 'Editing an item — Personal', alt: 'Editing an item, Personal edition' },
+    { src: 'images/55d06368da3b9e7ecd1a92db927e2df8.png', caption: 'Editing an item — Museum', alt: 'Editing an item, Museum edition with metadata' },
+    { src: 'images/15decf1b90588688099857423f9f4b82.jpg', caption: 'Browsing — treeview open', alt: 'Browsing a collection with the treeview open' },
+    { src: 'images/039c77bd57b968d656220e3679d52b62.jpg', caption: 'Browsing — treeview hidden', alt: 'Browsing a collection with the treeview hidden' },
+    { src: 'images/fa3aa10e873b7b8646bf0892f7db8f84.jpg', caption: 'Browsing by category', alt: 'Browsing categories as folders' },
+    { src: 'images/0b164e589c9520ea737823d5cb8c31f3.jpg', caption: 'Navigating locations', alt: 'Navigating the location treeview, from Cabinet 2 to Cabinet 4' },
+    { src: 'images/445120ec2f6d95e566189474ea93d913.jpg', caption: 'Inside a folder', alt: 'Browsing items inside a sub-folder' },
+    { src: 'images/45c409a534c1cd42deb3b7cc2c368dbe.jpg', caption: 'Ordering an album', alt: 'Reordering pictures in an album by clicking, drag-and-drop style' },
+    { src: 'images/efbffb36114eecd07b425e82e032c42c.jpg', caption: 'Building an accession form', alt: 'Building an accession form, Museum edition' },
+    { src: 'images/530230307b6ca67f46bf1b8c48e83551.jpg', caption: 'A finished deed of gift', alt: 'A finished accession sheet ready to print and sign' },
+    { src: 'images/b2dd29beacb5eb745ec85dae04aabdf6.jpg', caption: 'Reports and More menu', alt: 'The Reports and More menu' },
+    { src: 'images/44ab9942a05ffc9fdbb2addba000404b.jpg', caption: 'Program settings', alt: 'The program settings screen' }
+  ];
+
+  var grid = document.getElementById('galleryGrid');
+  GALLERY.forEach(function (shot, i) {
+    var card = document.createElement('div');
+    card.style.cssText = 'cursor: pointer; background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; overflow: hidden;';
+    card.innerHTML =
+      '<img src="' + shot.src + '" alt="' + shot.alt.replace(/"/g, '&quot;') + '" ' +
+      'style="display:block;width:100%;height:190px;object-fit:cover;object-position:top;border-bottom:1px solid #e3d8bf;">' +
+      '<div style="padding: 12px 14px; font-size: 13px; font-weight: 600; color: #0d2a63;">' + shot.caption + '</div>';
+    card.addEventListener('click', function () { openLightbox(i); });
+    grid.appendChild(card);
+  });
+
+  var overlay = document.getElementById('lightboxOverlay');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+
+  function openLightbox(i) {
+    var shot = GALLERY[i];
+    lightboxImg.src = shot.src;
+    lightboxImg.alt = shot.alt;
+    lightboxCaption.textContent = shot.alt;
+    overlay.style.display = 'flex';
+  }
+  function closeLightbox() {
+    overlay.style.display = 'none';
+  }
+  overlay.addEventListener('click', closeLightbox);
+</script>
+
+</body>
+</html>

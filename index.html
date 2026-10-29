@@ -1,599 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Virtual Archive</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<style>
-  :root {
-    --board:      #E9EBE6;
-    --paper:      #F8F9F6;
-    --ink:        #171C19;
-    --ink-soft:   #4C564F;
-    --ink-faint:  #6E7871;
-    --rule:       #C8CEC4;
-    --rule-soft:  #DDE1D9;
-    --green:      #2C5545;
-    --green-deep: #1E3D31;
-    --green-wash: #DFE7E1;
-    --brass:      #8A6D33;
-    --brass-wash: #EFE7D4;
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div style="width: 100%; display: flex; flex-direction: column; align-items: stretch; background: #f6f1e7;">
 
-    --f-display: "Newsreader", Georgia, "Times New Roman", serif;
-    --f-body:    "Public Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    --f-mono:    "IBM Plex Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --board:      #131714;
-      --paper:      #1C211D;
-      --ink:        #ECEFE9;
-      --ink-soft:   #B3BDB4;
-      --ink-faint:  #8B958C;
-      --rule:       #333B34;
-      --rule-soft:  #262D27;
-      --green:      #7FB49E;
-      --green-deep: #A5CDBB;
-      --green-wash: #1E2B24;
-      --brass:      #C6A664;
-      --brass-wash: #262117;
-    }
-  }
-  :root[data-theme="dark"] {
-    --board:      #131714;
-    --paper:      #1C211D;
-    --ink:        #ECEFE9;
-    --ink-soft:   #B3BDB4;
-    --ink-faint:  #8B958C;
-    --rule:       #333B34;
-    --rule-soft:  #262D27;
-    --green:      #7FB49E;
-    --green-deep: #A5CDBB;
-    --green-wash: #1E2B24;
-    --brass:      #C6A664;
-    --brass-wash: #262117;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    background: var(--board);
-    color: var(--ink);
-    font-family: var(--f-body);
-    font-size: 19px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.5rem; }
-  /* Narrow measure for reading, WITHOUT re-centring. Setting max-width on the
-     wrap itself makes its auto margins recentre the whole block, so those
-     sections started further right than every other section's heading and the
-     page lost its left edge. Constrain the children instead. */
-  .wrap.narrow > * { max-width: 38rem; }
-
-  h1, h2, h3 { font-family: var(--f-display); font-weight: 500; text-wrap: balance; }
-
-  .eyebrow {
-    font-family: var(--f-mono);
-    font-size: .74rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--brass);
-    margin: 0 0 1.4rem;
-  }
-
-  /* ---------------------------------------------------------------- masthead */
-  .masthead {
-    border-bottom: 1px solid var(--rule);
-    padding: 1.1rem 0;
-  }
-  .masthead .wrap {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 1rem; flex-wrap: wrap;
-  }
-  .wordmark {
-    font-family: var(--f-display); font-weight: 600; font-size: 1.25rem;
-    letter-spacing: .01em;
-  }
-  .wordmark span { color: var(--green); }
-  .masthead .site { font-family: var(--f-mono); font-size: .8rem; color: var(--ink-faint); }
-
-  /* ------------------------------------------------------------------- hero */
-  .hero { padding: 4.5rem 0 3.5rem; }
-  .hero h1 {
-    font-size: clamp(2.3rem, 5.2vw, 3.6rem);
-    line-height: 1.08;
-    margin: 0 0 1.4rem;
-    letter-spacing: -.015em;
-  }
-  .hero .lede {
-    font-size: 1.28rem; line-height: 1.55; color: var(--ink-soft);
-    max-width: 34rem; margin: 0 0 2.2rem;
-  }
-  .hero .lede strong { color: var(--ink); font-weight: 600; }
-
-  .hero-grid {
-    display: grid; grid-template-columns: 1.05fr .95fr; gap: 3.5rem; align-items: start;
-  }
-
-  /* ------------------------------------------------------- the record card */
-  .record {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-top: 5px solid var(--green);
-    border-radius: 2px;
-    padding: 1.6rem 1.7rem 1.8rem;
-    box-shadow: 0 1px 0 var(--rule-soft), 0 14px 34px -22px rgba(0,0,0,.45);
-  }
-  .record-head {
-    display: flex; justify-content: space-between; align-items: baseline;
-    gap: 1rem; padding-bottom: .9rem; margin-bottom: 1.1rem;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .record-head .what {
-    font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--ink-faint);
-  }
-  .record-head .acc {
-    font-family: var(--f-mono); font-size: .8rem; color: var(--brass);
-    white-space: nowrap;
-  }
-  .field { margin-bottom: .95rem; }
-  .field:last-child { margin-bottom: 0; }
-  .field .k {
-    font-family: var(--f-mono); font-size: .66rem; letter-spacing: .13em;
-    text-transform: uppercase; color: var(--ink-faint);
-    display: block; margin-bottom: .18rem;
-  }
-  .field .v {
-    font-family: var(--f-display); font-size: 1.02rem; line-height: 1.45;
-    color: var(--ink);
-  }
-  .field .v em { font-style: italic; color: var(--ink-soft); }
-  .record-note {
-    margin-top: 1.4rem; padding-top: .9rem; border-top: 1px solid var(--rule-soft);
-    font-size: .82rem; line-height: 1.5; color: var(--ink-faint);
-  }
-
-  /* ----------------------------------------------------------------- buttons */
-  .actions { display: flex; gap: .9rem; flex-wrap: wrap; align-items: center; }
-  .btn {
-    display: inline-block; font-family: var(--f-body); font-weight: 600;
-    font-size: 1.02rem; text-decoration: none; border-radius: 3px;
-    padding: .82rem 1.5rem; border: 2px solid var(--green);
-    transition: background-color .12s ease, color .12s ease;
-  }
-  .btn-primary { background: var(--green); color: var(--paper); }
-  .btn-primary:hover { background: var(--green-deep); border-color: var(--green-deep); }
-  .btn-ghost { color: var(--green); background: transparent; }
-  .btn-ghost:hover { background: var(--green-wash); }
-  .btn:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
-  .under-actions { font-size: .92rem; color: var(--ink-faint); margin: 1rem 0 0; }
-
-  /* ---------------------------------------------------------------- sections */
-  section { padding: 3.4rem 0; border-top: 1px solid var(--rule); }
-  section h2 {
-    font-size: clamp(1.65rem, 3vw, 2.1rem); line-height: 1.15;
-    margin: 0 0 1.1rem; letter-spacing: -.01em;
-  }
-  section p { margin: 0 0 1.15rem; }
-  section p:last-child { margin-bottom: 0; }
-  .sub { color: var(--ink-soft); }
-
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-
-  /* field-name chips, used where the app's own labels are quoted */
-  .labels { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.5rem 0 0; }
-  .labels span {
-    font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ink-soft);
-    border: 1px solid var(--rule); border-radius: 2px;
-    padding: .3rem .55rem; background: var(--paper);
-  }
-
-  /* the deed-of-gift feature panel */
-  .feature {
-    background: var(--paper); border: 1px solid var(--rule);
-    border-left: 5px solid var(--brass); border-radius: 2px;
-    padding: 1.8rem 1.9rem;
-  }
-  .feature h3 { font-size: 1.2rem; margin: 0 0 .6rem; }
-  .feature ul { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); }
-  .feature li { margin-bottom: .45rem; }
-  .feature li:last-child { margin-bottom: 0; }
-
-  /* plain prose lists */
-  .plain { margin: 0; padding-left: 1.15rem; }
-  .plain li { margin-bottom: .7rem; }
-  .plain li:last-child { margin-bottom: 0; }
-
-  /* --------------------------------------------------------------- pricing */
-  .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
-  .price {
-    background: var(--paper); border: 1px solid var(--rule); border-radius: 2px;
-    padding: 1.7rem 1.7rem 1.9rem; display: flex; flex-direction: column;
-  }
-  .price.lead { border: 2px solid var(--green); }
-  .price .tier {
-    font-family: var(--f-mono); font-size: .72rem; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 .7rem;
-  }
-  .price .amt {
-    font-family: var(--f-display); font-size: 2.7rem; font-weight: 500;
-    line-height: 1; margin: 0 0 .2rem; font-variant-numeric: tabular-nums;
-  }
-  .price .once { font-size: .9rem; color: var(--ink-faint); margin: 0 0 1.1rem; }
-  .price ul { margin: 0 0 1.4rem; padding-left: 1.1rem; font-size: .96rem; color: var(--ink-soft); }
-  .price li { margin-bottom: .4rem; }
-  .price .btn { margin-top: auto; text-align: center; }
-  .price .or {
-    margin: .7rem 0 0; font-size: .88rem; color: var(--ink-faint); text-align: center;
-  }
-  .price .or a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--rule); }
-  .price .or a:hover { border-bottom-color: var(--green); }
-  .thedifference {
-    background: var(--paper); border: 1px solid var(--rule);
-    border-left: 5px solid var(--green); border-radius: 2px;
-    padding: 1.5rem 1.7rem; margin: 1.8rem 0 0; max-width: 46rem;
-  }
-  .thedifference p { margin: 0 0 .9rem; color: var(--ink-soft); }
-  .thedifference p:last-child { margin-bottom: 0; }
-  .thedifference strong { color: var(--ink); font-weight: 700; }
-  .price li strong { color: var(--ink); font-weight: 700; }
-
-  .price-note { margin-top: 1.4rem; font-size: .95rem; color: var(--ink-faint); max-width: 46rem; }
-  .price-note strong { color: var(--ink-soft); font-weight: 600; }
-
-  /* ------------------------------------------------------------ requirements */
-  .req { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.8rem; }
-  .req div { border-top: 2px solid var(--rule); padding-top: .85rem; }
-  .req h4 {
-    font-family: var(--f-mono); font-size: .72rem; letter-spacing: .13em;
-    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 .4rem; font-weight: 500;
-  }
-  .req p { font-size: .96rem; margin: 0; color: var(--ink-soft); }
-
-  /* ----------------------------------------------------------------- footer */
-  footer {
-    border-top: 1px solid var(--rule); padding: 2.6rem 0 3.4rem;
-    font-size: .92rem; color: var(--ink-faint);
-  }
-  footer p { margin: 0 0 .5rem; }
-  footer a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--rule); }
-  footer a:hover { border-bottom-color: var(--green); }
-
-  /* contact block */
-  .contact {
-    margin-top: 2.4rem; padding: 1.8rem 1.9rem;
-    background: var(--paper); border: 1px solid var(--rule);
-    border-left: 5px solid var(--green); border-radius: 2px;
-  }
-  .contact h3 { font-size: 1.25rem; margin: 0 0 .6rem; }
-  .contact p { color: var(--ink-soft); margin: 0 0 .9rem; max-width: 38rem; }
-  .contact .addr { margin: 0; }
-  .contact .addr a {
-    font-family: var(--f-mono); font-size: 1.02rem; font-weight: 500;
-    color: var(--green); text-decoration: none;
-    border-bottom: 2px solid var(--green-wash); padding-bottom: 2px;
-  }
-  .contact .addr a:hover { border-bottom-color: var(--green); }
-  .contact .addr a:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
-
-  .todo {
-    background: var(--brass-wash); border: 1px dashed var(--brass);
-    border-radius: 2px; padding: 1rem 1.2rem; margin: 2rem 0 0;
-    font-size: .92rem; color: var(--ink-soft);
-  }
-  .todo strong { color: var(--brass); font-weight: 600; }
-
-  @media (max-width: 60rem) {
-    .hero-grid, .two { grid-template-columns: 1fr; gap: 2.4rem; }
-    .req { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
-  }
-  @media (max-width: 40rem) {
-    body { font-size: 18px; }
-    .req { grid-template-columns: 1fr; gap: 1.1rem; }
-    .hero { padding: 3rem 0 2.6rem; }
-    section { padding: 2.6rem 0; }
-    .prices { grid-template-columns: 1fr; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
-</style>
-
-<header class="masthead">
-  <div class="wrap">
-    <div class="wordmark">Virtual <span>Archive</span></div>
-    <div class="site">digitalfiler.com</div>
+<!-- NAV -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-bottom: 1px solid #e3d8bf;">
+    <a href="index.html" style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #0d2a63;">Virtual Archive</a>
+    <div style="display: flex; gap: 24px; font-size: 14px;">
+      <a href="features.html" style="font-weight:500;color:#251f14;">See it in action</a>
+      <a href="what-it-does.html" style="font-weight:500;color:#251f14;">What it does</a>
+      <a href="pricing.html" style="font-weight:500;color:#251f14;">Personal &amp; Museum</a>
+      <a href="help.html" style="font-weight:500;color:#251f14;">Help</a>
+      <a href="download.html" style="font-weight:500;color:#251f14;">Get it</a>
+    </div>
   </div>
-</header>
 
-<main>
+  <!-- HERO -->
+  <div style="padding: 72px 48px 56px 48px; display: flex; flex-wrap: wrap; gap: 48px; max-width: 1280px; margin: 0 auto; box-sizing: border-box; width: 100%;">
+    <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px; justify-content: center;">
+      <div style="font-family: 'Courier New', Consolas, monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b5804a;">For Windows, macOS &amp; Linux</div>
+      <h1 style="font-size: 48px; line-height: 1.12; color: #251f14;">Catalog anything. Find it in seconds.</h1>
+      <p style="font-size: 17px; line-height: 1.55; color: #4a4330; max-width: 480px;">Virtual Archive turns boxes of photos, documents, and objects into a searchable collection &mdash; built for museums and historical societies, or simple enough for your own closet.</p>
 
-  <div class="wrap hero">
-    <div class="hero-grid">
-      <div>
-        <p class="eyebrow">For historical societies and small museums</p>
-        <h1>A catalogue you buy once and keep.</h1>
-        <p class="lede">Virtual Archive records your collection on <strong>your own
-          computer</strong>. No subscription, no account, no internet needed to run it.
-          If we disappeared tomorrow, it would still open on Monday.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#try">Try it on your own collection</a>
-          <a class="btn btn-ghost" href="#price">See the price</a>
-        </div>
-        <p class="under-actions">Free for your first 100 items. Nothing to cancel.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px;">
+        <div style="display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e3d8bf; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: #b5804a;">One-time purchase</div>
+        <div style="display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e3d8bf; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: #b5804a;">Works fully offline</div>
+        <div style="display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e3d8bf; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: #b5804a;">No subscription, ever</div>
       </div>
 
-      <div class="record">
-        <div class="record-head">
-          <span class="what">Catalogue record</span>
-          <span class="acc">HS20260419142233</span>
+      <a href="download.html" style="align-self: flex-start; background: #0d2a63; color: #fff; padding: 13px 26px; border-radius: 7px; font-weight: 600; font-size: 15px; margin-top: 10px;">Get Virtual Archive</a>
+    </div>
+
+    <div style="flex: 1 1 380px; min-width: 0; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 100%; max-width: 480px; background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 24px 48px -16px rgba(26,20,48,0.35);">
+        <div style="display: flex; gap: 6px; padding: 4px 6px 10px 6px;">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: #e3604a;"></div>
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: #e3b24a;"></div>
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: #5ab06a;"></div>
         </div>
-        <div class="field">
-          <span class="k">Title</span>
-          <span class="v">Grange Hall on Main Street, after the fire</span>
-        </div>
-        <div class="field">
-          <span class="k">Source</span>
-          <span class="v">Estate of R. A. Fletcher</span>
-        </div>
-        <div class="field">
-          <span class="k">Location</span>
-          <span class="v">Storage \ Barn \ Lower Level \ Unit 1 \ Shelf 3</span>
-        </div>
-        <div class="field">
-          <span class="k">Categories</span>
-          <span class="v">Buildings \ Grange Hall &nbsp;·&nbsp; Fires &nbsp;·&nbsp; Main Street</span>
-        </div>
-        <div class="field">
-          <span class="k">Provenance</span>
-          <span class="v"><em>Held by the Fletcher family since 1948. Given by
-            R. A. Fletcher's daughter, March 2026.</em></span>
-        </div>
-        <div class="field">
-          <span class="k">Condition</span>
-          <span class="v">Silver print, foxing to upper edge</span>
-        </div>
-        <div class="record-note">
-          Every item carries a source, a location, any number of categories, a
-          description and its provenance. Museum copies add the accession number
-          and date, conditions of loan, and thirteen fields you name yourself.
-        </div>
+        <img src="images/f78a366eca59b6e8c3d89802015e0943.png" alt="A blank Add Item form in Virtual Archive, ready for input" style="display: block; width: 100%; border-radius: 0 0 6px 6px;">
       </div>
     </div>
   </div>
 
-  <section>
-    <div class="wrap two">
-      <div>
-        <h2>It is a catalogue, not a photo album.</h2>
-        <p class="sub">Most software will let you tag a picture. Very little of it
-          knows what an accession number is, or that a loan has conditions attached,
-          or that where an object came from matters as much as what it is.</p>
-        <p class="sub">Virtual Archive records the things a collection actually has
-          to answer for, and it does not make you invent a place to put them.</p>
-      </div>
-      <div>
-        <div class="labels">
-          <span>Source</span><span>Location</span><span>Categories</span>
-          <span>Title</span><span>Description</span><span>Provenance</span>
-          <span>Special conditions of loan</span><span>Accession #</span>
-          <span>Accession date</span><span>Entered by</span><span>Date entered</span>
-        </div>
-        <p class="sub" style="margin-top:1.4rem">Plus thirteen fields you define
-          yourself. It arrives set up with Material, Size, Time Period, Copyright,
-          Creator, Place of Creation, Condition and Appraised Value — change any of
-          them to suit your collection.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap two">
-      <div>
-        <h2>It writes the deed of gift.</h2>
-        <p class="sub">The part nobody enjoys. Choose a donor, and Virtual Archive
-          produces a Word document you can print and sign at the table.</p>
-        <p class="sub">Making it stamps the accession number and date onto every
-          item included, so the paperwork and the catalogue cannot drift apart.</p>
-      </div>
-      <div class="feature">
-        <h3>What comes out</h3>
-        <ul>
-          <li>A photograph of every item in the gift</li>
-          <li>A table of titles and descriptions</li>
-          <li>Your own logo at the head of the page</li>
-          <li>The gift and tax-receipt wording</li>
-          <li>Signature lines for the donor and for the museum</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap two">
-      <div>
-        <h2>A volunteer can find things in it.</h2>
-        <p class="sub">Three lists down the side — Source, Location and Categories —
-          each opening like a drawer. Nothing to learn beyond clicking a folder.</p>
-        <p class="sub">Search reads the whole of every record, not just the
-          description, so a name buried in a provenance note still comes back. What
-          you find collects in a working folder, and that folder is what you then
-          report on, export, or turn into a book.</p>
-      </div>
-      <div>
-        <h2 style="font-size:1.35rem">Two things worth knowing</h2>
-        <ul class="plain sub">
-          <li>Every item is identified by a fingerprint taken from the file itself,
-            so the same photograph cannot quietly be catalogued twice.</li>
-          <li>One stored copy is shared by every folder an item appears in. A
-            photograph filed under a source, a location and five categories still
-            takes the space of one photograph.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap narrow">
-      <h2>Nothing is ever trapped.</h2>
-      <p class="sub">A catalogue is only worth keeping if you can get it back out.
-        Any part of the collection exports to a spreadsheet of fourteen columns —
-        source, location, categories, title, description, provenance, accession
-        number and the rest — that opens in whatever you already use.</p>
-      <p class="sub">Whole collections, or any selection from one, save to a single
-        file you can hand to someone else, keep as a backup, or read back in later.
-        Reading one in can rewrite the source and location as it goes, which is what
-        makes sharing between societies safe rather than a merge you regret.</p>
-    </div>
-  </section>
-
-  <section id="try">
-    <div class="wrap narrow">
-      <h2>Try it on the real thing.</h2>
-      <p class="sub">Not a demonstration collection. Install it, put your own
-        material in, and see whether it suits you. The first hundred items are
-        free and there is nothing to cancel.</p>
-      <p class="sub">If you stop at the limit, nothing is taken away or held back.
-        You can still search, browse, print reports, export and back up everything
-        you entered. Only adding and editing pause until the copy is registered.</p>
-      <div class="actions" style="margin-top:1.8rem">
-        <a class="btn btn-primary" href="https://github.com/jgammans/Virtual-Archive-Downloads/releases/download/v3.2/VirtualArchive-Setup.exe">Download for Windows</a>
-        <a class="btn btn-ghost" href="https://github.com/jgammans/Virtual-Archive-Downloads/releases/download/v3.2/VirtualArchive-3.2-linux.tar.gz">Download for Linux</a>
-      </div>
-      <p class="sub" style="margin-top:.9rem">On a Mac? Write to
-        <a href="mailto:jgammans@gmail.com">jgammans@gmail.com</a> and a copy
-        comes back the same day.</p>
-    </div>
-  </section>
-
-  <section id="price">
-    <div class="wrap">
-      <h2>One price, paid once.</h2>
-      <p class="sub narrow">No renewal, no per-seat counting, no annual approval to
-        go back to the committee for.</p>
-
-      <div class="thedifference">
-        <p><strong>The two are the same program.</strong> Cataloguing, searching,
-          the three folder trees, albums and slideshows, books, spreadsheets,
-          backups, exports, as many collections as you like — a personal copy
-          has all of it.</p>
-        <p>What the historical society edition adds is <strong>accessioning,
-          and the paperwork that goes with it</strong>. A society that takes in
-          donations cannot work without that. A family sorting out their
-          photographs never will.</p>
-      </div>
-
-      <div class="prices">
-        <div class="price">
-          <p class="tier">Personal</p>
-          <p class="amt">$150</p>
-          <p class="once">once, per household</p>
-          <ul>
-            <li>The whole catalogue, search and albums</li>
-            <li>Spreadsheets, exports and backups</li>
-            <li>Books and display sheets</li>
-            <li>As many collections as you like</li>
-          </ul>
-          <a class="btn btn-ghost" href="mailto:jgammans@gmail.com?subject=Virtual%20Archive%20-%20personal%20licence%20(%24150)">Buy — $150</a>
-          <p class="or">or <a href="#try">start with the free trial</a></p>
-        </div>
-
-        <div class="price lead">
-          <p class="tier">Historical society</p>
-          <p class="amt">$495</p>
-          <p class="once">once, for the organisation — not per seat</p>
-          <ul>
-            <li>Everything in Personal, plus:</li>
-            <li><strong>Deed of gift and tax receipt</strong> — a Word
-              document per donor, with a photograph of every item, a table of
-              descriptions, your logo and signature lines for both sides</li>
-            <li><strong>Accession numbers</strong>, generated for you, or use
-              your society's own numbering</li>
-            <li><strong>Thirteen fields you name yourself</strong> — Material,
-              Size, Time Period, Condition, Appraised Value</li>
-            <li><strong>Special conditions of loan</strong></li>
-            <li><strong>Printed display sheets</strong> for a single item</li>
-            <li><strong>Staff logins</strong>, so entries carry a name</li>
-          </ul>
-          <a class="btn btn-primary" href="mailto:jgammans@gmail.com?subject=Virtual%20Archive%20-%20historical%20society%20licence%20(%24495)">Buy — $495</a>
-          <p class="or">or <a href="#try">start with the free trial</a></p>
-        </div>
-      </div>
-
-      <p class="price-note"><strong>No card? That is not a problem.</strong> Ask
-        and you will be sent an invoice you can put through your treasurer or
-        pay against a purchase order. Checks are fine. Nothing is switched off
-        while you wait for a committee to meet.</p>
-
-      <p class="price-note">When you buy, you will be asked what your collection
-        should be called — usually the name of your society. Your licence is made
-        from it, and it is the name that appears at the head of your reports.</p>
-
-      <p class="price-note">Setting up, bringing an existing catalogue across and
-        training are quoted separately — ask and you will get a figure, not an
-        hourly rate.</p>
-    </div>
-  </section>
-
-  <section id="download">
-    <div class="wrap">
-      <h2>What it needs.</h2>
-      <div class="req">
-        <div>
-          <h4>Windows</h4>
-          <p>Installs for your own user account. No administrator password, so no
-            call to whoever looks after the computers.</p>
-        </div>
-        <div>
-          <h4>Linux</h4>
-          <p>Download, unpack, run install.sh. No Python, no internet and no
-            administrator password.</p>
-        </div>
-        <div>
-          <h4>Mac</h4>
-          <p>Ready, and sent on request rather than downloaded — write and you
-            will have it the same day, on a USB stick if you prefer. It runs on
-            macOS 12 and later.</p>
-        </div>
-        <div>
-          <h4>No internet</h4>
-          <p>Nothing is sent anywhere and nothing is checked online. It works the
-            same in a back room with no connection at all.</p>
-        </div>
-      </div>
-
-      <p class="price-note"><strong>The Windows download is about 181 MB, the
-        Linux one about 105 MB.</strong> A few minutes on a normal connection,
-        longer on a slow one. If your connection makes that awkward, say so and
-        one will be posted to you on a USB stick, ready to run with nothing to
-        download at all.</p>
-
-      <p class="price-note"><strong>Windows will warn you, and it is not a
-        fault.</strong> A blue box appears reading "Windows protected your PC",
-        because the installer is new and Windows does not recognise it yet.
-        Click <strong>More info</strong>, then <strong>Run anyway</strong>. It
-        installs for your own account and never asks for an administrator
-        password.</p>
-
-      <div class="contact">
-        <h3>Ask a person.</h3>
-        <p>Questions before you try it, an existing catalogue you want brought
-          across, or a quote for setting it up — write and you will get a reply
-          from the person who wrote the software.</p>
-        <p class="addr"><a href="mailto:jgammans@gmail.com">jgammans@gmail.com</a></p>
-      </div>
-
-
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap">
-    <p>Virtual Archive 3.2 — collections software for small museums and historical
-      societies.</p>
-    <p>Runs on Windows, macOS and Linux. Your catalogue stays on your own machine.</p>
-    <p><a href="mailto:jgammans@gmail.com">jgammans@gmail.com</a></p>
+  <!-- QUICK LINKS -->
+  <div style="padding: 24px 48px 72px 48px; max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 20px;">
+    <a href="features.html" style="flex: 1 1 260px; background: #fff; border: 1px solid #e3d8bf; border-top: 3px solid #0d2a63; border-radius: 10px; padding: 22px 24px;">
+      <div style="font-weight: 700; color: #0d2a63; margin-bottom: 6px;">See it in action &rarr;</div>
+      <div style="font-size: 14px; color: #4a4330;">Real screens from the program.</div>
+    </a>
+    <a href="what-it-does.html" style="flex: 1 1 260px; background: #fff; border: 1px solid #e3d8bf; border-top: 3px solid #0d2a63; border-radius: 10px; padding: 22px 24px;">
+      <div style="font-weight: 700; color: #0d2a63; margin-bottom: 6px;">What it does &rarr;</div>
+      <div style="font-size: 14px; color: #4a4330;">Everything the program can do, at a glance.</div>
+    </a>
+    <a href="pricing.html" style="flex: 1 1 260px; background: #fff; border: 1px solid #e3d8bf; border-top: 3px solid #0d2a63; border-radius: 10px; padding: 22px 24px;">
+      <div style="font-weight: 700; color: #0d2a63; margin-bottom: 6px;">Personal &amp; Museum &rarr;</div>
+      <div style="font-size: 14px; color: #4a4330;">Compare the two editions and see pricing.</div>
+    </a>
+    <a href="help.html" style="flex: 1 1 260px; background: #fff; border: 1px solid #e3d8bf; border-top: 3px solid #0d2a63; border-radius: 10px; padding: 22px 24px;">
+      <div style="font-weight: 700; color: #0d2a63; margin-bottom: 6px;">Read the manual &rarr;</div>
+      <div style="font-size: 14px; color: #4a4330;">The same help screen that's built into the program.</div>
+    </a>
   </div>
-</footer>
+
+  <!-- FOOTER -->
+  <div style="padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #8a7f63; border-top: 1px solid #e3d8bf;">
+    <div>virtualarchive.org</div>
+    <div>Virtual Archive &copy; 2026</div>
+  </div>
+</div>
+</body>
+</html>

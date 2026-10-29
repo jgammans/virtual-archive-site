@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download — Virtual Archive</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div style="width: 100%; display: flex; flex-direction: column; align-items: stretch; background: #f6f1e7;">
+
+<!-- NAV -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-bottom: 1px solid #e3d8bf;">
+    <a href="index.html" style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #0d2a63;">Virtual Archive</a>
+    <div style="display: flex; gap: 24px; font-size: 14px;">
+      <a href="features.html" style="font-weight:500;color:#251f14;">See it in action</a>
+      <a href="what-it-does.html" style="font-weight:500;color:#251f14;">What it does</a>
+      <a href="pricing.html" style="font-weight:500;color:#251f14;">Personal &amp; Museum</a>
+      <a href="help.html" style="font-weight:500;color:#251f14;">Help</a>
+      <a href="download.html" style="font-weight:700;color:#0d2a63;">Get it</a>
+    </div>
+  </div>
+
+  <!-- GET IT -->
+  <div id="get" style="padding: 48px 48px 72px 48px;">
+    <div style="max-width: 640px; margin: 0 auto;">
+      <h2 style="font-size: 30px; color: #251f14; text-align: center; margin-bottom: 8px;">Get Virtual Archive</h2>
+      <p style="font-size: 14px; color: #8a7f63; text-align: center; margin-bottom: 32px; max-width: 540px; margin-left: auto; margin-right: auto;">Online checkout is coming soon. For now, send a purchase request below &mdash; we'll reply by email with how to pay, then your registration code.</p>
+
+      <div style="background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; padding: 32px;">
+
+        <div style="font-family: 'Courier New', Consolas, monospace; font-size: 13px; font-weight: 700; color: #8a7f63; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">Edition</div>
+        <div id="tierButtons" style="display: flex; gap: 10px; margin-bottom: 24px;"></div>
+
+        <div style="font-family: 'Courier New', Consolas, monospace; font-size: 13px; font-weight: 700; color: #8a7f63; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">Operating system</div>
+        <div id="osButtons" style="display: flex; gap: 10px; margin-bottom: 28px;"></div>
+
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #e3d8bf; padding-top: 20px; margin-bottom: 20px;">
+          <div id="summaryLine" style="font-size: 15px; color: #4a4330;"></div>
+          <div id="summaryPrice" style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #251f14;"></div>
+        </div>
+
+        <div id="sentPanel" style="display: none; background: #1f4a3a; border: 1px solid #2f6b52; border-radius: 8px; padding: 16px; font-size: 13px; color: #d7f2e4; text-align: left;">
+          Request sent. If your email app didn't open, email <strong>jgammans@gmail.com</strong> directly with your name, the edition and the OS you want.
+        </div>
+        <div id="formPanel" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+          <input id="nameInput" type="text" placeholder="Your name"
+            style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
+          <input id="emailInput" type="email" placeholder="Your email"
+            style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
+          <div id="errorLine" style="display: none; font-size: 12px; color: #b5204a;">Enter your name and a valid email first.</div>
+          <a id="submitBtn" href="#" style="display: block; text-align: center; text-decoration: none; background: #b5804a; color: #251f14; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px; margin-top: 4px;">Request to Buy</a>
+          <div style="font-size: 11px; color: #8a7f63; margin-top: 2px;">Opens an email with your request.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #8a7f63; border-top: 1px solid #e3d8bf;">
+    <div>virtualarchive.org</div>
+    <div>Virtual Archive &copy; 2026</div>
+  </div>
+</div>
+
+<script>
+  var OS_DATA = {
+    windows: { key: 'windows', label: 'Windows' },
+    mac: { key: 'mac', label: 'macOS' },
+    linux: { key: 'linux', label: 'Linux' }
+  };
+  var TIER_DATA = {
+    personal: { key: 'personal', title: 'Personal', label: 'Personal — $150.00', price: '$150.00' },
+    museum: { key: 'museum', title: 'Museum', label: 'Museum — $495.00', price: '$495.00' }
+  };
+
+  var state = { osKey: 'windows', tierKey: 'personal', sent: false };
+
+  var SELECTED_STYLE = 'background:#0d2a63;color:#fff;border:1px solid #0d2a63;padding:9px 18px;border-radius:7px;font-weight:600;font-size:14px;';
+  var UNSELECTED_STYLE = 'background:#fff;color:#0d2a63;border:1px solid #d8cba8;padding:9px 18px;border-radius:7px;font-weight:600;font-size:14px;';
+
+  var tierButtonsEl = document.getElementById('tierButtons');
+  var osButtonsEl = document.getElementById('osButtons');
+  var summaryLine = document.getElementById('summaryLine');
+  var summaryPrice = document.getElementById('summaryPrice');
+  var sentPanel = document.getElementById('sentPanel');
+  var formPanel = document.getElementById('formPanel');
+  var nameInput = document.getElementById('nameInput');
+  var emailInput = document.getElementById('emailInput');
+  var errorLine = document.getElementById('errorLine');
+  var submitBtn = document.getElementById('submitBtn');
+
+  function buildMailto() {
+    var tier = TIER_DATA[state.tierKey];
+    var os = OS_DATA[state.osKey];
+    var name = nameInput.value;
+    var email = emailInput.value;
+    var subject = 'Thanks for your interest in Virtual Archive — ' + tier.title;
+    var body = 'Hi, I\'d like to purchase Virtual Archive (' + tier.title + ' — ' + tier.price + ').\n\n'
+      + 'Name: ' + name + '\nEmail: ' + email + '\nOperating system: ' + os.label + '\n\n'
+      + 'Please send payment instructions and my registration code.\n\nThanks!';
+    return 'mailto:jgammans@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
+  function render() {
+    var tier = TIER_DATA[state.tierKey];
+    var os = OS_DATA[state.osKey];
+
+    tierButtonsEl.innerHTML = '';
+    Object.keys(TIER_DATA).forEach(function (key) {
+      var t = TIER_DATA[key];
+      var btn = document.createElement('button');
+      btn.className = 'tierbtn';
+      btn.textContent = t.label;
+      btn.style.cssText = key === state.tierKey ? SELECTED_STYLE : UNSELECTED_STYLE;
+      btn.addEventListener('click', function () { state.tierKey = key; render(); });
+      tierButtonsEl.appendChild(btn);
+    });
+
+    osButtonsEl.innerHTML = '';
+    Object.keys(OS_DATA).forEach(function (key) {
+      var o = OS_DATA[key];
+      var btn = document.createElement('button');
+      btn.className = 'osbtn';
+      btn.textContent = o.label;
+      btn.style.cssText = key === state.osKey ? SELECTED_STYLE : UNSELECTED_STYLE;
+      btn.addEventListener('click', function () { state.osKey = key; render(); });
+      osButtonsEl.appendChild(btn);
+    });
+
+    summaryLine.textContent = tier.title + ' for ' + os.label;
+    summaryPrice.textContent = tier.price;
+    submitBtn.textContent = 'Request to Buy — ' + tier.price;
+    submitBtn.href = buildMailto();
+
+    sentPanel.style.display = state.sent ? 'block' : 'none';
+    formPanel.style.display = state.sent ? 'none' : 'flex';
+  }
+
+  nameInput.addEventListener('input', function () { errorLine.style.display = 'none'; render(); });
+  emailInput.addEventListener('input', function () { errorLine.style.display = 'none'; render(); });
+
+  submitBtn.addEventListener('click', function (e) {
+    var name = nameInput.value.trim();
+    var email = emailInput.value;
+    if (!name || email.indexOf('@') < 1) {
+      e.preventDefault();
+      errorLine.style.display = 'block';
+      return;
+    }
+    state.sent = true;
+    render();
+  });
+
+  render();
+</script>
+
+</body>
+</html>

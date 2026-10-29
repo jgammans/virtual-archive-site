@@ -1,0 +1,27 @@
+body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #f6f1e7; color: #251f14; }
+a { color: #0d2a63; text-decoration: none; }
+a:hover { color: #b5804a; }
+h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; margin: 0; }
+button { font-family: 'Inter', system-ui, sans-serif; cursor: pointer; }
+.osbtn, .tierbtn { transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
+.ctabtn { transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
+
+.help-content { font-family: Georgia, 'Times New Roman', serif; color: #1a1a1a; }
+.help-content h2 { color: #000080; font-size: 17px; background-color: #e6e6f2;
+     padding: 7px 10px; margin: 26px 0 6px 0; }
+.help-content h3 { color: #000080; font-size: 15px; margin: 20px 0 3px 0; }
+.help-content p  { margin: 10px 0; line-height: 1.5; font-size: 14px; }
+.help-content li { margin: 6px 0; line-height: 1.5; font-size: 14px; }
+.help-content ol, .help-content ul { margin: 9px 0 13px 0; }
+.help-content .contents { margin: 2px 0; font-size: 13px; color: #333; }
+.help-content .tip { color: #5a3d00; font-size: 14px; margin: 0; }
+.help-content .contentshead { color: #000080; font-size: 14px; font-weight: bold; margin: 0 0 7px 0; }
+.help-content .code { background-color: #fff; color: #2a2a2a; font-family: 'Courier New', Consolas, monospace;
+      font-size: 12px; line-height: 1.5; padding: 14px 16px; margin: 9px 0 11px 0; border: 1px solid #c9c9c9; }
+.help-content .mOnce { color: #9a6400; font-weight: bold; font-size: 14px; }
+.help-content .mEach { color: #0f7a70; font-weight: bold; font-size: 12px; }
+.help-content .mFlow { color: #b5204a; font-weight: bold; font-size: 11px; }
+.helpbtn { transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
+.help-toc a:hover { background: #e6e6f2; color: #0d2a63 !important; }
+
+.lightbox-overlay { position: fixed; inset: 0; background: rgba(26,20,48,0.86); z-index: 50; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }

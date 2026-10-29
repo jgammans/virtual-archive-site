@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help — Virtual Archive</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div style="width: 100%; display: flex; flex-direction: column; align-items: stretch; background: #f6f1e7;">
+
+<!-- NAV -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-bottom: 1px solid #e3d8bf;">
+    <a href="index.html" style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #0d2a63;">Virtual Archive</a>
+    <div style="display: flex; gap: 24px; font-size: 14px;">
+      <a href="features.html" style="font-weight:500;color:#251f14;">See it in action</a>
+      <a href="what-it-does.html" style="font-weight:500;color:#251f14;">What it does</a>
+      <a href="pricing.html" style="font-weight:500;color:#251f14;">Personal &amp; Museum</a>
+      <a href="help.html" style="font-weight:700;color:#0d2a63;">Help</a>
+      <a href="download.html" style="font-weight:500;color:#251f14;">Get it</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div style="padding: 48px 48px 24px 48px; max-width: 1180px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+    <h2 style="font-size: 30px; color: #251f14; margin-bottom: 10px;">About Virtual Archive</h2>
+    <p style="font-size: 15px; color: #4a4330; margin-bottom: 28px; max-width: 640px;">A handful of words do most of the work in this program. Here's what they mean &mdash; then the full manual below, built into the program itself.</p>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px 40px;">
+      <div><strong style="color: #0d2a63;">Source</strong> &mdash; where or who it came from.</div>
+      <div><strong style="color: #0d2a63;">Location</strong> &mdash; where it is now, such as Storage Room 1/Shelf 4/Folder 5.</div>
+      <div><strong style="color: #0d2a63;">Category</strong> &mdash; what the item is, for finding it by subject &mdash; up to 16 per item, and you define your own.</div>
+      <div><strong style="color: #0d2a63;">File Attachment</strong> &mdash; a picture, spreadsheet, video, audio file, or any other type of file.</div>
+      <div><strong style="color: #0d2a63;">Title</strong> &mdash; a short description that serves as the item's caption and filename.</div>
+      <div><strong style="color: #0d2a63;">Description/Story</strong> &mdash; the full write-up. No length limit worth worrying about.</div>
+      <div><strong style="color: #0d2a63;">Provenance</strong> &mdash; the record of ownership and history, used as a guide to authenticity.</div>
+      <div><strong style="color: #0d2a63;">Item</strong> &mdash; a single entry in the collection.</div>
+      <div><strong style="color: #0d2a63;">Treeview</strong> &mdash; the three clickable lists &mdash; Source, Location, and Categories &mdash; you browse the collection through.</div>
+      <div><strong style="color: #0d2a63;">Accession/Catalog Number</strong> &mdash; the Museum edition's unique ID for an item, assigned when it's accessioned.</div>
+    </div>
+  </div>
+
+<!-- HELP -->
+  <div id="help" style="padding: 24px 48px 72px 48px; max-width: 1180px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+    <h2 style="font-size: 30px; color: #251f14; margin-bottom: 10px;">The manual</h2>
+    <p style="font-size: 15px; color: #4a4330; margin-bottom: 8px; max-width: 560px;">The same help screen that's built into the program &mdash; pick a topic on the left, or just scroll.</p>
+    <p style="font-size: 13px; color: #8a7f63; margin-bottom: 20px; max-width: 560px;">This is copied word-for-word from the program's own Help screen, including mentions of keys like <strong>T</strong> and <strong>Find in Help</strong> &mdash; those work inside the program itself, not on this web page.</p>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <button class="helpbtn" id="btnPersonal" style="background:#0d2a63;color:#fff;border:1px solid #0d2a63;padding:8px 18px;border-radius:7px;font-weight:600;font-size:13px;">Personal</button>
+      <button class="helpbtn" id="btnMuseum" style="background:#fff;color:#0d2a63;border:1px solid #d8cba8;padding:8px 18px;border-radius:7px;font-weight:600;font-size:13px;">Museum</button>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+
+      <nav class="help-toc" id="tocPersonal" style="flex: 0 1 240px; min-width: 200px; background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; padding: 14px 10px; max-height: 1500px; overflow-y: auto;"></nav>
+      <nav class="help-toc" id="tocMuseum" style="display:none; flex: 0 1 240px; min-width: 200px; background: #fdf8ee; border: 1px solid #e3d8bf; border-radius: 10px; padding: 14px 10px; max-height: 1500px; overflow-y: auto;"></nav>
+
+      <div id="panelPersonal" style="flex: 999 1 560px; min-width: 0; background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; max-height: 1500px; overflow-y: auto; padding: 16px 44px;">
+        <div class="help-content">
+<table width="100%" cellpadding="9" cellspacing="0" bgcolor="#fdf1cf">
+<tr><td align="center">
+<p class="tip">Reading this in a narrow column? Press <B>T</B> to widen it, and
+<B>T</B> again to put it back. Looking for a particular word? Type it into
+<B>Find in Help</B>, above this page, and press Enter - press it again, or
+<B>Find Next</B>, to jump to the next place it turns up.</p>
+</td></tr>
+</table>
+
+<table width="100%" cellpadding="10" cellspacing="0" bgcolor="#f3f3e7">
+<tr><td>
+<p class="contentshead">What is in here, in this order</p>
+<!--MUSEUM:CONTENTS-->
+<p class="contents">What the words mean &#183; installing and registering &#183; more than one collection</p>
+<p class="contents">Adding an item &#183; why an item has an ID &#183; changing an item &#183; moving something to another place &#183; deleting one or several &#183; importing a whole folder</p>
+<p class="contents">Rebuild Archive &#183; backing up and moving a collection</p>
+<p class="contents">Searching &#183; the RESULTS folder &#183; the spreadsheet &#183; albums and a book &#183; the Create screen</p>
+<p class="contents">The Program Settings screen &#183; every button and key, screen by screen &#183; where the collection lives</p>
+</td></tr>
+</table>
+
+<!--MUSEUM:MUSEUM-->
+
+<h2 id="p1">What the Words Mean</h2>
+<p>Seven words do most of the work in this program, and they are worth getting straight before anything else.</p>
+<p><b>SOURCE</b> - where or who the item came from. A donor, a purchase, a find.</p>
+<p><b>LOCATION</b> - where it physically is now. Storage Room 1/Shelf 4/Folder 5, Cemeteries/Hill Top, Streets/Maple St. A location can be as deep as you like; each part after a slash is a folder inside the one before it.</p>
+<p><b>CATEGORY</b> - what the item is, for finding it by subject: Vehicle, Photo, Children, Military/War/WWII, Minerals/Quartz. You make these up to suit the collection, and an item can carry up to <b>sixteen</b> of them. Past that the program says so and takes no more.</p>
+<p><b>TITLE</b> - a short description, which serves as the item's caption and as the name it is filed under in every folder it appears in. Two items may have the same title.</p>
+<p><b>DESCRIPTION</b> - the story: what the item is, what it is made of, how big it is, what condition it is in. There is no length limit worth worrying about.</p>
+<p><b>PROVENANCE</b> - the record of ownership and history, used as a guide to authenticity. Not required, and the part nobody can reconstruct later.</p>
+<p><b>ITEM</b> - one entry in the collection: a file, a record of the fields above, and a thumbnail, kept together.</p>
+<p>Three more that describe the program rather than the item.</p>
+<p><b>THE THREE LISTS</b> - Source, Location and Categories, down the left of the screen. They are folders holding the items, and clicking through them is how you walk the collection.</p>
+<p><b>THE ID</b> - a short code on each item, worked out from the file attached to it. It is not a number handed out in turn. There is a section on it below, because two useful things follow from it.</p>
+<p><b>RESULTS</b> - the folder a search puts its findings in, and what the reports are built from.</p>
+
+<h2 id="p2">Installing It, and Registering</h2>
+<p>The program runs on Windows, on a Mac and on Linux. It will work on a modest machine, and a bigger collection asks for more disk rather than more computer. A screen of 1920 by 1080 is a comfortable size to work at; on a 4K screen set the <b>Screen</b> choice in <b>Adjust Screen Settings</b> to 4K so the type and the lists come up at a sensible size.</p>
+<p><b>Installing.</b> Run the setup file and take the offered answers. It puts the program in place and leaves your collections alone - they are kept apart from the program, in your own user folder, which is what makes the next part safe.</p>
+<p><b>Updating.</b> Run a newer setup file over the top of the old one, the same way. The collections, the settings and the list of people are untouched, because none of them live in the program's own folder.</p>
+<p><b>Registering.</b> Until a copy is registered it works as a trial and stops at a hundred items. The code you were sent by email goes in from the <b>Reports and More</b> menu, at the item that reads <b>Register Digital Filer</b> until a copy has been registered and <b>Create New Collection</b> afterwards. Paste the code in, and the program restarts to take it up.</p>
+<p>If the code names a collection you already have, it opens that one and applies the registration to it rather than starting an empty collection beside it.</p>
+
+<h2 id="p3">More Than One Collection</h2>
+<p>One copy of the program can hold several collections, each entirely separate: its own items, its own folders, its own title in the window. A historical society and a personal collection of minerals can sit side by side without ever mixing.</p>
+<p><b>Which one you are in</b> is shown in the title bar across the top, and the drop-down above the <b>Source</b> list is how you change it. Picking another collection loads it: the lists are read again and the screen clears, which on a large collection takes a moment and says so.</p>
+<p><b>To make a new one</b>, use the registration item on the <b>Reports and More</b> menu, described just above. Each collection comes from its own code.</p>
+<p><b>To get rid of one</b>, take its items out first - make a full backup of it, then use <b>Delete Items Contained In A Backup File</b> on that backup, which empties it while leaving you the backup to change your mind with. Then run <b>Rebuild Archive</b>. Finding nothing left, it asks whether the collection should go, and if you say yes it is taken off the list. The folder itself stays on disk untouched, so nothing is lost in the moment of saying yes.</p>
+
+<h2 id="p4">Adding an Item, Start to Finish</h2>
+<p>Five things are needed before an item can be saved: a <B>source</B>, a <B>location</B>, at least one <B>category</B>, a <B>title</B> and a <B>description</B>. The Save button stays greyed out until all five are there, so a Save you cannot press means one of them is missing.</p>
+<ol>
+<li>Press <B>Add</B>. The screen clears and goes into Edit Mode, ready for something new.</li>
+<li>Press <B>Attach Picture Or Other File</B> and choose the photograph, document, sound or video. It is copied into the archive and the file you picked is left where it was. Attaching nothing is allowed, and the program then makes a file out of what you typed instead, but an item with a picture is worth far more to whoever opens it later.</li>
+<li>Press <B>SOURCE</B> and click, in the list on the left, who the item came from. If the name is not there, add it on the <B>Add Source</B> tab at the bottom left. If nobody knows, <B>DONOR UNKNOWN</B> is a real answer and the item still saves.</li>
+<li>Press <B>LOCATION</B> and click where the item physically is. <B>NOT PLACED</B> counts here in the same way.</li>
+<li>Press <B>CATEGORIES</B> and click one, or several. Clicking a category you have already chosen removes it again.</li>
+<li>Type the <B>title</B> in the box at the top. It is the name the item is filed under in every folder it appears in, so write it the way you would want to find it.</li>
+<li>Fill in the <B>description</B>: what the item is, with any distinguishing details, materials, dimensions and condition. <B>Provenance</B>, underneath, is for previous owners, dates and history. It is not required, and it is the part nobody can reconstruct later.</li>
+<li>Press <B>Save</B>.</li>
+</ol>
+<p>Nothing at all is written until Save is pressed, and <B>Cancel Changes</B> leaves the item exactly as it was.</p>
+<p>Entering a run of similar items is quicker than this list makes it look. The <B>SOURCE</B> button pressed three times fills in the last item's source, a fourth press adds the location, and a fifth the categories, so the second item of a box usually needs only a title, a description and the file.</p>
+
+<h2 id="p5">Why an Item Has an ID, and the One Rule</h2>
+<p>Every item carries an <B>ID</B>, shown on the item screen as something like <B>A1B-2C3</B>. It is not a number handed out in order. It is worked out from the file itself, from the picture or document attached to the item, so the file and the ID are one fact written two ways. Two things follow, and both turn up in ordinary use.</p>
+<p><B>The same file cannot be added twice.</B> Attach a file that is already in the collection and the program says so and stops, because that file is what tells one item from another. It offers the two honest ways out: attach it to this item as a display picture, or change the file itself - a single different pixel is enough - so that it genuinely is a different file. This is deliberate. Two items that are the same file are not two items.</p>
+<p><B>One copy of your file is filed in several places at once.</B> An item filed under a source, a location and three categories shows up in five folders, and it is the same single file each time rather than five copies of it. A collection does not swell because its items are well filed.</p>
+<p>And the rule that protects both: <B>do your renaming, moving and deleting inside the program</B>, not in Explorer or Finder. A file altered out there no longer matches its ID, and the program can no longer tell that the item is itself - which is how the same thing can end up in the collection twice. The folders you browse are also built fresh each time <B>Rebuild Archive</B> runs, so anything put into them by hand is gone at the next rebuild. The items are what those folders are built from, and they are the thing to look after.</p>
+
+<h2 id="p6">Changing an Item That Is Already In</h2>
+<p>Find the item first. Click through the Source, Location or Categories lists to the folder it is in, and if the folder holds several items the navigation bar and the two arrows step through them. A search is the other way in, and what it finds lands in the RESULTS folder.</p>
+<p>With the item on screen press <b>Edit</b>. Every box can be changed. Source and Location are picked the same way as when the item was entered. Categories toggle: click one to add it, click it again to take it off. The file itself is changed with <b>Attach Picture Or Other File</b>, and because the file is what gives the item its ID, replacing it gives the item a new one - which is the one case where that happens.</p>
+<p>Nothing is written until <b>Save</b>, and <b>Cancel Changes</b> puts every box back to what it was.</p>
+
+<h2 id="p7">Moving Something to Another Place</h2>
+<p>A location is a path, and the slashes in it are real containers inside one another. <B>CORNER CABINET\BOX 1</B> means box 1, which is in the corner cabinet; <B>CORNER CABINET\BOX 1\TRAY 2</B> is a tray inside that box. The lists down the left draw it as folders inside folders because that is what it is.</p>
+<p>So when the box itself is moved - out of the corner cabinet and onto shelf 7, say - what you want is for every item in it, and everything nested inside it, to come along. That is one job in this program, not one job per item.</p>
+<h3>Moving One Item</h3>
+<p>Press <B>Edit</B>, press <B>LOCATION</B>, and click the new place in the list. If the place does not exist yet, add it with <B>Add or Edit Location</B> first. Press <B>Save</B>. That item is now filed there and nothing else has changed.</p>
+<h3>Moving a Whole Box, with Everything In It</h3>
+<p>This is the one for a real move: the box has gone somewhere else, and its contents went with it.</p>
+<ol>
+<li>Press <B>Browse</B> and walk to the box: open <B>(LOCATION)</B>, then <B>CORNER CABINET</B>, then <B>BOX 1</B>. You are now standing in the folder that is going to move.</li>
+<li>Press <B>Move Directory</B> at the bottom. A screen opens titled <B>Move This Folder - choose destination</B>.</li>
+<li>Click where it is going - <B>BOX COLLECTION</B> - and press <B>Move Here</B>. The box keeps its own name and becomes part of what you clicked, so <B>CORNER CABINET\BOX 1</B> becomes <B>BOX COLLECTION\BOX 1</B>, the same as dragging one folder onto another.</li>
+<li>You are told how many items are about to be moved and asked to say yes. Read the number: it should be the number of things in that box. Then it works through them, counting as it goes, and says <B>MOVE COMPLETE</B> with the old and new addresses.</li>
+</ol>
+<p><B>Typing a destination instead.</B> The same screen has a box to type in, and what you type is the <B>whole new address</B> rather than a parent to sit under: type <B>BOX COLLECTION\BOX 1</B> and that is exactly where it lands. Typing is also the way to move something into a place that does not exist yet - <B>STORAGE ROOM 2\SHELF 4</B> is made on the way - and <B>(TOP LEVEL)</B> at the head of the list means no parent at all, a place of its own.</p>
+<p><B>What actually happens.</B> Every item whose location starts with the old path has that part of it rewritten, so the box, the trays inside it and every item in any of them all travel together and keep their arrangement. The folders you browse are relinked to match, and folders left empty by the move are cleared away.</p>
+<p>The items themselves are not touched. The files stay exactly where they are in the archive, the IDs do not change, and nothing is copied - only the address written on each record, and the folders built from it.</p>
+<p>There is no undo button for this. There is no need for one either: moving it back is the same job in the other direction, and the program tells you the count before it starts, which is the moment to notice if you are standing in the wrong folder.</p>
+<h3>The Other Way In</h3>
+<p>From an item rather than from the browser: press <B>Edit</B> on any item in that box and press <B>Add or Edit Location</B>. The box's own address is already filled in beside <B>Rename From</B> - it is the address the item you are on carries, which is why you open this from an item in the box you mean to move. Type the new address beside <B>Rename To</B> and press <B>Rename / Move Location</B>. It is the same move, with the same confirmation and the same count - it simply starts from an item you have in front of you instead of from the folder.</p>
+<p>This is also how a place gets a better name. The old address and the new one are both just text; renaming <B>BOX 1</B> to <B>MAPS AND PLANS</B> and moving <B>BOX 1</B> under <B>BOX COLLECTION</B> are the same operation, which is why one button does both.</p>
+<h3>Categories Move the Same Way</h3>
+<p>Everything above works on a category as well. Browse into the category and press <B>Move Directory</B>, or use <B>Add or Edit Categories</B> and its rename button. A category that has a display sheet keeps it, and sub-categories travel with their parent exactly as trays travel with their box.</p>
+<p>Sources are different: an item's source is where it came from, which does not change because the thing was put somewhere else. There is no move for a source folder, and there should not be.</p>
+<h2 id="p8">Deleting: One Item, or Several</h2>
+<p><B>Delete</B> removes the item you are looking at, entirely, and one is all it removes. It asks first, and once you have said yes that item is out of the collection: out of every folder it was filed in, out of the lists, out of the reports. There is no undo. Treat it as gone, because it is.</p>
+<p><B>It is not the preferred way to delete.</B> It is there for the single obvious mistake - the duplicate, the picture of the inside of a lens cap - where there is nothing to think about. For anything else, use the way described below, which asks you to make a backup file first and so hands you the means of changing your mind.</p>
+<h3>Deleting Several, and Keeping a Way Back</h3>
+<p>Clearing out a group of items is done through <B>Backing Up and Restoring</B>, on the <B>Reports and More</B> menu, in two steps: make a backup of the items that are going, then delete them using that backup file.</p>
+<ol>
+<li>Search for what is to go, so that those items are the ones in the <B>(RESULTS)</B> folder. Run several searches if it takes several - results add up rather than replacing each other - and look through RESULTS until it holds exactly what you mean to remove.</li>
+<li>Open <B>Backing Up and Restoring</B>, choose <B>Backup (Export) Result Folder</B> and press <B>Accept</B>. You are asked where to put the file; it is given a name ending <B>.VAB</B>, and it holds those items whole.</li>
+<li>In the same screen, choose <B>Delete Items Contained In A Backup File</B>, press <B>Accept</B>, and pick the file you have just made. Exactly the items in that file are removed from the collection, and nothing else is touched.</li>
+<li>Run <B>Rebuild Archive</B> afterwards so the folders you browse match what is left.</li>
+</ol>
+<p><B>The same file brings them back.</B> Deleting with it does not consume it or change it - it is a file of its own, outside the collection - so changing your mind needs nothing clever: open <B>Backing Up and Restoring</B> again, choose <B>Restore (Import) Backup File</B>, and pick that same file. It is the ordinary restore, doing the ordinary thing, and the items return with their sources, locations, categories, titles, descriptions and pictures exactly as they were.</p>
+<p>That is the whole reason this is the preferred way round. The file you had to make in order to delete is the same file that undoes it, so the undo exists before the deletion does. Nothing has to be remembered, and nothing has to be dug out of anywhere.</p>
+<p>So the order of work is: gather, back up, delete. Keep that .VAB somewhere sensible for as long as there is any chance of wanting those items again - a year, say, or for ever if the disk can spare it. It is the only way back, and it costs nothing to keep.</p>
+<p>This is also how part of a collection is handed to somebody else, or split into a collection of its own: the same backup file that lets you undo the deletion is the file they restore at their end. There is a section on backing up below that goes through all of it.</p>
+<h2 id="p9">Importing a Whole Folder</h2>
+<p>A folder of scans or photographs can come in all at once instead of one item at a time. It is on the <B>Reports and More</B> menu as <B>Import a Folder...</B>, and the screen says what it is about to do before it does it.</p>
+<ol>
+<li>Tick what to bring in: <B>Pictures</B>, <B>Music</B>, <B>Video</B>, <B>Documents</B>, or <B>Everything in the folder, whatever it is</B>. If what you want is not one of those, type the file types in the box instead, like <B>tif, cr2, wav</B>.</li>
+<li>Press <B>Choose Folder...</B> and pick the folder. Everything in it, and in every folder inside it, is considered.</li>
+<li>Fill in the <B>Source</B> and <B>Location</B> that will go on the whole batch, and press OK.</li>
+</ol>
+<p><B>"Everything in the folder, whatever it is"</B> brings in literally everything under the folder you choose, without asking file by file - which is the point of it, and exactly why it is worth a moment's thought before pointing it at a folder you have not looked through yourself. An old folder can hold more than you remember: thumbnails and cache files a camera or a phone left behind, a stray download, half a dozen near-duplicates of the same shot. None of that is sorted out on the way in - it all becomes items - and taking it back out afterwards means finding and deleting each one by hand rather than one folder you could have left out to begin with. Know roughly what is in a folder before choosing <B>Everything</B> on it; where you do not, tick just the kinds you actually want and the rest is left alone.</p>
+<p>Both of those boxes can be left empty, and what happens then is useful rather than a fallback. An empty <B>Source</B> files the batch under the date and time the import was run, which is how you find that one batch again afterwards. An empty <B>Location</B> groups the items by what they are - <B>PICTURES</B>, <B>MUSIC</B>, <B>VIDEO</B> or <B>FILES</B> - with one exception: an .MP3 that carries its own artist and album tag is filed by them instead, as <B>MUSIC\ARTIST\ALBUM</B>, stopping at the album so that every song on it still shares one folder to browse rather than each sitting alone in one of its own. A track number in the tag goes onto the front of the title, not into the location.</p>
+<p>Each file becomes an item, and it is the item's <B>category</B> - not its location - that keeps the folder structure you already had: filed under <B>IMPORT</B>, by the same file-type grouping as above, and then by the one folder immediately holding the file, rather than the whole chain of folders above it. The filename becomes the title, and a song uses the title in its own tag if it has one. Whatever a file knows about itself is kept: the camera and the date from a photograph, the artist and album from a song, the author and title from a document.</p>
+<p>Nothing in the folder you point at is moved, renamed or altered - the files stay exactly where they are and the collection gets its own copy. A file that is already in the collection is recognised and skipped, so running the same import twice does not bring anything in twice.</p>
+<p>What the import cannot do is write your descriptions. The items arrive with a title, a source, a location and their categories, and the description box is empty and waiting. That is the work; the import is only the carrying.</p>
+
+<h2 id="p10">What Rebuild Archive Does, and When to Run It</h2>
+<p><B>Rebuild Archive</B> is on the <B>Reports and More</B> menu. It throws away the folders you browse - the source folders, the location folders, the categories, the albums - and builds every one of them again from your items.</p>
+<p>That sounds alarming and is not, because those folders were never where anything was kept. They are a way of looking at the items, built out of what each item's record says, and they can be made again at any time. Your items are not rebuilt. They are what the rebuild is built from.</p>
+<p>Run it when the folders and the items have got out of step:</p>
+<ul>
+<li>after restoring a backup - though the program runs it for you then;</li>
+<li>when a folder looks wrong, or empty, or an item is not where it should be;</li>
+<li>after anything has been moved about underneath the program.</li>
+</ul>
+<p>It shows a bar and a percentage while it works, and a collection of several thousand items takes minutes rather than seconds. Closing the window stops it: it tells you how many items it managed and asks you to run it again to finish, and because it starts over from the items each time, stopping costs nothing but the time already spent.</p>
+
+<h2 id="p11">Backing Up, and Putting a Collection on Another Computer</h2>
+<p><B>Backing Up and Restoring</B> on the <B>Reports and More</B> menu does both jobs, and the screen is in three parts: make a backup, delete items using a backup, and restore from a backup.</p>
+<p><B>To make one</B>, choose <B>Full Backup</B> and press <B>Accept</B>. You are asked where to put it, and the box opens in your home folder rather than in the collection, because the one place a backup must never go is inside the thing it is backing up. Put it on another drive - the drives you can reach are listed down the side of that box. The file is given a name ending in <B>.VAB</B> and it holds the whole collection: every item, every record, the thumbnails, the categories, the album order and the accession records.</p>
+<p>It is written under a temporary name and only given its real one once it is finished and has been checked. A backup that was interrupted is therefore never left sitting there under the name of a good one, which is the worst way for a backup to fail.</p>
+<p><B>To send somebody part of a collection</B> rather than all of it, search for what they should have so that it lands in the RESULTS folder, then choose <B>Backup (Export) Result Folder</B>. That makes a .VAB of only those items.</p>
+<p><B>To put a collection on another computer</B>:</p>
+<ol>
+<li>Install the program there and open it.</li>
+<li>Make the collection: <B>Create New Collection</B> on the <B>Reports and More</B> menu, and give it a name. On a copy that has not been registered yet, that same menu item reads <B>Register Digital Filer</B> and asks for the code you were sent instead.</li>
+<li>With that collection open, go to <B>Backing Up and Restoring</B>, choose <B>Restore (Import) Backup File</B>, press <B>Accept</B>, and pick the .VAB file.</li>
+<li>Let it finish. It says REBUILD ARCHIVE next and then does it for you.</li>
+</ol>
+<p>Restoring <B>adds</B> what is in the backup to the collection that is open. It does not replace it and it does not empty it first, which is what makes it useful for joining two bodies of material as well as for moving one. The same choice can change what the items say as they come in: fill in <B>Change Source</B>, <B>Change Location</B> or <B>Add Category</B> before pressing Accept, and every item in the backup arrives with that instead. Leave those boxes empty and the items come in exactly as they were.</p>
+<h3>A Routine Worth Keeping</h3>
+<p>Knowing how to make a backup is not the same as having one. What works, from societies that have been doing this for years: a <B>full backup onto two drives once a year</B>, one kept where the collection is and one kept somewhere else entirely - a board member's house, another building - so that one fire or one theft cannot take both. Make another whenever you have just done a season's worth of entering, while it is fresh enough to be worth protecting.</p>
+<p>Write the date on the drive, keep the last one rather than writing over it, and <B>eject the drive before pulling it out</B> - on Windows through the arrow at the bottom right of the screen, on a Mac by dragging it to the wastebasket, on Linux with the eject symbol beside its name. The file is large and the last of it may still be being written when the copying looks finished.</p>
+<p>And test one. Restoring a backup into a spare collection, once, tells you the drive is readable and the file is whole - which is a thing worth knowing before the day you need it.</p>
+<p><B>Delete Items Contained In A Backup File</B> is the other direction: it removes from this collection exactly the items that are in the backup file you choose. This is the preferred way to delete anything more than a single obvious mistake, because the file itself is untouched - restoring that same file afterwards puts every one of those items back.</p>
+
+<h2 id="p12">Searching: What Is Looked At, and How</h2>
+<p>Type into the search box on the <B>Search</B> tab and press <B>Search</B>, or just press Enter. Capital letters make no difference.</p>
+<p>What is searched is the <B>whole of an item's record</B>, not only its description: the title, the description, the provenance, the source, the location, every category, the dates, the file type, and anything a photograph or a song brought in with it. That is why an item can come back for a reason that is not visible in its description, and why the match is marked in <B>SOURCE</B>, <B>LOCATION</B> and <B>CATEGORIES</B> as well as in the words.</p>
+<p>What you type is looked for as <B>one piece of text</B>. There is no wildcard, and there is no way to ask for two words in different places: <B>BRAGG FARM</B> finds records where that runs together as written, not records that happen to hold both words apart. Shorter is therefore usually better - <B>BRAGG</B> finds everything <B>BRAGG FARM</B> would have, and more.</p>
+<p>Searching for a single full stop <B>.</B> returns every item in the collection. Every record stores the file's extension with its dot, so a full stop is in all of them.</p>
+<p>The tick box <B>Search "Entered by" field</B> changes what is looked at rather than adding to it: with it ticked, the search looks only at who entered the item, which is how you find a volunteer's work for the afternoon. Untick it to go back to searching everything.</p>
+<p>A search of two letters or fewer finds items but marks nothing, which stops a short word painting the whole screen yellow.</p>
+<p>A search of a large collection is not instant - several thousand items take a little while, and the bar across the top is there to say that something is happening rather than nothing. When more than one item is found, the navigation bar shows which of how many you are looking at, and the arrows move through them.</p>
+
+<h2 id="p13">The RESULTS Folder, and Sharing Part of a Collection</h2>
+<p>Everything a search finds is put into a folder called <B>(RESULTS)</B>, and that folder is what the rest of the program works from when it is asked to produce something.</p>
+<p>A search <B>adds</B> to it and never empties it. Search for one family, then another place, then a year, and all three sets are gathered together - and an item already there is not put in twice. The only thing that empties it is the <B>Clear Results Folder</B> button.</p>
+<p><B>Clearing it deletes nothing.</B> What sits in that folder is the same single file the item already is, shown there as well; removing it removes the showing, not the item. The same is true of the folders you browse.</p>
+<p>Two more buttons sit beside it. <B>Add Selected Directory to Results</B> puts everything in the folder you are looking at into RESULTS, which is how to gather a whole category without searching for it. <B>View Result Folder</B> shows you what you have collected so far.</p>
+<p>Once it holds what it should, there are three things to do with it:</p>
+<ul>
+<li><B>Spreadsheet of (RESULTS) directory</B> on the <B>Reports and More</B> menu writes a spreadsheet of them;</li>
+<li><B>Backup (Export) Result Folder</B> on the <B>Backing Up and Restoring</B> screen makes a .VAB of just those items, which is how you send somebody part of a collection;</li>
+<li>and anything you then do to the items themselves is ordinary work - RESULTS is a way of holding a set, not a copy of it.</li>
+</ul>
+
+<h2 id="p14">A Spreadsheet of the Whole Collection</h2>
+<p>The 'Spreadsheet of (RESULTS) directory' option builds its report from whatever is in the RESULTS folder, so to get a report covering everything, first put everything into RESULTS: search for a single full stop <B>.</B> and every item in the collection is returned.</p>
+<p>This is complete, not an approximation. The search reads the whole of an item's record, not just its description, and every record stores the file's extension with its dot - <B>.JPG</B>, <B>.MP3</B> - so a full stop is always present, whatever the item is called and whatever was typed about it.</p>
+<p>The <B>FILE</B> column, the fifth one, is a link rather than just a name: click it in the spreadsheet and the item's own file opens, so a line you are reading about can be looked at without coming back to the program. The <B>LOCAL FILE LOCATION</B> column near the end links the same way to where the item is filed under its source.</p>
+<p>The spreadsheet is written as <B>Full_Report.xlsx</B> in the collection's data folder, and opens in whatever application handles spreadsheets on this computer. If nothing does, the file is still created and a window opens showing you where it is. Close the report before creating a new one - the file is overwritten in place, and a spreadsheet program holding the old copy open will go on showing the old figures.</p>
+
+<h2 id="p15">Albums, the Order They Are In, and a Book</h2>
+<p>An album is a category like any other. Put the items into it the way you file anything else, and what makes it an album is that you can decide the order they are in instead of leaving them in the order they were entered.</p>
+<p>Open the category, press <B>Edit</B>, and the <B>Album Order</B> button appears. It opens a screen of small pictures, numbered in their current order.</p>
+<ol>
+<li>Click the picture you want to move. It turns green.</li>
+<li>Click the picture you want it to sit at. The first one moves there and everything else shuffles along.</li>
+<li>Click a green picture again to change your mind instead of moving it.</li>
+<li>Press <B>Save Changes</B> when the order is right, or <B>Quit Without Saving</B> to leave it as it was.</li>
+</ol>
+<p><B>Slides Across</B> sets how many pictures are shown on a row, which is for your eyes while you work and has nothing to do with the order itself.</p>
+<p>The order is kept with the category and is what you see from then on, in the folder and in a slideshow.</p>
+<p><B>A slideshow.</B> The <B>Hide Tree</B> button puts the picture up on the whole window with the lists out of the way, and steps through the items in the folder you are in. How long each one stays up is the slider beside it, and at nought it simply stays on the picture you are looking at, which is the way to show one item across a room. The slider is only there when <B>Slideshow Timer</B> is ticked in Program Settings. Press the same button, now reading <B>Show Tree</B>, to come back.</p>
+<p><B>A book.</B> With <B>Create Book From Album</B> ticked in Program Settings, the Album Order screen also offers <B>Create Book</B>. It makes a document of the album in the order you have just set: each picture at the size and position the card format gives it, with the title, the description and the provenance under it. It is written into a folder called <B>Virtual Archive Output</B> in your home folder, with the date and time in its name so a new one never writes over the last, and it opens in whatever handles documents on this computer.</p>
+
+<h2 id="p16">The Create Screen: a Display Sheet for an Item or a Category</h2>
+<p>Highlight the item, or the category in the CATEGORIES list, then open the <B>Reports and More</B> menu and choose <B>Create Display Sheet</B>. The screen that opens has its controls at the top and the page itself underneath them: everything you change is redrawn there as you change it, so nothing has to be guessed at or produced to be looked at.</p>
+<h3>What Would You Like to Create?</h3>
+<p>Two choices at the top, and they decide which set of controls is on screen.</p>
+<p><B>This Item</B> is chosen when the screen opens. It makes a card for the one item you had highlighted.</p>
+<p><B>This Category</B> makes a page of a whole category: a heading, your own words, and every item in it. It is greyed out, with <B>no category selected</B> beside it, if you did not come in from a category - the reason is put next to the control rather than left for you to work out.</p>
+<h3>For One Item</h3>
+<p><B>Pick Template</B> - the list of card layouts. Left on its first entry, the card is the program's own. Choose one of yours and it asks <B>Build the page with this layout?</B> with <B>Run</B> and <B>Cancel</B>, so a layout picked by accident costs nothing. The list then returns to its first entry, which is deliberate: it means choosing the same layout again still does something.</p>
+<p><B>LEFT</B>, <B>CENTER</B>, <B>RIGHT</B> and <B>NONE</B> - where the picture sits on the card. <B>NONE</B> leaves the picture off and gives the whole card to the words. These apply to the program's own card; a layout of your own puts things where its own design says.</p>
+<p><B>Picture Size</B> - how wide the picture is drawn, from about an inch to eight. A printed page takes at most six and a half inches of it, so a picture cannot run off the paper however far the slider goes.</p>
+<p><B>orientation</B> - the small grey word over at the right, for a picture that is on its side. It is quiet on purpose: it is rarely wanted and it changes the item rather than the page. Press it and it asks first; say yes and <B>turn left</B> and <B>turn right</B> appear, a quarter turn each. The word itself becomes <B>Press When Done</B>, and pressing it puts the arrows away. It is offered for one item only - a category has no single picture a turn could mean.</p>
+<p><B>View In Browser</B> - builds the card and opens it in whatever shows web pages on this computer, ready to print.</p>
+<h3>For a Category</h3>
+<p><B>Category</B> - which category the page is for, named here so you can see at a glance that it is the one you meant.</p>
+<p><B>Heading</B> - the title that goes across the top of the page.</p>
+<p><B>Words</B> - what goes under the heading: a paragraph about the collection, the gift, the exhibition, whatever the page is for.</p>
+<p>Both of those are <B>kept with the category</B>. Come back to it next month and they are still in the boxes. Clear them both and the page is removed.</p>
+<p><B>Layout</B> - how the page is laid out. The first entry is the program's own <B>STANDARD PAGE</B>; under it are your own layouts; and <B>EDIT OR CREATE A NEW TEMPLATE</B> opens the layouts screen described below. Choosing one of your page layouts asks <B>Run</B> or <B>Cancel</B> first, the same as the card list does.</p>
+<p>A <B>Word layout</B> - a book template, ending .docx - behaves differently and says so: the button at the bottom changes to <B>View File</B>. Nothing is built when you pick it. Pressing the button then starts a <B>fresh copy</B> of that template, fills it from the category's own folder and opens it, so a book is never built on top of the last one.</p>
+<p><B>View In Browser</B> - builds the page and opens it. The preview on screen shows the first twelve items, which is enough to see what the page will look like; the page it makes holds up to four hundred.</p>
+<p>The page takes its picture position and size from the item controls above, which is why those two boxes are part of one screen: set the pictures the way you want them on a card, and the category page follows.</p>
+<h3>Layouts of Your Own</h3>
+<p><B>EDIT OR CREATE A NEW TEMPLATE</B>, on either list, opens a screen of the layouts you have and the ones the program came with. <B>Edit It</B> opens one of yours to change, in whatever handles that kind of file. <B>Save As A New File</B> takes a copy of any of them - which is the only thing to do with a supplied one, since those are read only and stay that way. <B>Delete</B> throws one of yours away. <B>Cancel</B> closes it.</p>
+<p>A layout made somewhere else can be brought in without any of that: <B>drag the file onto this window</B>. It is copied into your layouts folder and appears in the lists; if one of that name is already there you are asked before it is replaced.</p>
+<p>When you have finished, close the screen with the X. The heading and the words are saved on the way out as well as when a page is built, so a page written and not yet viewed is not lost.</p>
+
+<h3>What a Layout Can Ask For</h3>
+<p>Open <B>Sample of all fields</B>, the layout the program comes with, in a text editor, and short words in capitals between hash signs stand out everywhere: #HEADING#, #TITLE#, and so on. Each one is a marker. Wherever it sits in your file, the finished page has something real put there instead - the category's own heading, one item's own title - and everything else, every tag, every colour, every word you typed yourself, is left exactly as you wrote it.</p>
+<p>Some markers are filled once, from the category itself, however many times they appear on the page:</p>
+<p><B>#HEADING#</B> - the title typed into the Heading box.</p>
+<p><B>#CATEGORYTEXT#</B> - the paragraph typed into the Words box.</p>
+<p><B>#CATEGORY#</B> - the category's own name, exactly as it is filed.</p>
+<p><B>#ORGANIZATION#</B> - your collection's name.</p>
+<p><B>#COUNT#</B> - how many items are on the page.</p>
+<p><B>#ACCESSIONNUM#</B> - a fresh accession number for the batch, worked out new each time, the same kind a single card gets.</p>
+<p><B>#LOGO#</B> - your report logo, already a complete picture rather than a filename. Put the marker itself where the picture should sit; there is nothing to put it inside.</p>
+<p>The rest are filled once for every item, and only work between a pair of <B>#EACH#</B> and <B>#END#</B> markers. Put those two around whatever should repeat - one cell of a table, say - and the program copies that piece once for every item in the category, filling it fresh each time:</p>
+<p><B>#TITLE#</B> - the item's name.</p>
+<p><B>#THUMB#</B> - the item's own picture, already complete; <B>#FILENAME#</B> is the same marker, under the name a card layout knows it by.</p>
+<p><B>#DESCRIPTION#</B>, <B>#PROVENANCE#</B> and <B>#METADATA#</B> - the item's own description, provenance and metadata.</p>
+<p><B>#ID#</B> and <B>#SOURCE#</B> - the item's short identifier, and who it came from.</p>
+<p><B>#NUMBER#</B> - which one this is on the page: 1, 2, 3 and on.</p>
+<p><B>#NEWROW#</B> - put at the very front of the repeated piece, it becomes a new table row every three items, and nothing at all on the first.</p>
+<p>A category page is not the donor's own business card, so <B>#DONOR#</B>, <B>#ADDRESS#</B>, <B>#CITY#</B>, <B>#STATE#</B>, <B>#ZIP#</B>, <B>#PHONE#</B> and <B>#EMAIL#</B> print as nothing on a layout ending .html - a page is something you might show or publish, and a donor's home address is not what those seven words were written for. The one exception is a layout ending .rtf: that comes out as a document to print and hand to somebody, one item to a page, and there the donor markers are filled, because a donation form without its donor on it is not a form.</p>
+<p>Last, <B>#!HEADING#</B>, with an exclamation mark after the hash, prints the word #HEADING# itself rather than the heading - of use only if you are explaining your own layout to somebody else, the way this page is explaining the program's.</p>
+
+<h3>A Sample, Using Every Field</h3>
+<p>The program comes with exactly this layout, ready to pick: <B>Sample of all fields</B>, in the same Pick Template and Layout lists. Choose it on a real category to see it filled for yourself, or read it below first.</p>
+<p>Pick it under <B>Layout</B>, for <B>This Category</B> - that is what it is written for. Picked under <B>Pick Template</B>, for <B>This Item</B>, a single card still makes sense of most of it: the picture, the item markers and the donor markers all fill in the same as they do on a card of their own, #NUMBER# is simply 1, and #EACH#, #NEWROW# and #END# hold nothing and quietly disappear. <B>#HEADING#</B>, <B>#CATEGORY#</B>, <B>#COUNT#</B> and <B>#CATEGORYTEXT#</B> print as nothing rather than as themselves - there genuinely is no heading, no total and no paragraph of words for a single item to borrow them from, the same as a donor field left blank on an item with none.</p>
+<p>Below is the whole file. Colour and size are only there, in this explanation, to tell the three kinds apart: gold and the largest for the ones filled once from the category, teal and the size the rest of the sample is in for the ones filled once per item, and pink and the smallest for the two that hold the layout together rather than naming a field at all. Your own layout can use any colours and sizes you like, or none - the blue, white, rust and olive of the supplied file itself are its own choice, not something the program asks for, and the heading, the item name, the description and the small print are each a different size in it too, for the same reason.</p>
+<pre class="code">&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+body  { font-family: Verdana, sans-serif; color: #202020; }
+.head { color: #ffffff; }
+.sub  { color: #cfe8ff; }
+.name { color: #0b4f6c; }
+.meta { color: #6a6a6a; }
+.prov { color: #7a5c00; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table width="100%" bgcolor="#0b4f6c" cellpadding="14"&gt;
+&lt;tr&gt;&lt;td align="center"&gt;
+<span class="mOnce">#LOGO#</span>
+&lt;h1 class="head"&gt;<span class="mOnce">#HEADING#</span>&lt;/h1&gt;
+&lt;p class="sub"&gt;<span class="mOnce">#ORGANIZATION#</span> - <span class="mOnce">#CATEGORY#</span>&lt;/p&gt;
+&lt;p class="sub"&gt;<span class="mOnce">#COUNT#</span> items - Acc. <span class="mOnce">#ACCESSIONNUM#</span>&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;<span class="mOnce">#CATEGORYTEXT#</span>&lt;/p&gt;
+
+&lt;table width="100%" cellpadding="10"&gt;
+<span class="mFlow">#EACH#</span>
+<span class="mFlow">#NEWROW#</span>
+&lt;tr&gt;&lt;td bgcolor="#eef6fa"&gt;
+<span class="mEach">#THUMB#</span>
+&lt;p class="name"&gt;<span class="mEach">#NUMBER#</span>. <span class="mEach">#TITLE#</span>&lt;/p&gt;
+&lt;p class="meta"&gt;<span class="mEach">#METADATA#</span>&lt;/p&gt;
+&lt;p&gt;<span class="mEach">#DESCRIPTION#</span>&lt;/p&gt;
+&lt;p class="prov"&gt;<span class="mEach">#PROVENANCE#</span>&lt;/p&gt;
+&lt;p class="meta"&gt;Catalogue <span class="mEach">#ID#</span> - from <span class="mEach">#SOURCE#</span>&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;
+<span class="mFlow">#END#</span>
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Saved and chosen from <B>Pick Template</B>, that comes out as a page with a dark blue band across the top carrying the logo and the heading, your own words underneath it, then one pale cell per item with its picture, title, metadata, description, provenance and catalogue line.</p>
+
+<h3>Writing One Yourself</h3>
+<p>Start from a supplied layout rather than an empty file - <B>Save As A New File</B> on <B>Sample of all fields</B> or <B>A Simple Web File</B>, then <B>Edit It</B>, both on the <B>EDIT OR CREATE A NEW TEMPLATE</B> screen above. A supplied layout is read only, so there is no risk of changing the one the program came with by mistake.</p>
+<p>A layout for one item must end <B>.rtf</B>, <B>.html</B> or <B>.htm</B> - whichever opens best in whatever you write it with. A layout for a whole category may end any of those three as well, or <B>.docx</B>: a Word book template, which is the one kind that does not build a page at all. It opens a fresh copy of itself, filled from the category, every time you choose it - see <B>Layouts of Your Own</B> and the Word layout note above. Anything else dropped onto the templates window, or saved with another ending, is not offered in either list.</p>
+<p>A marker must be typed exactly as shown, in capitals, with a hash sign on each side - #title# is not a marker and prints as those seven characters. Anything that is not one of the markers above is left precisely as you typed it, so there is no part of an HTML page this program stops you laying out as you please.</p>
+<p>A layout with no #EACH# ... #END# pair is still a valid page - the once-only markers are filled and nothing of the item list prints, which is a fair way to make a cover sheet for a book of several categories run one after another.</p>
+<p>Finished, bring it in with <B>drag the file onto this window</B>, the same as any layout from somewhere else, and it appears in the <B>Layout</B> list ready to choose.</p>
+
+<h2 id="p17">The Program Settings Screen</h2>
+<p>Everything the program lets you turn on and off is on one screen. Open <B>Settings</B> on the <B>Reports and More</B> menu and it comes up titled <B>Program Settings</B>, with a note across the top saying the options may be turned on and off without fear of changing the underlying data. That is the plain truth of this screen: the boxes decide what you are shown and which buttons you are offered, and not one of them alters an item, a file or a folder.</p>
+<p>Nothing takes effect until you press <B>Save Configuration</B>, and then it takes effect at once - the program picks the changes up as the screen closes, so there is no restarting it to see them. <B>Cancel</B>, or closing the window with the X, leaves every box as it was, and puts the two pictures back as well if you changed one and then thought better of it.</p>
+<p>The boxes are a list down the left side, and they are taken here in the order they sit in.</p>
+<p><B>Show Item Detail on Description Page</B> - adds, under the description of the item you are looking at, the lines that say where it came from and how it is filed: SOURCE, LOCATION, CATEGORIES, and then the item's ID and the type of file it is. A word you have searched for is marked in those lines as well as in the description, so when a search turns up an item because of its donor or its place you can see which field matched. Resting the pointer on one of them shows the whole of it, for a name too long to fit the line.</p>
+<p><B>Allow Deletions</B> - ticked, the <B>Delete</B> button is on the bottom row and works. Unticked, it is not there at all. This box is the only thing that takes the button away for good; the other reasons it goes quiet, such as nothing being selected or a slideshow running, grey it for the moment and give it back.</p>
+<p><B>Show Camera GPS/Metadata on pictures that contain it</B> - adds what the camera itself wrote into the picture: the model of camera, the date and time the picture was taken, and the latitude and longitude if the camera recorded them. It is only read from .JPG files, and a picture that carries none of it simply shows nothing. These lines go in underneath the detail lines above, so this box needs <B>Show Item Detail on Description Page</B> ticked as well - on its own it has nowhere to appear.</p>
+<p><B>Slideshow Timer</B> - puts a slider beside the <B>Hide Tree</B> button for how long each picture stays up before the next one. It reads <B>Delay 5 seconds</B>, and so on, as you move it, and at nought it reads <B>Manual Mode</B> and stays on the picture in front of you until you move on yourself. Without this box ticked there is no slider and a slideshow steps along by hand, which is what you want for showing one item across a room.</p>
+<p><B>Album/Slideshow Order</B> - makes the <B>Album Order</B> button appear when you are in Edit Mode on a category folder, which is where the order of an album is set. It is categories only: a Source folder, a Location folder and the RESULTS folder are not sequences and have no order screen. There is a section on albums above.</p>
+<p><B>Create Book From Album</B> - adds the <B>Create Book</B> button to the Album Order screen, which makes a document of the album in the order you have just set.</p>
+<p><B>Show Expanded Trees</B> - the three lists down the left open one level further when the program starts, so you see what is inside each heading rather than the headings by themselves. On a collection with a great many folders the shorter list is easier to get around, which is the reason this is a choice at all.</p>
+<p><B>Show Logo on Description Page</B> - puts your logo at the top of the description, above the item's title. It is the same logo the reports and the cards use, the one set by <B>Change Report Logo</B> on this same screen.</p>
+<p><B>Add watermarks and rotation when adding an image file</B> - when you attach a .JPG, .TIFF, .PNG or .BMP file, the watermark screen opens first. You can turn the picture upright there and write a line across it, and the copy that comes out is the one that gets filed. The file on your disk is left exactly as it was. If the item's title is still empty, what you typed for the watermark is used for it.</p>
+<p><B>Delete Files as they are entered</B> - removes the original file from wherever you picked it up, after the item has been made and the archive's own copy of it has been written. It is meant for working through a folder of things to be entered: what is left in the folder is what you have not done yet. It applies only to the file brought in for a new item, and only once that item's copy is safely in place.</p>
+
+<h3>The Pictures, and How the Program Looks</h3>
+<p>The right hand side of the screen holds the two pictures the program uses, each with a preview above its button, and one button that leads to everything about the way the program looks.</p>
+<p><B>Change Program Graphic</B> - the picture shown whenever there is nothing else to show: before anything has been picked, and on an item that has no picture of its own, such as a sound file or a document. It must be a .JPG and it is scaled to the frame it goes in.</p>
+<p><B>Change Report Logo</B> - your own logo, used at the head of the reports and the forms, on the cards, and on the description page when <B>Show Logo on Description Page</B> is ticked. A .JPG again. It is used at 300 pixels wide by 136 high, and one of another size is scaled to fit, which can cost it some sharpness - so it is worth giving it one already about that shape.</p>
+<p>Either picture takes effect the moment you choose it and the preview above the button changes to show it. Leave by <B>Cancel</B> rather than <B>Save Configuration</B> and the one you had before comes back.</p>
+<p><B>Adjust Screen Settings...</B> - one screen for everything about how the program looks, with its own <B>Done</B> button at the bottom which saves and closes it.</p>
+<ol>
+<li><B>Colors</B> - a row of looks to choose from, each one shown as a small sample. Click the one you want and the program restarts to come up in it.</li>
+<li><B>Screen</B> - <B>Regular screen</B> or <B>4K screen</B>, which says which of the two sets of sizes below is the one in use. The <B>Reset</B> beside each puts that whole set back to the sizes the program came with.</li>
+<li><B>Directory Text</B> - the size of the type in the Source, Location and Categories lists, whether it is bold, and how wide the panel holding them is. Both sets of numbers are shown side by side so you can set one up without losing sight of the other. A name too long for the panel is cut off, so the type size and the panel width between them decide how much of a folder's name you can read.</li>
+<li><B>Description Text</B> - the same three things for the description beside the picture. Whatever width you do not give the description is what the picture gets, so these are really one adjustment: wider text reads more like a page, narrower leaves a bigger picture.</li>
+</ol>
+<p><B>Done</B> saves that screen by itself. There is nothing further to press on the settings screen behind it for the sizes and the colours to stick.</p>
+
+<h2 id="p18">The Buttons on the Main Screen</h2>
+<p>A button is enabled only when it can do something, so one that is greyed is telling you something. Either a thing is missing - <B>Save</B> stays grey until all five of the needed fields are filled in and something has actually changed - or the program is in the wrong mode for it.</p>
+<p>Where a button has a key of its own, the key is named with it below. The keys work while you are looking at the collection, and only then: in Edit Mode, and while the cursor is in the search box, a letter is just a letter. Each one does nothing unless its own button is enabled, so the key is never able to do something the button could not.</p>
+<p><B>Save</B> and <B>Delete</B> have no key, by intention. They must be clicked with the mouse, deliberately, because neither should ever happen by a stray keystroke.</p>
+<p><B>Add</B>, or the <B>A</B> key - clears the form and goes into Edit Mode ready for something new. Nothing is written by pressing it.</p>
+<p><B>Edit</B>, or the <B>E</B> key - takes the item on screen into Edit Mode so its boxes can be changed. Once you are in, the same button reads <B>Cancel</B>, and pressing it comes back out with the item as it was.</p>
+<p><B>Save</B> - writes the item: the file is copied into the archive, the record is written beside it, and the folders it belongs in are linked up. If nothing is attached it asks first, and says why a file is wanted - the form as you have filled it in becomes the item's supporting document if you go ahead without one. A large file takes a moment and the cursor says so.</p>
+<p><B>Cancel Changes</B> - puts every box back to what the item said when you went in, and leaves Edit Mode. The screen comes back to its browsing shape, with the picture full size again.</p>
+<p><B>Delete</B> - removes the item on screen, and only that one. It asks first, and after that the item is out of the collection. To clear out a group of items, and to keep a way of changing your mind, use the backup route described under <B>Deleting: One Item, or Several</B> above.</p>
+<p><B>Attach Picture Or Other File</B> - picks the photograph, document, sound or video that the item is about. It is copied in and the file you chose is left where it was. If the item already has a file, you are asked whether the new one is to replace it or to serve as a display picture - a picture to look at for an item whose real file cannot be shown, such as a document.</p>
+<p><B>Read Text From Image</B> - reads the words out of the attached picture and puts them in the <B>Description</B> if that is empty, and in <B>Provenance</B> if it is not. It says READING... while it works, which on a big scan is a few seconds. The button is only there when there is text in the picture to read, and only on a computer that has the text reading support installed, so a copy of the program without it simply never offers it.</p>
+<p><B>Open Item</B>, or the <B>V</B> key, or the <B>O</B> key - opens the attached file in whatever this computer uses for that kind of file. If the picture has been turned, what opens is a turned copy; the archived file itself is never written to, because its bytes are the item's identity.</p>
+<p><B>Browse</B>, or the <B>B</B> key - opens the picture browser on the folder you are in: a screenful of tiles to walk the collection by eye and pick an item. It will not go outside the collection.</p>
+<p><B>Hide Tree</B>, or the plus key on the number pad - puts the picture up on the whole window with the lists out of the way, and steps through the items in the folder you are in. Adding, editing and deleting are switched off while it is up, because it is a screen for showing rather than working. The same button then reads <B>Show Tree</B> and brings everything back.</p>
+<p><B>Album Order</B> - opens the screen where the order of a category is set. It appears in Edit Mode on a category folder holding at least two items, and is not offered on a folder of more than two thousand - a screen of that many pictures cannot be built.</p>
+<p><B>The two arrows</B>, or the left and right arrow keys - the navigation bar above them says which of how many found items you are looking at, and the arrows step through them. They come round again at either end rather than stopping.</p>
+<p><B>SOURCE</B>, <B>LOCATION</B> and <B>CATEGORIES</B> - bring the matching list to the front, which is all they do if the item is filled in. Pressed in order while adding, they do something better: the third press on <B>SOURCE</B> fills in the last item's source, a fourth press adds its location, and a fifth all of its categories. Entering a box of similar things, that leaves only the title, the description and the file to do.</p>
+<p><B>Add or Edit Source</B>, <B>Add or Edit Location</B>, <B>Add or Edit Categories</B> - one button that follows whichever list is in front of you, and opens the screen for adding to that list or renaming part of it. It is there in Edit Mode only.</p>
+<p><B>Search</B> - searches the whole of every item's record for what is in the box beside it. Pressing Enter in the box does the same. What it finds is <B>added</B> to the RESULTS folder rather than replacing what is there, so several searches build one set. The tick box <B>Search "Entered by" field</B> narrows it to who entered the item instead.</p>
+<p><B>Clear Result Folder</B> - empties RESULTS, and says on its face how many files are in there waiting. It deletes nothing: what sits in that folder is the same single file each item already is, shown there as well.</p>
+<p><B>View Result Folder</B> - opens the picture browser on RESULTS, which is the quickest way to look over what a search gathered.</p>
+
+<h3>The Row Above the Description</h3>
+<p>While you are in Edit Mode the description box has its own row of controls, and they work the way they do in a word processor: on whatever is selected, or from the cursor onwards if nothing is.</p>
+<p><B>Size</B> picks the size of the type. <B>Text Color</B> opens the colour picker. <B>B</B>, <B>I</B> and <B>U</B> are bold, italic and underline, and stay pressed in while they are on. <B>Left</B>, <B>Center</B> and <B>Right</B> line the paragraph up. <B>&#8226; List</B> and <B>1. List</B> make a bulleted or a numbered list.</p>
+<p>Text pasted in from a document or a web page keeps its own formatting, and these controls work on it afterwards the same as on anything typed.</p>
+
+<h3>Keys With No Button of Their Own</h3>
+<p>Five things have a key and nothing on the screen to press, so they are easy to miss.</p>
+<p><B>T</B> widens the description, for an item with a great deal written about it, and <B>T</B> again puts it back to the width set in <B>Adjust Screen Settings</B>. It stays as you leave it while you move from item to item, and the picture takes whatever room the words are not using. It works on this help page as well, which is probably the page it is most useful on.</p>
+<p><B>X</B> closes the lists down to their headings, however far they have been opened.</p>
+<p>The <B>down arrow</B> puts the cursor in the description, and from there the <B>up and down arrows</B> and the <B>Page-Up and Page-Down keys</B> scroll a description too long for the window.</p>
+<p>The <B>Menu key</B> - the one beside the right-hand Control key on most keyboards - opens the watermark screen on the item's own picture, for writing a line across it.</p>
+<p><B>F1</B> shows this help.</p>
+
+<h2 id="p19">The Buttons on the Other Screens</h2>
+<p><B>The picture browser</B>, which <B>Browse</B> and <B>View Result Folder</B> both open. Every tile is a button: a folder tile goes into that folder, a picture tile picks that item and closes the screen. <B>Back</B>, or the left arrow key, goes up one folder, and it is only there when there is somewhere to go up to. The numbers along the bottom are how many pictures to put across the screen, from the fewest and largest to the most and smallest. <B>Move Directory</B> takes the folder you are in, with everything under it, and makes it part of another folder you then pick - on that second screen, <B>Move Here</B> accepts the place you have chosen. It is offered for a category or a location folder, which are the two kinds of folder that can be moved. <B>Cancel</B> leaves without picking anything. In RESULTS each picture also has a <B>DELETE FROM RESULTS</B> button under it, which takes that one item out of the set without touching the item.</p>
+<p><B>Add or Edit Source.</B> <B>Save</B> keeps the name and address as the item's source and closes. <B>Clear Form</B> empties the boxes so a new donor can be typed from scratch - it does not delete anybody. <B>Cancel</B> closes and changes nothing.</p>
+<p><B>Add or Edit Location.</B> The top box is a new location to create, and <B>Add New Location</B> makes it: typed as a path, <B>CHEST\DRAWER 1</B> makes the drawer inside the chest rather than one oddly named folder. The list underneath is what already exists, and clicking an entry copies it into that box to work from. Lower down, <B>Rename From</B> shows the location the item you came in from is in - it is fixed, so there is no picking the wrong one - and <B>Rename To</B> is the new address for it. <B>Rename / Move Location</B> then does it, telling you how many items it covers first, because a path that names a different parent is a move. <B>Cancel</B> closes and changes nothing.</p>
+<p><B>Add or Edit Categories.</B> The same shape, for categories: <B>Add New Category</B> at the top, <B>Rename From</B> holding the category you browsed in through, <B>Rename To</B> for its new name or place, the rename button, and <B>Cancel</B>. <B>Split at First Word</B> is a shortcut for one common case: it takes the category chosen in the list and offers it back split at its first word, so <B>POSTCARDS FROM MAINE</B> becomes <B>POSTCARDS</B> with <B>FROM MAINE</B> underneath it. It only fills in the box; nothing moves until you press the rename button.</p>
+<p>This screen has two lists. The one on the left is the categories this collection already has. The one on the right is a set of <B>suggestions</B> the program comes with - three worked-out schemes, a historical society's among them - and clicking one writes it into the box as a category to create. They are a guide, most useful when several people are entering items and the filing should come out the same whoever did it. Nothing obliges you to use them.</p>
+<p><B>The Album Order screen.</B> Every numbered picture is a button: click one to pick it up, it turns green, and click where it is to go. Click a green one again to put it down instead. <B>Slides Across</B> - 5, 10 or 15 - is how many are shown on a row while you work, and has nothing to do with the order. <B>Save Changes</B> writes the order; <B>Quit Without Saving</B> leaves it as it was. <B>Create Book</B> makes a document of the album in the order on screen.</p>
+<p><B>The Create screen</B> has a section of its own above - <B>The Create Screen: a Display Sheet for an Item or a Category</B> - which takes its controls one at a time for both of the things it makes. In short: <B>This Item</B> or <B>This Category</B> at the top, the card controls or the category boxes underneath depending on which, and one button at the bottom that builds the page. That button reads <B>View In Browser</B> for anything it draws itself, and <B>View File</B> when the chosen layout is a Word book template, which it fills and opens instead.</p>
+<p>The small grey word <B>orientation</B> on that screen is for a picture that is on its side. Press it and it asks, plainly, before anything moves, because this changes the item. Say yes and <B>turn left</B> and <B>turn right</B> appear beside it, a quarter turn each; the word itself becomes <B>Press When Done</B>, and pressing it puts the arrows away again.</p>
+<p><B>The watermark screen</B>, which opens when you attach a picture with that setting ticked, and from the Menu key on any item. The box is what gets written across the picture; <B>&#169;</B> puts the copyright sign in it and <B>Filename</B> puts the item's own file name in, each only into an empty box. The colours are which colour to write in. <B>No Rotation</B>, <B>Right 90 Degrees</B>, <B>Left 90 Degrees</B> and <B>180 Degrees</B> turn the picture itself, and <B>Rotate Watermark Text 45 degrees</B> turns the writing rather than the picture. <B>Accept Image</B> takes the picture as shown and closes; working through a folder of them, it accepts this one and brings up the next. <B>Finalize Watermark</B> does a whole folder in one go rather than the picture in front of you: every .JPG and .TIF in the <B>Watermark These</B> folder, inside a folder called <B>Watermark</B> in your home folder, is marked the same way. The finished ones go into <B>Watermarked</B> beside it and the originals are moved to <B>Finished Original</B>, so nothing is written over.</p>
+<p><B>Backing Up and Restoring.</B> Five choices, one <B>Accept</B> to run the one you have picked, and <B>Cancel</B> to leave. The choices are a full backup, a backup of only what is in RESULTS, restoring from a backup file, importing a backup while changing the source or location of everything in it, and deleting from this collection the items a backup file holds. There is a section on backing up above, which goes through them.</p>
+<p><B>Program Settings</B> has its own section above: the boxes, the two pictures, <B>Adjust Screen Settings</B> with its <B>Reset</B> and <B>Done</B>, and <B>Save Configuration</B> and <B>Cancel</B> at the bottom.</p>
+
+<h2 id="p20">Where the Collection Lives</h2>
+<p>None of this needs to be known to use the program. It is here because somebody always asks, and because knowing it makes the one rule above make sense.</p>
+<p>Each item has a folder of its own, named by the <b>hash</b> of its file: a forty character number worked out from the contents of that file and nothing else. Inside it are the file itself under the same name with its original extension, a <b>DATA.txt</b> holding the item's fields, and <b>DISPLAY.JPG</b>, a smaller picture the program draws on screen because a full size photograph is slow to put up again and again. DISPLAY.JPG is not precious - it makes itself again if it goes missing.</p>
+<p>All of those item folders live in one place, <b>Items</b>, and that is the collection. The folders you browse - the sources, the locations, the categories, the albums - hold links to those same files rather than copies of them, which is why an item filed in five places takes the space of one. <b>Rebuild Archive</b> throws that browsable tree away and lays it down again from Items, which is why anything put into those folders by hand does not last and why nothing of value is lost when they are rebuilt.</p>
+<p>An item whose file is not a picture - a video, a sound, a document - can be given a picture to show instead. Attach the second file and answer <b>No</b> when asked whether it is to replace the first: it becomes the display picture, and the item keeps the identity its real file gave it.</p>
+<p>A backup is a single file ending <b>.VAB</b>. It is an ordinary zip file with a name of its own, holding everything needed to put the collection back: every item, every record, the thumbnails and the album order.</p>
+
+        </div>
+      </div>
+      <div id="panelMuseum" style="display:none; flex: 999 1 560px; min-width: 0; background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; max-height: 1500px; overflow-y: auto; padding: 16px 44px;">
+        <div class="help-content">
+<table width="100%" cellpadding="9" cellspacing="0" bgcolor="#fdf1cf">
+<tr><td align="center">
+<p class="tip">Reading this in a narrow column? Press <B>T</B> to widen it, and
+<B>T</B> again to put it back. Looking for a particular word? Type it into
+<B>Find in Help</B>, above this page, and press Enter - press it again, or
+<B>Find Next</B>, to jump to the next place it turns up.</p>
+</td></tr>
+</table>
+
+<table width="100%" cellpadding="10" cellspacing="0" bgcolor="#f3f3e7">
+<tr><td>
+<p class="contentshead">What is in here, in this order</p>
+<!--MUSEUM:CONTENTS-->
+<p class="contents">The museum version &#183; what it adds &#183; logging in and passwords &#183; adding and removing users &#183; an accession from the item to the signature</p>
+<p class="contents">What the words mean &#183; installing and registering &#183; more than one collection</p>
+<p class="contents">Adding an item &#183; why an item has an ID &#183; changing an item &#183; moving something to another place &#183; deleting one or several &#183; importing a whole folder</p>
+<p class="contents">Rebuild Archive &#183; backing up and moving a collection</p>
+<p class="contents">Searching &#183; the RESULTS folder &#183; the spreadsheet &#183; albums and a book &#183; the Create screen</p>
+<p class="contents">The Program Settings screen &#183; every button and key, screen by screen &#183; where the collection lives</p>
+</td></tr>
+</table>
+
+<!--MUSEUM:MUSEUM-->
+<h2 id="m1">The Museum Version</h2>
+<p>Everything in this section belongs to one box: <B>Historical Society - Museum Version</B>, at the top of <B>Program Settings</B>. With it ticked the program keeps accession records, can ask who you are when it starts, and can produce a deed of gift. With it unticked none of that is on the screen, and none of this section applies - which is why you are only shown it when the box is ticked.</p>
+<p>What the box turns on belongs to the <B>installation</B> rather than to one collection, so the accession fields, the extra fields and the sign-in screen are available to every collection on the machine. Which of them you actually use is then a matter of the five boxes described just below.</p>
+<p>The rest of that settings screen - the boxes under the dividing line, the two pictures and the screen settings - is the same in both versions of the program and is described further down, under <B>The Program Settings Screen</B>.</p>
+<h3>The Five Boxes at the Top of Program Settings</h3>
+<p><B>Historical Society - Museum Version</B> - with this ticked an item carries the date it was accessioned, its accession number, and a <B>Donor Expectations</B> box for whatever the donor asked of you: a condition on the gift, a wish about how it is shown, anything you will want to be able to read back years from now. Untick it and those three are hidden.</p>
+<p>The date and the number appear on an item once it has actually been accessioned. Until then there is nothing to show and they stay out of the way, which is why a brand new item does not seem to have them.</p>
+<p>It is worth settling this one before you enter anything. Nothing already entered comes to harm by ticking it later - the fields are simply empty on those items - but accession details are far easier to put in while the item is in front of you for the first time.</p>
+<p><B>Require Login</B> - asks who you are when the program starts, and decides from the answer whether you may change anything. The sign-in screen itself, the list of people and how to set the whole thing up are the next three parts of this section.</p>
+<p><B>Accession Form Creation</B> - puts a <B>Create Accession Form</B> tab on an item in Edit Mode, when that item is complete and has not been accessioned yet. That tab is where the deed of gift for the donor to sign is made, covering everything that donor has given you that is still waiting. The whole job, step by step, is the last part of this section.</p>
+<p><B>Accession Number Overide</B> - the program makes an accession number of its own out of the date and time, and this box lets you use your own instead. With it ticked, the accession number on the form can be typed into. Type it before you pick the items, because the number fills itself in the moment you choose the first one. Whatever is in that box is the number that gets used, with a dot and the count of items on the form after it. If you have no numbering of your own, leave this box alone: a number the program makes is built from the moment it was made, so no two forms are ever given the same one.</p>
+<p><B>Show Metadata  Box</B> - adds a panel of thirteen more fields to an item in Edit Mode, for the things this program has no box of its own for. Twelve of them come named: Contributor(s), Material, Size, Date, Time Period, Copyright, Publisher, Creator, Place of Creation, Materials and Techniques, Condition and Appraised Value. The thirteenth has no name on it until one is given. None of them is required, and the panel says as much at the top of itself - fill in whichever apply to the item in front of you and leave the rest.</p>
+<p>What you put in them is written into the spreadsheet of the whole collection as columns of its own, headed with the field names, so it can be read back and sorted outside the program.</p>
+<p>The names are a plain list, one to a line, and a collection can have its own. Put a file called <B>MetaFields.txt</B> in the collection's own data folder - the one holding <B>Items</B> - and those names are what that collection's thirteen boxes are called; every other collection on the machine carries on with the ones the program came with. A rock collection can be asking for <B>Species</B>, <B>Locality</B> and <B>Hardness</B> while the museum collection beside it still asks for <B>Contributor(s)</B> and <B>Appraised Value</B>.</p>
+<p>One thing to know before changing a list that is already in use: the values are stored by <B>position</B>, not by name. Rename the third field and whatever was typed into the third box is now labelled with the new name. On a collection with nothing in those boxes yet it costs nothing; on one that has been filled in, read down the list first.</p>
+<h3>Logging In</h3>
+<p>With <B>Require Login</B> ticked, the program opens on a sign-in screen showing the name of the collection being opened and its logo, a list of names, and a box for a password. There are three ways past it.</p>
+<p><B>As yourself</B> - pick your name and type your password. You can add, edit and delete items, and the menus are all there.</p>
+<p><B>As ADMIN</B> - pick ADMIN and type the administrator's password. Everything a user can do, and the list of users opens for editing underneath.</p>
+<p><B>As a guest</B> - leave the password box empty and press the button. A guest can look at everything, search, read descriptions and see pictures, but <B>Add</B>, <B>Edit Mode</B> and <B>Delete</B> are switched off and the menu bar is not shown. Closing the sign-in screen with the X, or pressing Escape, is the same as choosing guest.</p>
+<p>The button always says what pressing it is about to do. It reads <B>Login as GUEST</B> while the password box is empty, changes to <B>Log In as</B> your name the moment a password that fits is typed, and says <B>Password Not Accepted</B> while a wrong one is in the box - so a mistyped password is visible before you commit to it, not afterwards when something will not work.</p>
+<p>A wrong password is refused rather than quietly let in as a guest. The box is cleared so the next try starts clean, and you can type it again or empty the box and look around instead.</p>
+<p><B>Require Login</B> is a setting of the collection, so one collection on a machine can ask and another not.</p>
+<p>There is no logging out. Nothing signs you off part way through, and nothing times out: when you have finished, close the program, and the next person to open it is asked who they are.</p>
+<h3>Adding and Removing Users</h3>
+<p>Choose <B>ADMIN</B> on the sign-in screen and type the administrator's password, and the user list opens below. One name to a line. To give somebody a password, type the name, an upright bar, and the password:</p>
+<center><B>MONA|her password here</B></center>
+<p><br>
+Press <B>Save List</B> and it tells you how many users were saved and how many of them have a password. A user with <B>no</B> password is listed, and can be given one later, but until then they can only get in as a guest.</p>
+<p>Passwords are not kept as you typed them. They are scrambled on the way to the file in a way that cannot be turned back, which is why the list shows names only when you reopen it and never shows a password back to you. Typing a name on its own leaves that user's password exactly as it was; only a name with a bar and a new password changes one.</p>
+<p>The administrator's password is fixed inside the program. It cannot be changed from the user list and it is not written in this help file, so no amount of editing the list can lock an administrator out of a collection.</p>
+<p>The list of users belongs to the <B>installation</B> and not to one collection, so the same people are offered whichever collection is being opened.</p>
+<h3>Setting Up Who Logs In</h3>
+<p>From a copy that nobody has to sign into, the whole arrangement takes four steps.</p>
+<ol>
+<li>Open <B>Settings</B> on the <B>Reports and More</B> menu and tick <B>Require Login</B>. Save it.</li>
+<li>Close the program and start it again. The sign-in screen is there now.</li>
+<li>Choose <B>ADMIN</B>, type the administrator's password, and the user list opens underneath.</li>
+<li>Type each person on their own line as <B>NAME|their password</B>, and press <B>Save List</B>.</li>
+</ol>
+<p>From then on each of them picks their own name and types their own password, and anyone else who sits down at the machine can look but not change anything. Their name is also written onto every item they enter, which is what the "Entered by" search looks at.</p>
+<p>Two things worth deciding before you do it. <B>Require Login</B> belongs to the collection, so a reading-room collection can ask while the working one does not. And a person with no password is not locked out, they are a guest - which is a perfectly good answer for somebody who should see the collection and not touch it.</p>
+<h3>An Accession, from the Item to the Signature</h3>
+<p>This needs <B>Accession Form Creation</B> ticked in Program Settings.</p>
+<p>The form is made from the <B>item</B> rather than from a separate screen, and it covers one donor at a time. Everything that donor has given you that has not been accessioned yet can go on the one form.</p>
+<ol>
+<li>Find any item from that donor and press <B>Edit</B>. The item must be complete and not already accessioned, and a <B>Create Accession Form</B> tab then appears beside the item's details.</li>
+<li>Open that tab. The donor's name and address are shown, from the donor's own record: first and last name, address, town, state, postcode, email and telephone. Fill in or correct what is missing - this is what prints at the head of the deed of gift.</li>
+<li>Underneath is everything of that donor's that is waiting to be accessioned. Pick the ones this form is for. Hold Control to pick several, or Shift to pick a run of them.</li>
+<li>The accession number fills itself in as soon as you choose something, and the number on the form is that number and then how many items are on it - <B>MU20261021143000.6</B> for six of them. If <B>Accession Number Overide</B> is ticked you can type your own number instead, before choosing the items.</li>
+<li>The form builds itself on screen as you pick, with the logo, the donor's address, each item with its picture and description, the gift wording and the two signature lines. Read it there before you make it.</li>
+<li>Press <B>Create Accession Sheet</B>. The document is written into a folder called <B>Virtual Archive Output</B> in your home folder and opened for printing.</li>
+</ol>
+<p>Every item on that form is given the accession number at the same moment, so they stop being offered on the next form and the number shows on each of them from then on. That is the whole of what accessioning changes: the item is not moved, not altered, and its ID is untouched - an accession number and an ID are two different things, and the item keeps both.</p>
+<p>Print it, have the donor sign it, and keep the paper. The program made the document; it is not the record of the signature.</p>
+
+<h2 id="m2">What the Words Mean</h2>
+<p>Seven words do most of the work in this program, and they are worth getting straight before anything else.</p>
+<p><b>SOURCE</b> - where or who the item came from. A donor, a purchase, a find.</p>
+<p><b>LOCATION</b> - where it physically is now. Storage Room 1/Shelf 4/Folder 5, Cemeteries/Hill Top, Streets/Maple St. A location can be as deep as you like; each part after a slash is a folder inside the one before it.</p>
+<p><b>CATEGORY</b> - what the item is, for finding it by subject: Vehicle, Photo, Children, Military/War/WWII, Minerals/Quartz. You make these up to suit the collection, and an item can carry up to <b>sixteen</b> of them. Past that the program says so and takes no more.</p>
+<p><b>TITLE</b> - a short description, which serves as the item's caption and as the name it is filed under in every folder it appears in. Two items may have the same title.</p>
+<p><b>DESCRIPTION</b> - the story: what the item is, what it is made of, how big it is, what condition it is in. There is no length limit worth worrying about.</p>
+<p><b>PROVENANCE</b> - the record of ownership and history, used as a guide to authenticity. Not required, and the part nobody can reconstruct later.</p>
+<p><b>ITEM</b> - one entry in the collection: a file, a record of the fields above, and a thumbnail, kept together.</p>
+<p>Three more that describe the program rather than the item.</p>
+<p><b>THE THREE LISTS</b> - Source, Location and Categories, down the left of the screen. They are folders holding the items, and clicking through them is how you walk the collection.</p>
+<p><b>THE ID</b> - a short code on each item, worked out from the file attached to it. It is not a number handed out in turn. There is a section on it below, because two useful things follow from it.</p>
+<p><b>RESULTS</b> - the folder a search puts its findings in, and what the reports are built from.</p>
+
+<h2 id="m3">Installing It, and Registering</h2>
+<p>The program runs on Windows, on a Mac and on Linux. It will work on a modest machine, and a bigger collection asks for more disk rather than more computer. A screen of 1920 by 1080 is a comfortable size to work at; on a 4K screen set the <b>Screen</b> choice in <b>Adjust Screen Settings</b> to 4K so the type and the lists come up at a sensible size.</p>
+<p><b>Installing.</b> Run the setup file and take the offered answers. It puts the program in place and leaves your collections alone - they are kept apart from the program, in your own user folder, which is what makes the next part safe.</p>
+<p><b>Updating.</b> Run a newer setup file over the top of the old one, the same way. The collections, the settings and the list of people are untouched, because none of them live in the program's own folder.</p>
+<p><b>Registering.</b> Until a copy is registered it works as a trial and stops at a hundred items. The code you were sent by email goes in from the <b>Reports and More</b> menu, at the item that reads <b>Register Virtual Archive</b> until a copy has been registered and <b>Create New Collection</b> afterwards. Paste the code in, and the program restarts to take it up.</p>
+<p>If the code names a collection you already have, it opens that one and applies the registration to it rather than starting an empty collection beside it.</p>
+
+<h2 id="m4">More Than One Collection</h2>
+<p>One copy of the program can hold several collections, each entirely separate: its own items, its own folders, its own title in the window. A historical society and a personal collection of minerals can sit side by side without ever mixing.</p>
+<p><b>Which one you are in</b> is shown in the title bar across the top, and the drop-down above the <b>Source</b> list is how you change it. Picking another collection loads it: the lists are read again and the screen clears, which on a large collection takes a moment and says so.</p>
+<p><b>To make a new one</b>, use the registration item on the <b>Reports and More</b> menu, described just above. Each collection comes from its own code.</p>
+<p><b>To get rid of one</b>, take its items out first - make a full backup of it, then use <b>Delete Items Contained In A Backup File</b> on that backup, which empties it while leaving you the backup to change your mind with. Then run <b>Rebuild Archive</b>. Finding nothing left, it asks whether the collection should go, and if you say yes it is taken off the list. The folder itself stays on disk untouched, so nothing is lost in the moment of saying yes.</p>
+
+<h2 id="m5">Adding an Item, Start to Finish</h2>
+<p>Five things are needed before an item can be saved: a <B>source</B>, a <B>location</B>, at least one <B>category</B>, a <B>title</B> and a <B>description</B>. The Save button stays greyed out until all five are there, so a Save you cannot press means one of them is missing.</p>
+<ol>
+<li>Press <B>Add</B>. The screen clears and goes into Edit Mode, ready for something new.</li>
+<li>Press <B>Attach Picture Or Other File</B> and choose the photograph, document, sound or video. It is copied into the archive and the file you picked is left where it was. Attaching nothing is allowed, and the program then makes a file out of what you typed instead, but an item with a picture is worth far more to whoever opens it later.</li>
+<li>Press <B>SOURCE</B> and click, in the list on the left, who the item came from. If the name is not there, add it on the <B>Add Source</B> tab at the bottom left. If nobody knows, <B>DONOR UNKNOWN</B> is a real answer and the item still saves.</li>
+<li>Press <B>LOCATION</B> and click where the item physically is. <B>NOT PLACED</B> counts here in the same way.</li>
+<li>Press <B>CATEGORIES</B> and click one, or several. Clicking a category you have already chosen removes it again.</li>
+<li>Type the <B>title</B> in the box at the top. It is the name the item is filed under in every folder it appears in, so write it the way you would want to find it.</li>
+<li>Fill in the <B>description</B>: what the item is, with any distinguishing details, materials, dimensions and condition. <B>Provenance</B>, underneath, is for previous owners, dates and history. It is not required, and it is the part nobody can reconstruct later.</li>
+<li>Press <B>Save</B>.</li>
+</ol>
+<p>Nothing at all is written until Save is pressed, and <B>Cancel Changes</B> leaves the item exactly as it was.</p>
+<p>Entering a run of similar items is quicker than this list makes it look. The <B>SOURCE</B> button pressed three times fills in the last item's source, a fourth press adds the location, and a fifth the categories, so the second item of a box usually needs only a title, a description and the file.</p>
+
+<h2 id="m6">Why an Item Has an ID, and the One Rule</h2>
+<p>Every item carries an <B>ID</B>, shown on the item screen as something like <B>A1B-2C3</B>. It is not a number handed out in order. It is worked out from the file itself, from the picture or document attached to the item, so the file and the ID are one fact written two ways. Two things follow, and both turn up in ordinary use.</p>
+<p><B>The same file cannot be added twice.</B> Attach a file that is already in the collection and the program says so and stops, because that file is what tells one item from another. It offers the two honest ways out: attach it to this item as a display picture, or change the file itself - a single different pixel is enough - so that it genuinely is a different file. This is deliberate. Two items that are the same file are not two items.</p>
+<p><B>One copy of your file is filed in several places at once.</B> An item filed under a source, a location and three categories shows up in five folders, and it is the same single file each time rather than five copies of it. A collection does not swell because its items are well filed.</p>
+<p>And the rule that protects both: <B>do your renaming, moving and deleting inside the program</B>, not in Explorer or Finder. A file altered out there no longer matches its ID, and the program can no longer tell that the item is itself - which is how the same thing can end up in the collection twice. The folders you browse are also built fresh each time <B>Rebuild Archive</B> runs, so anything put into them by hand is gone at the next rebuild. The items are what those folders are built from, and they are the thing to look after.</p>
+
+<h2 id="m7">Changing an Item That Is Already In</h2>
+<p>Find the item first. Click through the Source, Location or Categories lists to the folder it is in, and if the folder holds several items the navigation bar and the two arrows step through them. A search is the other way in, and what it finds lands in the RESULTS folder.</p>
+<p>With the item on screen press <b>Edit</b>. Every box can be changed. Source and Location are picked the same way as when the item was entered. Categories toggle: click one to add it, click it again to take it off. The file itself is changed with <b>Attach Picture Or Other File</b>, and because the file is what gives the item its ID, replacing it gives the item a new one - which is the one case where that happens.</p>
+<p>Nothing is written until <b>Save</b>, and <b>Cancel Changes</b> puts every box back to what it was.</p>
+
+<h2 id="m8">Moving Something to Another Place</h2>
+<p>A location is a path, and the slashes in it are real containers inside one another. <B>CORNER CABINET\BOX 1</B> means box 1, which is in the corner cabinet; <B>CORNER CABINET\BOX 1\TRAY 2</B> is a tray inside that box. The lists down the left draw it as folders inside folders because that is what it is.</p>
+<p>So when the box itself is moved - out of the corner cabinet and onto shelf 7, say - what you want is for every item in it, and everything nested inside it, to come along. That is one job in this program, not one job per item.</p>
+<h3>Moving One Item</h3>
+<p>Press <B>Edit</B>, press <B>LOCATION</B>, and click the new place in the list. If the place does not exist yet, add it with <B>Add or Edit Location</B> first. Press <B>Save</B>. That item is now filed there and nothing else has changed.</p>
+<h3>Moving a Whole Box, with Everything In It</h3>
+<p>This is the one for a real move: the box has gone somewhere else, and its contents went with it.</p>
+<ol>
+<li>Press <B>Browse</B> and walk to the box: open <B>(LOCATION)</B>, then <B>CORNER CABINET</B>, then <B>BOX 1</B>. You are now standing in the folder that is going to move.</li>
+<li>Press <B>Move Directory</B> at the bottom. A screen opens titled <B>Move This Folder - choose destination</B>.</li>
+<li>Click where it is going - <B>BOX COLLECTION</B> - and press <B>Move Here</B>. The box keeps its own name and becomes part of what you clicked, so <B>CORNER CABINET\BOX 1</B> becomes <B>BOX COLLECTION\BOX 1</B>, the same as dragging one folder onto another.</li>
+<li>You are told how many items are about to be moved and asked to say yes. Read the number: it should be the number of things in that box. Then it works through them, counting as it goes, and says <B>MOVE COMPLETE</B> with the old and new addresses.</li>
+</ol>
+<p><B>Typing a destination instead.</B> The same screen has a box to type in, and what you type is the <B>whole new address</B> rather than a parent to sit under: type <B>BOX COLLECTION\BOX 1</B> and that is exactly where it lands. Typing is also the way to move something into a place that does not exist yet - <B>STORAGE ROOM 2\SHELF 4</B> is made on the way - and <B>(TOP LEVEL)</B> at the head of the list means no parent at all, a place of its own.</p>
+<p><B>What actually happens.</B> Every item whose location starts with the old path has that part of it rewritten, so the box, the trays inside it and every item in any of them all travel together and keep their arrangement. The folders you browse are relinked to match, and folders left empty by the move are cleared away.</p>
+<p>The items themselves are not touched. The files stay exactly where they are in the archive, the IDs do not change, and nothing is copied - only the address written on each record, and the folders built from it.</p>
+<p>There is no undo button for this. There is no need for one either: moving it back is the same job in the other direction, and the program tells you the count before it starts, which is the moment to notice if you are standing in the wrong folder.</p>
+<h3>The Other Way In</h3>
+<p>From an item rather than from the browser: press <B>Edit</B> on any item in that box and press <B>Add or Edit Location</B>. The box's own address is already filled in beside <B>Rename From</B> - it is the address the item you are on carries, which is why you open this from an item in the box you mean to move. Type the new address beside <B>Rename To</B> and press <B>Rename / Move Location</B>. It is the same move, with the same confirmation and the same count - it simply starts from an item you have in front of you instead of from the folder.</p>
+<p>This is also how a place gets a better name. The old address and the new one are both just text; renaming <B>BOX 1</B> to <B>MAPS AND PLANS</B> and moving <B>BOX 1</B> under <B>BOX COLLECTION</B> are the same operation, which is why one button does both.</p>
+<h3>Categories Move the Same Way</h3>
+<p>Everything above works on a category as well. Browse into the category and press <B>Move Directory</B>, or use <B>Add or Edit Categories</B> and its rename button. A category that has a display sheet keeps it, and sub-categories travel with their parent exactly as trays travel with their box.</p>
+<p>Sources are different: an item's source is where it came from, which does not change because the thing was put somewhere else. There is no move for a source folder, and there should not be.</p>
+<h2 id="m9">Deleting: One Item, or Several</h2>
+<p><B>Delete</B> removes the item you are looking at, entirely, and one is all it removes. It asks first, and once you have said yes that item is out of the collection: out of every folder it was filed in, out of the lists, out of the reports. There is no undo. Treat it as gone, because it is.</p>
+<p><B>It is not the preferred way to delete.</B> It is there for the single obvious mistake - the duplicate, the picture of the inside of a lens cap - where there is nothing to think about. For anything else, use the way described below, which asks you to make a backup file first and so hands you the means of changing your mind.</p>
+<h3>Deleting Several, and Keeping a Way Back</h3>
+<p>Clearing out a group of items is done through <B>Backing Up and Restoring</B>, on the <B>Reports and More</B> menu, in two steps: make a backup of the items that are going, then delete them using that backup file.</p>
+<ol>
+<li>Search for what is to go, so that those items are the ones in the <B>(RESULTS)</B> folder. Run several searches if it takes several - results add up rather than replacing each other - and look through RESULTS until it holds exactly what you mean to remove.</li>
+<li>Open <B>Backing Up and Restoring</B>, choose <B>Backup (Export) Result Folder</B> and press <B>Accept</B>. You are asked where to put the file; it is given a name ending <B>.VAB</B>, and it holds those items whole.</li>
+<li>In the same screen, choose <B>Delete Items Contained In A Backup File</B>, press <B>Accept</B>, and pick the file you have just made. Exactly the items in that file are removed from the collection, and nothing else is touched.</li>
+<li>Run <B>Rebuild Archive</B> afterwards so the folders you browse match what is left.</li>
+</ol>
+<p><B>The same file brings them back.</B> Deleting with it does not consume it or change it - it is a file of its own, outside the collection - so changing your mind needs nothing clever: open <B>Backing Up and Restoring</B> again, choose <B>Restore (Import) Backup File</B>, and pick that same file. It is the ordinary restore, doing the ordinary thing, and the items return with their sources, locations, categories, titles, descriptions and pictures exactly as they were.</p>
+<p>That is the whole reason this is the preferred way round. The file you had to make in order to delete is the same file that undoes it, so the undo exists before the deletion does. Nothing has to be remembered, and nothing has to be dug out of anywhere.</p>
+<p>So the order of work is: gather, back up, delete. Keep that .VAB somewhere sensible for as long as there is any chance of wanting those items again - a year, say, or for ever if the disk can spare it. It is the only way back, and it costs nothing to keep.</p>
+<p>This is also how part of a collection is handed to somebody else, or split into a collection of its own: the same backup file that lets you undo the deletion is the file they restore at their end. There is a section on backing up below that goes through all of it.</p>
+<h2 id="m10">Importing a Whole Folder</h2>
+<p>A folder of scans or photographs can come in all at once instead of one item at a time. It is on the <B>Reports and More</B> menu as <B>Import a Folder...</B>, and the screen says what it is about to do before it does it.</p>
+<ol>
+<li>Tick what to bring in: <B>Pictures</B>, <B>Music</B>, <B>Video</B>, <B>Documents</B>, or <B>Everything in the folder, whatever it is</B>. If what you want is not one of those, type the file types in the box instead, like <B>tif, cr2, wav</B>.</li>
+<li>Press <B>Choose Folder...</B> and pick the folder. Everything in it, and in every folder inside it, is considered.</li>
+<li>Fill in the <B>Source</B> and <B>Location</B> that will go on the whole batch, and press OK.</li>
+</ol>
+<p><B>"Everything in the folder, whatever it is"</B> brings in literally everything under the folder you choose, without asking file by file - which is the point of it, and exactly why it is worth a moment's thought before pointing it at a folder you have not looked through yourself. An old folder can hold more than you remember: thumbnails and cache files a camera or a phone left behind, a stray download, half a dozen near-duplicates of the same shot. None of that is sorted out on the way in - it all becomes items - and taking it back out afterwards means finding and deleting each one by hand rather than one folder you could have left out to begin with. Know roughly what is in a folder before choosing <B>Everything</B> on it; where you do not, tick just the kinds you actually want and the rest is left alone.</p>
+<p>Both of those boxes can be left empty, and what happens then is useful rather than a fallback. An empty <B>Source</B> files the batch under the date and time the import was run, which is how you find that one batch again afterwards. An empty <B>Location</B> groups the items by what they are - <B>PICTURES</B>, <B>MUSIC</B>, <B>VIDEO</B> or <B>FILES</B> - with one exception: an .MP3 that carries its own artist and album tag is filed by them instead, as <B>MUSIC\ARTIST\ALBUM</B>, stopping at the album so that every song on it still shares one folder to browse rather than each sitting alone in one of its own. A track number in the tag goes onto the front of the title, not into the location.</p>
+<p>Each file becomes an item, and it is the item's <B>category</B> - not its location - that keeps the folder structure you already had: filed under <B>IMPORT</B>, by the same file-type grouping as above, and then by the one folder immediately holding the file, rather than the whole chain of folders above it. The filename becomes the title, and a song uses the title in its own tag if it has one. Whatever a file knows about itself is kept: the camera and the date from a photograph, the artist and album from a song, the author and title from a document.</p>
+<p>Nothing in the folder you point at is moved, renamed or altered - the files stay exactly where they are and the collection gets its own copy. A file that is already in the collection is recognised and skipped, so running the same import twice does not bring anything in twice.</p>
+<p>What the import cannot do is write your descriptions. The items arrive with a title, a source, a location and their categories, and the description box is empty and waiting. That is the work; the import is only the carrying.</p>
+
+<h2 id="m11">What Rebuild Archive Does, and When to Run It</h2>
+<p><B>Rebuild Archive</B> is on the <B>Reports and More</B> menu. It throws away the folders you browse - the source folders, the location folders, the categories, the albums - and builds every one of them again from your items.</p>
+<p>That sounds alarming and is not, because those folders were never where anything was kept. They are a way of looking at the items, built out of what each item's record says, and they can be made again at any time. Your items are not rebuilt. They are what the rebuild is built from.</p>
+<p>Run it when the folders and the items have got out of step:</p>
+<ul>
+<li>after restoring a backup - though the program runs it for you then;</li>
+<li>when a folder looks wrong, or empty, or an item is not where it should be;</li>
+<li>after anything has been moved about underneath the program.</li>
+</ul>
+<p>It shows a bar and a percentage while it works, and a collection of several thousand items takes minutes rather than seconds. Closing the window stops it: it tells you how many items it managed and asks you to run it again to finish, and because it starts over from the items each time, stopping costs nothing but the time already spent.</p>
+
+<h2 id="m12">Backing Up, and Putting a Collection on Another Computer</h2>
+<p><B>Backing Up and Restoring</B> on the <B>Reports and More</B> menu does both jobs, and the screen is in three parts: make a backup, delete items using a backup, and restore from a backup.</p>
+<p><B>To make one</B>, choose <B>Full Backup</B> and press <B>Accept</B>. You are asked where to put it, and the box opens in your home folder rather than in the collection, because the one place a backup must never go is inside the thing it is backing up. Put it on another drive - the drives you can reach are listed down the side of that box. The file is given a name ending in <B>.VAB</B> and it holds the whole collection: every item, every record, the thumbnails, the categories, the album order and the accession records.</p>
+<p>It is written under a temporary name and only given its real one once it is finished and has been checked. A backup that was interrupted is therefore never left sitting there under the name of a good one, which is the worst way for a backup to fail.</p>
+<p><B>To send somebody part of a collection</B> rather than all of it, search for what they should have so that it lands in the RESULTS folder, then choose <B>Backup (Export) Result Folder</B>. That makes a .VAB of only those items.</p>
+<p><B>To put a collection on another computer</B>:</p>
+<ol>
+<li>Install the program there and open it.</li>
+<li>Make the collection: <B>Create New Collection</B> on the <B>Reports and More</B> menu, and give it a name. On a copy that has not been registered yet, that same menu item reads <B>Register Virtual Archive</B> and asks for the code you were sent instead.</li>
+<li>With that collection open, go to <B>Backing Up and Restoring</B>, choose <B>Restore (Import) Backup File</B>, press <B>Accept</B>, and pick the .VAB file.</li>
+<li>Let it finish. It says REBUILD ARCHIVE next and then does it for you.</li>
+</ol>
+<p>Restoring <B>adds</B> what is in the backup to the collection that is open. It does not replace it and it does not empty it first, which is what makes it useful for joining two bodies of material as well as for moving one. The same choice can change what the items say as they come in: fill in <B>Change Source</B>, <B>Change Location</B> or <B>Add Category</B> before pressing Accept, and every item in the backup arrives with that instead. Leave those boxes empty and the items come in exactly as they were.</p>
+<h3>A Routine Worth Keeping</h3>
+<p>Knowing how to make a backup is not the same as having one. What works, from societies that have been doing this for years: a <B>full backup onto two drives once a year</B>, one kept where the collection is and one kept somewhere else entirely - a board member's house, another building - so that one fire or one theft cannot take both. Make another whenever you have just done a season's worth of entering, while it is fresh enough to be worth protecting.</p>
+<p>Write the date on the drive, keep the last one rather than writing over it, and <B>eject the drive before pulling it out</B> - on Windows through the arrow at the bottom right of the screen, on a Mac by dragging it to the wastebasket, on Linux with the eject symbol beside its name. The file is large and the last of it may still be being written when the copying looks finished.</p>
+<p>And test one. Restoring a backup into a spare collection, once, tells you the drive is readable and the file is whole - which is a thing worth knowing before the day you need it.</p>
+<p><B>Delete Items Contained In A Backup File</B> is the other direction: it removes from this collection exactly the items that are in the backup file you choose. This is the preferred way to delete anything more than a single obvious mistake, because the file itself is untouched - restoring that same file afterwards puts every one of those items back.</p>
+
+<h2 id="m13">Searching: What Is Looked At, and How</h2>
+<p>Type into the search box on the <B>Search</B> tab and press <B>Search</B>, or just press Enter. Capital letters make no difference.</p>
+<p>What is searched is the <B>whole of an item's record</B>, not only its description: the title, the description, the provenance, the source, the location, every category, the dates, the file type, and anything a photograph or a song brought in with it. That is why an item can come back for a reason that is not visible in its description, and why the match is marked in <B>SOURCE</B>, <B>LOCATION</B> and <B>CATEGORIES</B> as well as in the words.</p>
+<p>What you type is looked for as <B>one piece of text</B>. There is no wildcard, and there is no way to ask for two words in different places: <B>BRAGG FARM</B> finds records where that runs together as written, not records that happen to hold both words apart. Shorter is therefore usually better - <B>BRAGG</B> finds everything <B>BRAGG FARM</B> would have, and more.</p>
+<p>Searching for a single full stop <B>.</B> returns every item in the collection. Every record stores the file's extension with its dot, so a full stop is in all of them.</p>
+<p>The tick box <B>Search "Entered by" field</B> changes what is looked at rather than adding to it: with it ticked, the search looks only at who entered the item, which is how you find a volunteer's work for the afternoon. Untick it to go back to searching everything.</p>
+<p>A search of two letters or fewer finds items but marks nothing, which stops a short word painting the whole screen yellow.</p>
+<p>A search of a large collection is not instant - several thousand items take a little while, and the bar across the top is there to say that something is happening rather than nothing. When more than one item is found, the navigation bar shows which of how many you are looking at, and the arrows move through them.</p>
+
+<h2 id="m14">The RESULTS Folder, and Sharing Part of a Collection</h2>
+<p>Everything a search finds is put into a folder called <B>(RESULTS)</B>, and that folder is what the rest of the program works from when it is asked to produce something.</p>
+<p>A search <B>adds</B> to it and never empties it. Search for one family, then another place, then a year, and all three sets are gathered together - and an item already there is not put in twice. The only thing that empties it is the <B>Clear Results Folder</B> button.</p>
+<p><B>Clearing it deletes nothing.</B> What sits in that folder is the same single file the item already is, shown there as well; removing it removes the showing, not the item. The same is true of the folders you browse.</p>
+<p>Two more buttons sit beside it. <B>Add Selected Directory to Results</B> puts everything in the folder you are looking at into RESULTS, which is how to gather a whole category without searching for it. <B>View Result Folder</B> shows you what you have collected so far.</p>
+<p>Once it holds what it should, there are three things to do with it:</p>
+<ul>
+<li><B>Spreadsheet of (RESULTS) directory</B> on the <B>Reports and More</B> menu writes a spreadsheet of them;</li>
+<li><B>Backup (Export) Result Folder</B> on the <B>Backing Up and Restoring</B> screen makes a .VAB of just those items, which is how you send somebody part of a collection;</li>
+<li>and anything you then do to the items themselves is ordinary work - RESULTS is a way of holding a set, not a copy of it.</li>
+</ul>
+
+<h2 id="m15">A Spreadsheet of the Whole Collection</h2>
+<p>The 'Spreadsheet of (RESULTS) directory' option builds its report from whatever is in the RESULTS folder, so to get a report covering everything, first put everything into RESULTS: search for a single full stop <B>.</B> and every item in the collection is returned.</p>
+<p>This is complete, not an approximation. The search reads the whole of an item's record, not just its description, and every record stores the file's extension with its dot - <B>.JPG</B>, <B>.MP3</B> - so a full stop is always present, whatever the item is called and whatever was typed about it.</p>
+<p>The <B>FILE</B> column, the fifth one, is a link rather than just a name: click it in the spreadsheet and the item's own file opens, so a line you are reading about can be looked at without coming back to the program. The <B>LOCAL FILE LOCATION</B> column near the end links the same way to where the item is filed under its source.</p>
+<p>The spreadsheet is written as <B>Full_Report.xlsx</B> in the collection's data folder, and opens in whatever application handles spreadsheets on this computer. If nothing does, the file is still created and a window opens showing you where it is. Close the report before creating a new one - the file is overwritten in place, and a spreadsheet program holding the old copy open will go on showing the old figures.</p>
+
+<h2 id="m16">Albums, the Order They Are In, and a Book</h2>
+<p>An album is a category like any other. Put the items into it the way you file anything else, and what makes it an album is that you can decide the order they are in instead of leaving them in the order they were entered.</p>
+<p>Open the category, press <B>Edit</B>, and the <B>Album Order</B> button appears. It opens a screen of small pictures, numbered in their current order.</p>
+<ol>
+<li>Click the picture you want to move. It turns green.</li>
+<li>Click the picture you want it to sit at. The first one moves there and everything else shuffles along.</li>
+<li>Click a green picture again to change your mind instead of moving it.</li>
+<li>Press <B>Save Changes</B> when the order is right, or <B>Quit Without Saving</B> to leave it as it was.</li>
+</ol>
+<p><B>Slides Across</B> sets how many pictures are shown on a row, which is for your eyes while you work and has nothing to do with the order itself.</p>
+<p>The order is kept with the category and is what you see from then on, in the folder and in a slideshow.</p>
+<p><B>A slideshow.</B> The <B>Hide Tree</B> button puts the picture up on the whole window with the lists out of the way, and steps through the items in the folder you are in. How long each one stays up is the slider beside it, and at nought it simply stays on the picture you are looking at, which is the way to show one item across a room. The slider is only there when <B>Slideshow Timer</B> is ticked in Program Settings. Press the same button, now reading <B>Show Tree</B>, to come back.</p>
+<p><B>A book.</B> With <B>Create Book From Album</B> ticked in Program Settings, the Album Order screen also offers <B>Create Book</B>. It makes a document of the album in the order you have just set: each picture at the size and position the card format gives it, with the title, the description and the provenance under it. It is written into a folder called <B>Virtual Archive Output</B> in your home folder, with the date and time in its name so a new one never writes over the last, and it opens in whatever handles documents on this computer.</p>
+
+<h2 id="m17">The Create Screen: a Display Sheet for an Item or a Category</h2>
+<p>Highlight the item, or the category in the CATEGORIES list, then open the <B>Reports and More</B> menu and choose <B>Create Display Sheet</B>. The screen that opens has its controls at the top and the page itself underneath them: everything you change is redrawn there as you change it, so nothing has to be guessed at or produced to be looked at.</p>
+<h3>What Would You Like to Create?</h3>
+<p>Two choices at the top, and they decide which set of controls is on screen.</p>
+<p><B>This Item</B> is chosen when the screen opens. It makes a card for the one item you had highlighted.</p>
+<p><B>This Category</B> makes a page of a whole category: a heading, your own words, and every item in it. It is greyed out, with <B>no category selected</B> beside it, if you did not come in from a category - the reason is put next to the control rather than left for you to work out.</p>
+<h3>For One Item</h3>
+<p><B>Pick Template</B> - the list of card layouts. Left on its first entry, the card is the program's own. Choose one of yours and it asks <B>Build the page with this layout?</B> with <B>Run</B> and <B>Cancel</B>, so a layout picked by accident costs nothing. The list then returns to its first entry, which is deliberate: it means choosing the same layout again still does something.</p>
+<p><B>LEFT</B>, <B>CENTER</B>, <B>RIGHT</B> and <B>NONE</B> - where the picture sits on the card. <B>NONE</B> leaves the picture off and gives the whole card to the words. These apply to the program's own card; a layout of your own puts things where its own design says.</p>
+<p><B>Picture Size</B> - how wide the picture is drawn, from about an inch to eight. A printed page takes at most six and a half inches of it, so a picture cannot run off the paper however far the slider goes.</p>
+<p><B>orientation</B> - the small grey word over at the right, for a picture that is on its side. It is quiet on purpose: it is rarely wanted and it changes the item rather than the page. Press it and it asks first; say yes and <B>turn left</B> and <B>turn right</B> appear, a quarter turn each. The word itself becomes <B>Press When Done</B>, and pressing it puts the arrows away. It is offered for one item only - a category has no single picture a turn could mean.</p>
+<p><B>View In Browser</B> - builds the card and opens it in whatever shows web pages on this computer, ready to print.</p>
+<h3>For a Category</h3>
+<p><B>Category</B> - which category the page is for, named here so you can see at a glance that it is the one you meant.</p>
+<p><B>Heading</B> - the title that goes across the top of the page.</p>
+<p><B>Words</B> - what goes under the heading: a paragraph about the collection, the gift, the exhibition, whatever the page is for.</p>
+<p>Both of those are <B>kept with the category</B>. Come back to it next month and they are still in the boxes. Clear them both and the page is removed.</p>
+<p><B>Layout</B> - how the page is laid out. The first entry is the program's own <B>STANDARD PAGE</B>; under it are your own layouts; and <B>EDIT OR CREATE A NEW TEMPLATE</B> opens the layouts screen described below. Choosing one of your page layouts asks <B>Run</B> or <B>Cancel</B> first, the same as the card list does.</p>
+<p>A <B>Word layout</B> - a book template, ending .docx - behaves differently and says so: the button at the bottom changes to <B>View File</B>. Nothing is built when you pick it. Pressing the button then starts a <B>fresh copy</B> of that template, fills it from the category's own folder and opens it, so a book is never built on top of the last one.</p>
+<p><B>View In Browser</B> - builds the page and opens it. The preview on screen shows the first twelve items, which is enough to see what the page will look like; the page it makes holds up to four hundred.</p>
+<p>The page takes its picture position and size from the item controls above, which is why those two boxes are part of one screen: set the pictures the way you want them on a card, and the category page follows.</p>
+<h3>Layouts of Your Own</h3>
+<p><B>EDIT OR CREATE A NEW TEMPLATE</B>, on either list, opens a screen of the layouts you have and the ones the program came with. <B>Edit It</B> opens one of yours to change, in whatever handles that kind of file. <B>Save As A New File</B> takes a copy of any of them - which is the only thing to do with a supplied one, since those are read only and stay that way. <B>Delete</B> throws one of yours away. <B>Cancel</B> closes it.</p>
+<p>A layout made somewhere else can be brought in without any of that: <B>drag the file onto this window</B>. It is copied into your layouts folder and appears in the lists; if one of that name is already there you are asked before it is replaced.</p>
+<p>When you have finished, close the screen with the X. The heading and the words are saved on the way out as well as when a page is built, so a page written and not yet viewed is not lost.</p>
+
+<h3>What a Layout Can Ask For</h3>
+<p>Open <B>Sample of all fields</B>, the layout the program comes with, in a text editor, and short words in capitals between hash signs stand out everywhere: #HEADING#, #TITLE#, and so on. Each one is a marker. Wherever it sits in your file, the finished page has something real put there instead - the category's own heading, one item's own title - and everything else, every tag, every colour, every word you typed yourself, is left exactly as you wrote it.</p>
+<p>Some markers are filled once, from the category itself, however many times they appear on the page:</p>
+<p><B>#HEADING#</B> - the title typed into the Heading box.</p>
+<p><B>#CATEGORYTEXT#</B> - the paragraph typed into the Words box.</p>
+<p><B>#CATEGORY#</B> - the category's own name, exactly as it is filed.</p>
+<p><B>#ORGANIZATION#</B> - your collection's name.</p>
+<p><B>#COUNT#</B> - how many items are on the page.</p>
+<p><B>#ACCESSIONNUM#</B> - a fresh accession number for the batch, worked out new each time, the same kind a single card gets.</p>
+<p><B>#LOGO#</B> - your report logo, already a complete picture rather than a filename. Put the marker itself where the picture should sit; there is nothing to put it inside.</p>
+<p>The rest are filled once for every item, and only work between a pair of <B>#EACH#</B> and <B>#END#</B> markers. Put those two around whatever should repeat - one cell of a table, say - and the program copies that piece once for every item in the category, filling it fresh each time:</p>
+<p><B>#TITLE#</B> - the item's name.</p>
+<p><B>#THUMB#</B> - the item's own picture, already complete; <B>#FILENAME#</B> is the same marker, under the name a card layout knows it by.</p>
+<p><B>#DESCRIPTION#</B>, <B>#PROVENANCE#</B> and <B>#METADATA#</B> - the item's own description, provenance and metadata.</p>
+<p><B>#ID#</B> and <B>#SOURCE#</B> - the item's short identifier, and who it came from.</p>
+<p><B>#NUMBER#</B> - which one this is on the page: 1, 2, 3 and on.</p>
+<p><B>#NEWROW#</B> - put at the very front of the repeated piece, it becomes a new table row every three items, and nothing at all on the first.</p>
+<p>A category page is not the donor's own business card, so <B>#DONOR#</B>, <B>#ADDRESS#</B>, <B>#CITY#</B>, <B>#STATE#</B>, <B>#ZIP#</B>, <B>#PHONE#</B> and <B>#EMAIL#</B> print as nothing on a layout ending .html - a page is something you might show or publish, and a donor's home address is not what those seven words were written for. The one exception is a layout ending .rtf: that comes out as a document to print and hand to somebody, one item to a page, and there the donor markers are filled, because a donation form without its donor on it is not a form.</p>
+<p>Last, <B>#!HEADING#</B>, with an exclamation mark after the hash, prints the word #HEADING# itself rather than the heading - of use only if you are explaining your own layout to somebody else, the way this page is explaining the program's.</p>
+
+<h3>A Sample, Using Every Field</h3>
+<p>The program comes with exactly this layout, ready to pick: <B>Sample of all fields</B>, in the same Pick Template and Layout lists. Choose it on a real category to see it filled for yourself, or read it below first.</p>
+<p>Pick it under <B>Layout</B>, for <B>This Category</B> - that is what it is written for. Picked under <B>Pick Template</B>, for <B>This Item</B>, a single card still makes sense of most of it: the picture, the item markers and the donor markers all fill in the same as they do on a card of their own, #NUMBER# is simply 1, and #EACH#, #NEWROW# and #END# hold nothing and quietly disappear. <B>#HEADING#</B>, <B>#CATEGORY#</B>, <B>#COUNT#</B> and <B>#CATEGORYTEXT#</B> print as nothing rather than as themselves - there genuinely is no heading, no total and no paragraph of words for a single item to borrow them from, the same as a donor field left blank on an item with none.</p>
+<p>Below is the whole file. Colour and size are only there, in this explanation, to tell the three kinds apart: gold and the largest for the ones filled once from the category, teal and the size the rest of the sample is in for the ones filled once per item, and pink and the smallest for the two that hold the layout together rather than naming a field at all. Your own layout can use any colours and sizes you like, or none - the blue, white, rust and olive of the supplied file itself are its own choice, not something the program asks for, and the heading, the item name, the description and the small print are each a different size in it too, for the same reason.</p>
+<pre class="code">&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+body  { font-family: Verdana, sans-serif; color: #202020; }
+.head { color: #ffffff; }
+.sub  { color: #cfe8ff; }
+.name { color: #0b4f6c; }
+.meta { color: #6a6a6a; }
+.prov { color: #7a5c00; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table width="100%" bgcolor="#0b4f6c" cellpadding="14"&gt;
+&lt;tr&gt;&lt;td align="center"&gt;
+<span class="mOnce">#LOGO#</span>
+&lt;h1 class="head"&gt;<span class="mOnce">#HEADING#</span>&lt;/h1&gt;
+&lt;p class="sub"&gt;<span class="mOnce">#ORGANIZATION#</span> - <span class="mOnce">#CATEGORY#</span>&lt;/p&gt;
+&lt;p class="sub"&gt;<span class="mOnce">#COUNT#</span> items - Acc. <span class="mOnce">#ACCESSIONNUM#</span>&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;<span class="mOnce">#CATEGORYTEXT#</span>&lt;/p&gt;
+
+&lt;table width="100%" cellpadding="10"&gt;
+<span class="mFlow">#EACH#</span>
+<span class="mFlow">#NEWROW#</span>
+&lt;tr&gt;&lt;td bgcolor="#eef6fa"&gt;
+<span class="mEach">#THUMB#</span>
+&lt;p class="name"&gt;<span class="mEach">#NUMBER#</span>. <span class="mEach">#TITLE#</span>&lt;/p&gt;
+&lt;p class="meta"&gt;<span class="mEach">#METADATA#</span>&lt;/p&gt;
+&lt;p&gt;<span class="mEach">#DESCRIPTION#</span>&lt;/p&gt;
+&lt;p class="prov"&gt;<span class="mEach">#PROVENANCE#</span>&lt;/p&gt;
+&lt;p class="meta"&gt;Catalogue <span class="mEach">#ID#</span> - from <span class="mEach">#SOURCE#</span>&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;
+<span class="mFlow">#END#</span>
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Saved and chosen from <B>Pick Template</B>, that comes out as a page with a dark blue band across the top carrying the logo and the heading, your own words underneath it, then one pale cell per item with its picture, title, metadata, description, provenance and catalogue line.</p>
+
+<h3>Writing One Yourself</h3>
+<p>Start from a supplied layout rather than an empty file - <B>Save As A New File</B> on <B>Sample of all fields</B> or <B>A Simple Web File</B>, then <B>Edit It</B>, both on the <B>EDIT OR CREATE A NEW TEMPLATE</B> screen above. A supplied layout is read only, so there is no risk of changing the one the program came with by mistake.</p>
+<p>A layout for one item must end <B>.rtf</B>, <B>.html</B> or <B>.htm</B> - whichever opens best in whatever you write it with. A layout for a whole category may end any of those three as well, or <B>.docx</B>: a Word book template, which is the one kind that does not build a page at all. It opens a fresh copy of itself, filled from the category, every time you choose it - see <B>Layouts of Your Own</B> and the Word layout note above. Anything else dropped onto the templates window, or saved with another ending, is not offered in either list.</p>
+<p>A marker must be typed exactly as shown, in capitals, with a hash sign on each side - #title# is not a marker and prints as those seven characters. Anything that is not one of the markers above is left precisely as you typed it, so there is no part of an HTML page this program stops you laying out as you please.</p>
+<p>A layout with no #EACH# ... #END# pair is still a valid page - the once-only markers are filled and nothing of the item list prints, which is a fair way to make a cover sheet for a book of several categories run one after another.</p>
+<p>Finished, bring it in with <B>drag the file onto this window</B>, the same as any layout from somewhere else, and it appears in the <B>Layout</B> list ready to choose.</p>
+
+<h2 id="m18">The Program Settings Screen</h2>
+<p>Everything the program lets you turn on and off is on one screen. Open <B>Settings</B> on the <B>Reports and More</B> menu and it comes up titled <B>Program Settings</B>, with a note across the top saying the options may be turned on and off without fear of changing the underlying data. That is the plain truth of this screen: the boxes decide what you are shown and which buttons you are offered, and not one of them alters an item, a file or a folder.</p>
+<p>Nothing takes effect until you press <B>Save Configuration</B>, and then it takes effect at once - the program picks the changes up as the screen closes, so there is no restarting it to see them. <B>Cancel</B>, or closing the window with the X, leaves every box as it was, and puts the two pictures back as well if you changed one and then thought better of it.</p>
+<p>The boxes are a list down the left side, and they are taken here in the order they sit in.</p>
+<p><B>Show Item Detail on Description Page</B> - adds, under the description of the item you are looking at, the lines that say where it came from and how it is filed: SOURCE, LOCATION, CATEGORIES, and then the item's ID and the type of file it is. A word you have searched for is marked in those lines as well as in the description, so when a search turns up an item because of its donor or its place you can see which field matched. Resting the pointer on one of them shows the whole of it, for a name too long to fit the line.</p>
+<p><B>Allow Deletions</B> - ticked, the <B>Delete</B> button is on the bottom row and works. Unticked, it is not there at all. This box is the only thing that takes the button away for good; the other reasons it goes quiet, such as nothing being selected or a slideshow running, grey it for the moment and give it back.</p>
+<p><B>Show Camera GPS/Metadata on pictures that contain it</B> - adds what the camera itself wrote into the picture: the model of camera, the date and time the picture was taken, and the latitude and longitude if the camera recorded them. It is only read from .JPG files, and a picture that carries none of it simply shows nothing. These lines go in underneath the detail lines above, so this box needs <B>Show Item Detail on Description Page</B> ticked as well - on its own it has nowhere to appear.</p>
+<p><B>Slideshow Timer</B> - puts a slider beside the <B>Hide Tree</B> button for how long each picture stays up before the next one. It reads <B>Delay 5 seconds</B>, and so on, as you move it, and at nought it reads <B>Manual Mode</B> and stays on the picture in front of you until you move on yourself. Without this box ticked there is no slider and a slideshow steps along by hand, which is what you want for showing one item across a room.</p>
+<p><B>Album/Slideshow Order</B> - makes the <B>Album Order</B> button appear when you are in Edit Mode on a category folder, which is where the order of an album is set. It is categories only: a Source folder, a Location folder and the RESULTS folder are not sequences and have no order screen. There is a section on albums above.</p>
+<p><B>Create Book From Album</B> - adds the <B>Create Book</B> button to the Album Order screen, which makes a document of the album in the order you have just set.</p>
+<p><B>Show Expanded Trees</B> - the three lists down the left open one level further when the program starts, so you see what is inside each heading rather than the headings by themselves. On a collection with a great many folders the shorter list is easier to get around, which is the reason this is a choice at all.</p>
+<p><B>Show Logo on Description Page</B> - puts your logo at the top of the description, above the item's title. It is the same logo the reports and the cards use, the one set by <B>Change Report Logo</B> on this same screen.</p>
+<p><B>Add watermarks and rotation when adding an image file</B> - when you attach a .JPG, .TIFF, .PNG or .BMP file, the watermark screen opens first. You can turn the picture upright there and write a line across it, and the copy that comes out is the one that gets filed. The file on your disk is left exactly as it was. If the item's title is still empty, what you typed for the watermark is used for it.</p>
+<p><B>Delete Files as they are entered</B> - removes the original file from wherever you picked it up, after the item has been made and the archive's own copy of it has been written. It is meant for working through a folder of things to be entered: what is left in the folder is what you have not done yet. It applies only to the file brought in for a new item, and only once that item's copy is safely in place.</p>
+
+<h3>The Pictures, and How the Program Looks</h3>
+<p>The right hand side of the screen holds the two pictures the program uses, each with a preview above its button, and one button that leads to everything about the way the program looks.</p>
+<p><B>Change Program Graphic</B> - the picture shown whenever there is nothing else to show: before anything has been picked, and on an item that has no picture of its own, such as a sound file or a document. It must be a .JPG and it is scaled to the frame it goes in.</p>
+<p><B>Change Report Logo</B> - your own logo, used at the head of the reports and the forms, on the cards, and on the description page when <B>Show Logo on Description Page</B> is ticked. A .JPG again. It is used at 300 pixels wide by 136 high, and one of another size is scaled to fit, which can cost it some sharpness - so it is worth giving it one already about that shape.</p>
+<p>Either picture takes effect the moment you choose it and the preview above the button changes to show it. Leave by <B>Cancel</B> rather than <B>Save Configuration</B> and the one you had before comes back.</p>
+<p><B>Adjust Screen Settings...</B> - one screen for everything about how the program looks, with its own <B>Done</B> button at the bottom which saves and closes it.</p>
+<ol>
+<li><B>Colors</B> - a row of looks to choose from, each one shown as a small sample. Click the one you want and the program restarts to come up in it.</li>
+<li><B>Screen</B> - <B>Regular screen</B> or <B>4K screen</B>, which says which of the two sets of sizes below is the one in use. The <B>Reset</B> beside each puts that whole set back to the sizes the program came with.</li>
+<li><B>Directory Text</B> - the size of the type in the Source, Location and Categories lists, whether it is bold, and how wide the panel holding them is. Both sets of numbers are shown side by side so you can set one up without losing sight of the other. A name too long for the panel is cut off, so the type size and the panel width between them decide how much of a folder's name you can read.</li>
+<li><B>Description Text</B> - the same three things for the description beside the picture. Whatever width you do not give the description is what the picture gets, so these are really one adjustment: wider text reads more like a page, narrower leaves a bigger picture.</li>
+</ol>
+<p><B>Done</B> saves that screen by itself. There is nothing further to press on the settings screen behind it for the sizes and the colours to stick.</p>
+
+<h2 id="m19">The Buttons on the Main Screen</h2>
+<p>A button is enabled only when it can do something, so one that is greyed is telling you something. Either a thing is missing - <B>Save</B> stays grey until all five of the needed fields are filled in and something has actually changed - or the program is in the wrong mode for it.</p>
+<p>Where a button has a key of its own, the key is named with it below. The keys work while you are looking at the collection, and only then: in Edit Mode, and while the cursor is in the search box, a letter is just a letter. Each one does nothing unless its own button is enabled, so the key is never able to do something the button could not.</p>
+<p><B>Save</B> and <B>Delete</B> have no key, by intention. They must be clicked with the mouse, deliberately, because neither should ever happen by a stray keystroke.</p>
+<p><B>Add</B>, or the <B>A</B> key - clears the form and goes into Edit Mode ready for something new. Nothing is written by pressing it.</p>
+<p><B>Edit</B>, or the <B>E</B> key - takes the item on screen into Edit Mode so its boxes can be changed. Once you are in, the same button reads <B>Cancel</B>, and pressing it comes back out with the item as it was.</p>
+<p><B>Save</B> - writes the item: the file is copied into the archive, the record is written beside it, and the folders it belongs in are linked up. If nothing is attached it asks first, and says why a file is wanted - the form as you have filled it in becomes the item's supporting document if you go ahead without one. A large file takes a moment and the cursor says so.</p>
+<p><B>Cancel Changes</B> - puts every box back to what the item said when you went in, and leaves Edit Mode. The screen comes back to its browsing shape, with the picture full size again.</p>
+<p><B>Delete</B> - removes the item on screen, and only that one. It asks first, and after that the item is out of the collection. To clear out a group of items, and to keep a way of changing your mind, use the backup route described under <B>Deleting: One Item, or Several</B> above.</p>
+<p><B>Attach Picture Or Other File</B> - picks the photograph, document, sound or video that the item is about. It is copied in and the file you chose is left where it was. If the item already has a file, you are asked whether the new one is to replace it or to serve as a display picture - a picture to look at for an item whose real file cannot be shown, such as a document.</p>
+<p><B>Read Text From Image</B> - reads the words out of the attached picture and puts them in the <B>Description</B> if that is empty, and in <B>Provenance</B> if it is not. It says READING... while it works, which on a big scan is a few seconds. The button is only there when there is text in the picture to read, and only on a computer that has the text reading support installed, so a copy of the program without it simply never offers it.</p>
+<p><B>Open Item</B>, or the <B>V</B> key, or the <B>O</B> key - opens the attached file in whatever this computer uses for that kind of file. If the picture has been turned, what opens is a turned copy; the archived file itself is never written to, because its bytes are the item's identity.</p>
+<p><B>Browse</B>, or the <B>B</B> key - opens the picture browser on the folder you are in: a screenful of tiles to walk the collection by eye and pick an item. It will not go outside the collection.</p>
+<p><B>Hide Tree</B>, or the plus key on the number pad - puts the picture up on the whole window with the lists out of the way, and steps through the items in the folder you are in. Adding, editing and deleting are switched off while it is up, because it is a screen for showing rather than working. The same button then reads <B>Show Tree</B> and brings everything back.</p>
+<p><B>Album Order</B> - opens the screen where the order of a category is set. It appears in Edit Mode on a category folder holding at least two items, and is not offered on a folder of more than two thousand - a screen of that many pictures cannot be built.</p>
+<p><B>The two arrows</B>, or the left and right arrow keys - the navigation bar above them says which of how many found items you are looking at, and the arrows step through them. They come round again at either end rather than stopping.</p>
+<p><B>SOURCE</B>, <B>LOCATION</B> and <B>CATEGORIES</B> - bring the matching list to the front, which is all they do if the item is filled in. Pressed in order while adding, they do something better: the third press on <B>SOURCE</B> fills in the last item's source, a fourth press adds its location, and a fifth all of its categories. Entering a box of similar things, that leaves only the title, the description and the file to do.</p>
+<p><B>Add or Edit Source</B>, <B>Add or Edit Location</B>, <B>Add or Edit Categories</B> - one button that follows whichever list is in front of you, and opens the screen for adding to that list or renaming part of it. It is there in Edit Mode only.</p>
+<p><B>Search</B> - searches the whole of every item's record for what is in the box beside it. Pressing Enter in the box does the same. What it finds is <B>added</B> to the RESULTS folder rather than replacing what is there, so several searches build one set. The tick box <B>Search "Entered by" field</B> narrows it to who entered the item instead.</p>
+<p><B>Clear Result Folder</B> - empties RESULTS, and says on its face how many files are in there waiting. It deletes nothing: what sits in that folder is the same single file each item already is, shown there as well.</p>
+<p><B>View Result Folder</B> - opens the picture browser on RESULTS, which is the quickest way to look over what a search gathered.</p>
+
+<h3>The Row Above the Description</h3>
+<p>While you are in Edit Mode the description box has its own row of controls, and they work the way they do in a word processor: on whatever is selected, or from the cursor onwards if nothing is.</p>
+<p><B>Size</B> picks the size of the type. <B>Text Color</B> opens the colour picker. <B>B</B>, <B>I</B> and <B>U</B> are bold, italic and underline, and stay pressed in while they are on. <B>Left</B>, <B>Center</B> and <B>Right</B> line the paragraph up. <B>&#8226; List</B> and <B>1. List</B> make a bulleted or a numbered list.</p>
+<p>Text pasted in from a document or a web page keeps its own formatting, and these controls work on it afterwards the same as on anything typed.</p>
+
+<h3>Keys With No Button of Their Own</h3>
+<p>Five things have a key and nothing on the screen to press, so they are easy to miss.</p>
+<p><B>T</B> widens the description, for an item with a great deal written about it, and <B>T</B> again puts it back to the width set in <B>Adjust Screen Settings</B>. It stays as you leave it while you move from item to item, and the picture takes whatever room the words are not using. It works on this help page as well, which is probably the page it is most useful on.</p>
+<p><B>X</B> closes the lists down to their headings, however far they have been opened.</p>
+<p>The <B>down arrow</B> puts the cursor in the description, and from there the <B>up and down arrows</B> and the <B>Page-Up and Page-Down keys</B> scroll a description too long for the window.</p>
+<p>The <B>Menu key</B> - the one beside the right-hand Control key on most keyboards - opens the watermark screen on the item's own picture, for writing a line across it.</p>
+<p><B>F1</B> shows this help.</p>
+
+<h2 id="m20">The Buttons on the Other Screens</h2>
+<p><B>The picture browser</B>, which <B>Browse</B> and <B>View Result Folder</B> both open. Every tile is a button: a folder tile goes into that folder, a picture tile picks that item and closes the screen. <B>Back</B>, or the left arrow key, goes up one folder, and it is only there when there is somewhere to go up to. The numbers along the bottom are how many pictures to put across the screen, from the fewest and largest to the most and smallest. <B>Move Directory</B> takes the folder you are in, with everything under it, and makes it part of another folder you then pick - on that second screen, <B>Move Here</B> accepts the place you have chosen. It is offered for a category or a location folder, which are the two kinds of folder that can be moved. <B>Cancel</B> leaves without picking anything. In RESULTS each picture also has a <B>DELETE FROM RESULTS</B> button under it, which takes that one item out of the set without touching the item.</p>
+<p><B>Add or Edit Source.</B> <B>Save</B> keeps the name and address as the item's source and closes. <B>Clear Form</B> empties the boxes so a new donor can be typed from scratch - it does not delete anybody. <B>Cancel</B> closes and changes nothing.</p>
+<p><B>Add or Edit Location.</B> The top box is a new location to create, and <B>Add New Location</B> makes it: typed as a path, <B>CHEST\DRAWER 1</B> makes the drawer inside the chest rather than one oddly named folder. The list underneath is what already exists, and clicking an entry copies it into that box to work from. Lower down, <B>Rename From</B> shows the location the item you came in from is in - it is fixed, so there is no picking the wrong one - and <B>Rename To</B> is the new address for it. <B>Rename / Move Location</B> then does it, telling you how many items it covers first, because a path that names a different parent is a move. <B>Cancel</B> closes and changes nothing.</p>
+<p><B>Add or Edit Categories.</B> The same shape, for categories: <B>Add New Category</B> at the top, <B>Rename From</B> holding the category you browsed in through, <B>Rename To</B> for its new name or place, the rename button, and <B>Cancel</B>. <B>Split at First Word</B> is a shortcut for one common case: it takes the category chosen in the list and offers it back split at its first word, so <B>POSTCARDS FROM MAINE</B> becomes <B>POSTCARDS</B> with <B>FROM MAINE</B> underneath it. It only fills in the box; nothing moves until you press the rename button.</p>
+<p>This screen has two lists. The one on the left is the categories this collection already has. The one on the right is a set of <B>suggestions</B> the program comes with - three worked-out schemes, a historical society's among them - and clicking one writes it into the box as a category to create. They are a guide, most useful when several people are entering items and the filing should come out the same whoever did it. Nothing obliges you to use them.</p>
+<p><B>The Album Order screen.</B> Every numbered picture is a button: click one to pick it up, it turns green, and click where it is to go. Click a green one again to put it down instead. <B>Slides Across</B> - 5, 10 or 15 - is how many are shown on a row while you work, and has nothing to do with the order. <B>Save Changes</B> writes the order; <B>Quit Without Saving</B> leaves it as it was. <B>Create Book</B> makes a document of the album in the order on screen.</p>
+<p><B>The Create screen</B> has a section of its own above - <B>The Create Screen: a Display Sheet for an Item or a Category</B> - which takes its controls one at a time for both of the things it makes. In short: <B>This Item</B> or <B>This Category</B> at the top, the card controls or the category boxes underneath depending on which, and one button at the bottom that builds the page. That button reads <B>View In Browser</B> for anything it draws itself, and <B>View File</B> when the chosen layout is a Word book template, which it fills and opens instead.</p>
+<p>The small grey word <B>orientation</B> on that screen is for a picture that is on its side. Press it and it asks, plainly, before anything moves, because this changes the item. Say yes and <B>turn left</B> and <B>turn right</B> appear beside it, a quarter turn each; the word itself becomes <B>Press When Done</B>, and pressing it puts the arrows away again.</p>
+<p><B>The watermark screen</B>, which opens when you attach a picture with that setting ticked, and from the Menu key on any item. The box is what gets written across the picture; <B>&#169;</B> puts the copyright sign in it and <B>Filename</B> puts the item's own file name in, each only into an empty box. The colours are which colour to write in. <B>No Rotation</B>, <B>Right 90 Degrees</B>, <B>Left 90 Degrees</B> and <B>180 Degrees</B> turn the picture itself, and <B>Rotate Watermark Text 45 degrees</B> turns the writing rather than the picture. <B>Accept Image</B> takes the picture as shown and closes; working through a folder of them, it accepts this one and brings up the next. <B>Finalize Watermark</B> does a whole folder in one go rather than the picture in front of you: every .JPG and .TIF in the <B>Watermark These</B> folder, inside a folder called <B>Watermark</B> in your home folder, is marked the same way. The finished ones go into <B>Watermarked</B> beside it and the originals are moved to <B>Finished Original</B>, so nothing is written over.</p>
+<p><B>Backing Up and Restoring.</B> Five choices, one <B>Accept</B> to run the one you have picked, and <B>Cancel</B> to leave. The choices are a full backup, a backup of only what is in RESULTS, restoring from a backup file, importing a backup while changing the source or location of everything in it, and deleting from this collection the items a backup file holds. There is a section on backing up above, which goes through them.</p>
+<p><B>Program Settings</B> has its own section above: the boxes, the two pictures, <B>Adjust Screen Settings</B> with its <B>Reset</B> and <B>Done</B>, and <B>Save Configuration</B> and <B>Cancel</B> at the bottom.</p>
+
+<h2 id="m21">Where the Collection Lives</h2>
+<p>None of this needs to be known to use the program. It is here because somebody always asks, and because knowing it makes the one rule above make sense.</p>
+<p>Each item has a folder of its own, named by the <b>hash</b> of its file: a forty character number worked out from the contents of that file and nothing else. Inside it are the file itself under the same name with its original extension, a <b>DATA.txt</b> holding the item's fields, and <b>DISPLAY.JPG</b>, a smaller picture the program draws on screen because a full size photograph is slow to put up again and again. DISPLAY.JPG is not precious - it makes itself again if it goes missing.</p>
+<p>All of those item folders live in one place, <b>Items</b>, and that is the collection. The folders you browse - the sources, the locations, the categories, the albums - hold links to those same files rather than copies of them, which is why an item filed in five places takes the space of one. <b>Rebuild Archive</b> throws that browsable tree away and lays it down again from Items, which is why anything put into those folders by hand does not last and why nothing of value is lost when they are rebuilt.</p>
+<p>An item whose file is not a picture - a video, a sound, a document - can be given a picture to show instead. Attach the second file and answer <b>No</b> when asked whether it is to replace the first: it becomes the display picture, and the item keeps the identity its real file gave it.</p>
+<p>A backup is a single file ending <b>.VAB</b>. It is an ordinary zip file with a name of its own, holding everything needed to put the collection back: every item, every record, the thumbnails and the album order.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #8a7f63; border-top: 1px solid #e3d8bf;">
+    <div>virtualarchive.org</div>
+    <div>Virtual Archive &copy; 2026</div>
+  </div>
+</div>
+
+<script>
+  var PERSONAL_TOC = [
+    { id: 'p1', text: 'What the Words Mean' }, { id: 'p2', text: 'Installing It, and Registering' }, { id: 'p3', text: 'More Than One Collection' }, { id: 'p4', text: 'Adding an Item, Start to Finish' }, { id: 'p5', text: 'Why an Item Has an ID, and the One Rule' }, { id: 'p6', text: 'Changing an Item That Is Already In' }, { id: 'p7', text: 'Moving Something to Another Place' }, { id: 'p8', text: 'Deleting: One Item, or Several' }, { id: 'p9', text: 'Importing a Whole Folder' }, { id: 'p10', text: 'What Rebuild Archive Does, and When to Run It' }, { id: 'p11', text: 'Backing Up, and Putting a Collection on Another Computer' }, { id: 'p12', text: 'Searching: What Is Looked At, and How' }, { id: 'p13', text: 'The RESULTS Folder, and Sharing Part of a Collection' }, { id: 'p14', text: 'A Spreadsheet of the Whole Collection' }, { id: 'p15', text: 'Albums, the Order They Are In, and a Book' }, { id: 'p16', text: 'The Create Screen: a Display Sheet for an Item or a Category' }, { id: 'p17', text: 'The Program Settings Screen' }, { id: 'p18', text: 'The Buttons on the Main Screen' }, { id: 'p19', text: 'The Buttons on the Other Screens' }, { id: 'p20', text: 'Where the Collection Lives' }
+  ];
+  var MUSEUM_TOC = [
+    { id: 'm1', text: 'The Museum Version' }, { id: 'm2', text: 'What the Words Mean' }, { id: 'm3', text: 'Installing It, and Registering' }, { id: 'm4', text: 'More Than One Collection' }, { id: 'm5', text: 'Adding an Item, Start to Finish' }, { id: 'm6', text: 'Why an Item Has an ID, and the One Rule' }, { id: 'm7', text: 'Changing an Item That Is Already In' }, { id: 'm8', text: 'Moving Something to Another Place' }, { id: 'm9', text: 'Deleting: One Item, or Several' }, { id: 'm10', text: 'Importing a Whole Folder' }, { id: 'm11', text: 'What Rebuild Archive Does, and When to Run It' }, { id: 'm12', text: 'Backing Up, and Putting a Collection on Another Computer' }, { id: 'm13', text: 'Searching: What Is Looked At, and How' }, { id: 'm14', text: 'The RESULTS Folder, and Sharing Part of a Collection' }, { id: 'm15', text: 'A Spreadsheet of the Whole Collection' }, { id: 'm16', text: 'Albums, the Order They Are In, and a Book' }, { id: 'm17', text: 'The Create Screen: a Display Sheet for an Item or a Category' }, { id: 'm18', text: 'The Program Settings Screen' }, { id: 'm19', text: 'The Buttons on the Main Screen' }, { id: 'm20', text: 'The Buttons on the Other Screens' }, { id: 'm21', text: 'Where the Collection Lives' }
+  ];
+
+  var ACTIVE_STYLE = 'display:block;padding:7px 10px;font-size:14px;border-radius:5px;line-height:1.35;cursor:pointer;background:#0d2a63;color:#fff;font-weight:600;';
+  var INACTIVE_STYLE = 'display:block;padding:7px 10px;font-size:14px;color:#333;border-radius:5px;line-height:1.35;cursor:pointer;';
+
+  function buildToc(navEl, items, activeId) {
+    navEl.innerHTML = '';
+    items.forEach(function (item) {
+      var a = document.createElement('a');
+      a.id = 'toc-' + item.id;
+      a.href = '#' + item.id;
+      a.textContent = item.text;
+      a.style.cssText = item.id === activeId ? ACTIVE_STYLE : INACTIVE_STYLE;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        jumpTo(navEl, items, item.id);
+      });
+      navEl.appendChild(a);
+    });
+  }
+
+  function jumpTo(navEl, items, id) {
+    buildToc(navEl, items, id);
+    var heading = document.getElementById(id);
+    if (heading) heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var tocLink = document.getElementById('toc-' + id);
+    if (tocLink) tocLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  buildToc(document.getElementById('tocPersonal'), PERSONAL_TOC, 'p1');
+  buildToc(document.getElementById('tocMuseum'), MUSEUM_TOC, 'm1');
+
+  var btnPersonal = document.getElementById('btnPersonal');
+  var btnMuseum = document.getElementById('btnMuseum');
+  var tocPersonal = document.getElementById('tocPersonal');
+  var tocMuseum = document.getElementById('tocMuseum');
+  var panelPersonal = document.getElementById('panelPersonal');
+  var panelMuseum = document.getElementById('panelMuseum');
+
+  var SELECTED_HELP_BTN = 'background:#0d2a63;color:#fff;border:1px solid #0d2a63;padding:8px 18px;border-radius:7px;font-weight:600;font-size:13px;';
+  var UNSELECTED_HELP_BTN = 'background:#fff;color:#0d2a63;border:1px solid #d8cba8;padding:8px 18px;border-radius:7px;font-weight:600;font-size:13px;';
+
+  function showPersonal() {
+    btnPersonal.style.cssText = SELECTED_HELP_BTN;
+    btnMuseum.style.cssText = UNSELECTED_HELP_BTN;
+    tocPersonal.style.display = '';
+    tocMuseum.style.display = 'none';
+    panelPersonal.style.display = '';
+    panelMuseum.style.display = 'none';
+  }
+  function showMuseum() {
+    btnPersonal.style.cssText = UNSELECTED_HELP_BTN;
+    btnMuseum.style.cssText = SELECTED_HELP_BTN;
+    tocPersonal.style.display = 'none';
+    tocMuseum.style.display = '';
+    panelPersonal.style.display = 'none';
+    panelMuseum.style.display = '';
+  }
+  btnPersonal.addEventListener('click', showPersonal);
+  btnMuseum.addEventListener('click', showMuseum);
+</script>
+
+</body>
+</html>
