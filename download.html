@@ -25,7 +25,7 @@
 
   <!-- GET IT -->
   <div id="get" style="padding: 48px 48px 72px 48px; max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box;">
-    <p style="font-size: 14px; color: #8a7f63; text-align: center; margin-bottom: 40px; max-width: 540px; margin-left: auto; margin-right: auto;">Online checkout is coming soon. For now, send a purchase request below &mdash; we'll reply by email with how to pay, then your registration code.</p>
+    <p style="font-size: 14px; color: #8a7f63; text-align: center; margin-bottom: 40px; max-width: 540px; margin-left: auto; margin-right: auto;">Pick your edition and operating system, then check out securely &mdash; we'll follow up by email with your download and registration code.</p>
 
     <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch;">
 
@@ -82,22 +82,8 @@
             <div id="summaryPrice" style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #251f14;"></div>
           </div>
 
-          <div id="sentBox" style="display: none; background: #1f4a3a; border: 1px solid #2f6b52; border-radius: 8px; padding: 16px; font-size: 13px; color: #d7f2e4; text-align: left;">
-            Request sent &mdash; we'll reply by email with how to pay and your registration code.
-          </div>
-          <form id="buyForm" action="https://formsubmit.co/jgammans@gmail.com" method="POST" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
-            <input type="hidden" name="_subject" id="subjectField" value="">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_autoresponse" value="Thanks for your interest in Virtual Archive! We've received your purchase request and will reply soon with payment instructions and your registration code.">
-            <input type="hidden" name="_next" value="https://virtualarchive.org/download.html?sent=1">
-            <input type="hidden" name="Edition" id="tierField" value="">
-            <input type="hidden" name="Operating system" id="osField" value="">
-            <input id="nameInput" name="Name" type="text" placeholder="Your name" style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
-            <input id="emailInput" name="email" type="email" placeholder="Your email" style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
-            <div id="errorBox" style="display: none; font-size: 12px; color: #b5204a;">Enter your name and a valid email first.</div>
-            <button type="submit" id="submitLink" style="display: block; text-align: center; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px; margin-top: 4px; border: none; cursor: pointer; font-family: inherit;">Request to Buy</button>
-            <div style="font-size: 11px; color: #8a7f63; margin-top: 2px;">Sends your request straight to us &mdash; no email app required.</div>
-          </form>
+          <a id="buyButton" href="#" style="display: block; text-align: center; text-decoration: none; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px;">Buy Now</a>
+          <div style="font-size: 11px; color: #8a7f63; margin-top: 8px; text-align: center;">Secure checkout via Stripe. We'll email your download link and registration code after payment.</div>
         </div>
       </div>
 
@@ -113,8 +99,8 @@
 
 <script>
   var TIERS = {
-    personal: { key: 'personal', title: 'Personal', label: 'Personal — $150.00', price: '$150.00' },
-    museum: { key: 'museum', title: 'Museum', label: 'Museum — $495.00', price: '$495.00' }
+    personal: { key: 'personal', title: 'Personal', label: 'Personal — $150.00', price: '$150.00', payLink: 'https://buy.stripe.com/bJe5kDcu92BAazGfBD3Nm01' },
+    museum: { key: 'museum', title: 'Museum', label: 'Museum — $495.00', price: '$495.00', payLink: 'https://buy.stripe.com/3cIaEX9hX0tsfU0dtv3Nm00' }
   };
   var OSES = {
     windows: { key: 'windows', label: 'Windows' },
@@ -122,7 +108,7 @@
     linux: { key: 'linux', label: 'Linux' }
   };
 
-  var state = { tierKey: 'personal', osKey: 'windows', sent: false };
+  var state = { tierKey: 'personal', osKey: 'windows' };
 
   var SELECTED = 'background:#0d2a63;color:#fff;border:1px solid #0d2a63;padding:9px 18px;border-radius:7px;font-weight:600;font-size:14px;';
   var UNSELECTED = 'background:#fff;color:#0d2a63;border:1px solid #d8cba8;padding:9px 18px;border-radius:7px;font-weight:600;font-size:14px;';
@@ -131,19 +117,7 @@
   var osButtons = document.getElementById('osButtons');
   var summaryLabel = document.getElementById('summaryLabel');
   var summaryPrice = document.getElementById('summaryPrice');
-  var submitLink = document.getElementById('submitLink');
-  var nameInput = document.getElementById('nameInput');
-  var emailInput = document.getElementById('emailInput');
-  var errorBox = document.getElementById('errorBox');
-  var sentBox = document.getElementById('sentBox');
-  var formBox = document.getElementById('buyForm');
-  var subjectField = document.getElementById('subjectField');
-  var tierField = document.getElementById('tierField');
-  var osField = document.getElementById('osField');
-
-  if (new URLSearchParams(window.location.search).get('sent') === '1') {
-    state.sent = true;
-  }
+  var buyButton = document.getElementById('buyButton');
 
   function render() {
     tierButtons.innerHTML = '';
@@ -172,26 +146,9 @@
     var os = OSES[state.osKey];
     summaryLabel.textContent = tier.title + ' for ' + os.label;
     summaryPrice.textContent = tier.price;
-    submitLink.textContent = 'Request to Buy — ' + tier.price;
-
-    subjectField.value = 'Purchase request — Virtual Archive ' + tier.title + ' (' + tier.price + ')';
-    tierField.value = tier.title + ' — ' + tier.price;
-    osField.value = os.label;
-
-    sentBox.style.display = state.sent ? 'block' : 'none';
-    formBox.style.display = state.sent ? 'none' : 'flex';
+    buyButton.textContent = 'Buy Now — ' + tier.price;
+    buyButton.href = tier.payLink + '?client_reference_id=' + os.key;
   }
-
-  formBox.addEventListener('submit', function (e) {
-    if (!nameInput.value.trim() || emailInput.value.indexOf('@') < 1) {
-      e.preventDefault();
-      errorBox.style.display = 'block';
-      return;
-    }
-    errorBox.style.display = 'none';
-  });
-  nameInput.addEventListener('input', function () { errorBox.style.display = 'none'; });
-  emailInput.addEventListener('input', function () { errorBox.style.display = 'none'; });
 
   render();
 </script>
