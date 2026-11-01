@@ -84,15 +84,21 @@
           </div>
 
           <div id="sentBox" style="display: none; background: #1f4a3a; border: 1px solid #2f6b52; border-radius: 8px; padding: 16px; font-size: 13px; color: #d7f2e4; text-align: left;">
-            Request sent. If your email app didn't open, email <strong>jgammans@gmail.com</strong> directly with your name, the edition and the OS you want.
+            Request sent &mdash; we'll reply by email with how to pay and your registration code.
           </div>
-          <div id="formBox" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
-            <input id="nameInput" type="text" placeholder="Your name" style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
-            <input id="emailInput" type="email" placeholder="Your email" style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
+          <form id="buyForm" action="https://formsubmit.co/jgammans@gmail.com" method="POST" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+            <input type="hidden" name="_subject" id="subjectField" value="">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://virtualarchive.org/download.html?sent=1">
+            <input type="hidden" name="Edition" id="tierField" value="">
+            <input type="hidden" name="Operating system" id="osField" value="">
+            <input id="nameInput" name="Name" type="text" placeholder="Your name" style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
+            <input id="emailInput" name="Email" type="email" placeholder="Your email" style="background: #f6f1e7; border: 1px solid #e3d8bf; border-radius: 6px; padding: 10px 12px; color: #251f14; font-size: 14px;">
             <div id="errorBox" style="display: none; font-size: 12px; color: #b5204a;">Enter your name and a valid email first.</div>
-            <a id="submitLink" href="#" style="display: block; text-align: center; text-decoration: none; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px; margin-top: 4px;">Request to Buy</a>
-            <div style="font-size: 11px; color: #8a7f63; margin-top: 2px;">Opens an email with your request.</div>
-          </div>
+            <button type="submit" id="submitLink" style="display: block; text-align: center; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px; margin-top: 4px; border: none; cursor: pointer; font-family: inherit;">Request to Buy</button>
+            <div style="font-size: 11px; color: #8a7f63; margin-top: 2px;">Sends your request straight to us &mdash; no email app required.</div>
+          </form>
         </div>
       </div>
 
@@ -131,7 +137,14 @@
   var emailInput = document.getElementById('emailInput');
   var errorBox = document.getElementById('errorBox');
   var sentBox = document.getElementById('sentBox');
-  var formBox = document.getElementById('formBox');
+  var formBox = document.getElementById('buyForm');
+  var subjectField = document.getElementById('subjectField');
+  var tierField = document.getElementById('tierField');
+  var osField = document.getElementById('osField');
+
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    state.sent = true;
+  }
 
   function render() {
     tierButtons.innerHTML = '';
@@ -162,25 +175,21 @@
     summaryPrice.textContent = tier.price;
     submitLink.textContent = 'Request to Buy — ' + tier.price;
 
-    var subject = 'Thanks for your interest in Virtual Archive — ' + tier.title;
-    var body = 'Hi, I\'d like to purchase Virtual Archive (' + tier.title + ' — ' + tier.price + ').\n\n'
-      + 'Name: ' + nameInput.value + '\nEmail: ' + emailInput.value + '\nOperating system: ' + os.label + '\n\n'
-      + 'Please send payment instructions and my registration code.\n\nThanks!';
-    submitLink.href = 'mailto:jgammans@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    subjectField.value = 'Purchase request — Virtual Archive ' + tier.title + ' (' + tier.price + ')';
+    tierField.value = tier.title + ' — ' + tier.price;
+    osField.value = os.label;
 
     sentBox.style.display = state.sent ? 'block' : 'none';
     formBox.style.display = state.sent ? 'none' : 'flex';
   }
 
-  submitLink.addEventListener('click', function (e) {
+  formBox.addEventListener('submit', function (e) {
     if (!nameInput.value.trim() || emailInput.value.indexOf('@') < 1) {
       e.preventDefault();
       errorBox.style.display = 'block';
       return;
     }
     errorBox.style.display = 'none';
-    state.sent = true;
-    render();
   });
   nameInput.addEventListener('input', function () { errorBox.style.display = 'none'; });
   emailInput.addEventListener('input', function () { errorBox.style.display = 'none'; });
