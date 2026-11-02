@@ -84,6 +84,7 @@
 
           <a id="buyButton" href="#" style="display: block; text-align: center; text-decoration: none; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px;">Buy Now</a>
           <div style="font-size: 11px; color: #8a7f63; margin-top: 8px; text-align: center;">Secure checkout via Stripe. We'll email your download link and registration code after payment.</div>
+          <div id="securityNote" style="font-size: 11px; color: #8a7f63; margin-top: 6px; text-align: center;"></div>
         </div>
       </div>
 
@@ -107,6 +108,11 @@
     mac: { key: 'mac', label: 'macOS' },
     linux: { key: 'linux', label: 'Linux' }
   };
+  var SECURITY_NOTES = {
+    windows: 'Windows will show a SmartScreen warning since the installer isn’t yet signed — click "More info" then "Run anyway" to continue.',
+    mac: 'macOS will flag it as from an unidentified developer — right-click the app and choose "Open" to continue.',
+    linux: 'On Linux, just make the installer executable (chmod +x) and run it — no security warning to click through.'
+  };
 
   var state = { tierKey: 'personal', osKey: 'windows' };
 
@@ -118,6 +124,7 @@
   var summaryLabel = document.getElementById('summaryLabel');
   var summaryPrice = document.getElementById('summaryPrice');
   var buyButton = document.getElementById('buyButton');
+  var securityNote = document.getElementById('securityNote');
 
   function render() {
     tierButtons.innerHTML = '';
@@ -148,6 +155,7 @@
     summaryPrice.textContent = tier.price;
     buyButton.textContent = 'Buy Now — ' + tier.price;
     buyButton.href = tier.payLink + '?client_reference_id=' + os.key;
+    securityNote.textContent = SECURITY_NOTES[os.key];
   }
 
   render();
