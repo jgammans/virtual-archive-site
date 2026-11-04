@@ -77,14 +77,22 @@
           <div style="font-family: 'Courier New', Consolas, monospace; font-size: 13px; font-weight: 700; color: #8a7f63; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">Operating system</div>
           <div id="osButtons" style="display: flex; gap: 10px; margin-bottom: 28px;"></div>
 
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Email address</label>
+          <input id="emailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 16px;">
+
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Collection name</label>
+          <input id="collectionNameInput" type="text" placeholder="e.g. Smith Family Archive" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 6px;">
+          <div style="font-size: 11px; color: #8a7f63; margin-bottom: 20px;">Your registration code is tied to this name, so use whatever you plan to call your collection in the program.</div>
+
           <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #e3d8bf; padding-top: 20px; margin-bottom: 20px;">
             <div id="summaryLabel" style="font-size: 15px; color: #4a4330;"></div>
             <div id="summaryPrice" style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #251f14;"></div>
           </div>
 
-          <a id="buyButton" href="#" style="display: block; text-align: center; text-decoration: none; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px;">Buy Now</a>
+          <button id="buyButton" type="button" style="display: block; width: 100%; text-align: center; text-decoration: none; background: #1f6b4a; color: #fff; padding: 13px 0; border-radius: 8px; font-weight: 700; font-size: 15px; border: none; cursor: pointer;">Buy Now</button>
           <div style="font-size: 11px; color: #8a7f63; margin-top: 8px; text-align: center;">Secure checkout via Stripe. We'll email your download link and registration code after payment.</div>
           <div id="securityNote" style="font-size: 14px; color: #000; margin-top: 6px; text-align: center;"></div>
+          <div id="orderMessage" style="font-size: 13px; margin-top: 10px; text-align: center;"></div>
         </div>
       </div>
 
@@ -107,8 +115,8 @@
 
 <script>
   var TIERS = {
-    personal: { key: 'personal', title: 'Personal', label: 'Personal — $150.00', price: '$150.00', payLink: 'https://buy.stripe.com/bJe5kDcu92BAazGfBD3Nm01' },
-    museum: { key: 'museum', title: 'Museum', label: 'Museum — $495.00', price: '$495.00', payLink: 'https://buy.stripe.com/3cIaEX9hX0tsfU0dtv3Nm00' }
+    personal: { key: 'personal', title: 'Personal', label: 'Personal — $150.00', price: '$150.00' },
+    museum: { key: 'museum', title: 'Museum', label: 'Museum — $495.00', price: '$495.00' }
   };
   var OSES = {
     windows: { key: 'windows', label: 'Windows' },
@@ -116,6 +124,8 @@
     linux: { key: 'linux', label: 'Linux' }
   };
   var MAC_SECURITY_NOTE = 'macOS will say it can’t check the app for malicious software — hold Control and click it, choose "Open," then "Open" again. If no Open button appears, go to System Settings → Privacy & Security and click "Open Anyway."';
+
+  var WORKER_URL = 'https://virtual-archive-fulfillment.virtual-archive-fulfillment.workers.dev';
 
   var state = { tierKey: 'personal', osKey: 'windows' };
 
@@ -128,6 +138,9 @@
   var summaryPrice = document.getElementById('summaryPrice');
   var buyButton = document.getElementById('buyButton');
   var securityNote = document.getElementById('securityNote');
+  var emailInput = document.getElementById('emailInput');
+  var collectionNameInput = document.getElementById('collectionNameInput');
+  var orderMessage = document.getElementById('orderMessage');
 
   function render() {
     tierButtons.innerHTML = '';
@@ -157,9 +170,57 @@
     summaryLabel.textContent = tier.title + ' for ' + os.label;
     summaryPrice.textContent = tier.price;
     buyButton.textContent = 'Buy Now — ' + tier.price;
-    buyButton.href = tier.payLink + '?client_reference_id=' + os.key;
     securityNote.textContent = (os.key === 'mac') ? MAC_SECURITY_NOTE : '';
   }
+
+  buyButton.addEventListener('click', function () {
+    var email = emailInput.value.trim();
+    var collectionName = collectionNameInput.value.trim();
+
+    orderMessage.style.color = '#a33';
+    if (!email || email.indexOf('@') === -1) {
+      orderMessage.textContent = 'Enter a valid email address.';
+      return;
+    }
+    if (!collectionName) {
+      orderMessage.textContent = 'Enter a name for your collection.';
+      return;
+    }
+
+    orderMessage.style.color = '#4a4330';
+    orderMessage.textContent = 'Setting up checkout…';
+    buyButton.disabled = true;
+
+    fetch(WORKER_URL + '/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tier: state.tierKey,
+        os: state.osKey,
+        email: email,
+        collectionName: collectionName
+      })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.bypass) {
+          orderMessage.style.color = '#1f6b4a';
+          orderMessage.textContent = 'Test order — fulfillment email sent to ' + email + '.';
+        } else if (data.url) {
+          window.location.href = data.url;
+          return;
+        } else {
+          orderMessage.style.color = '#a33';
+          orderMessage.textContent = 'Something went wrong: ' + (data.error || 'unknown error');
+        }
+        buyButton.disabled = false;
+      })
+      .catch(function () {
+        orderMessage.style.color = '#a33';
+        orderMessage.textContent = 'Could not reach the order system. Try again in a moment.';
+        buyButton.disabled = false;
+      });
+  });
 
   render();
 </script>
