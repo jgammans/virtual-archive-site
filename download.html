@@ -78,11 +78,7 @@
           <div id="osButtons" style="display: flex; gap: 10px; margin-bottom: 28px;"></div>
 
           <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Email address</label>
-          <input id="emailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 16px;">
-
-          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Collection name</label>
-          <input id="collectionNameInput" type="text" placeholder="e.g. Smith Family Archive" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 6px;">
-          <div style="font-size: 11px; color: #8a7f63; margin-bottom: 20px;">Your registration code is tied to this name, so use whatever you plan to call your collection in the program.</div>
+          <input id="emailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 20px;">
 
           <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #e3d8bf; padding-top: 20px; margin-bottom: 20px;">
             <div id="summaryLabel" style="font-size: 15px; color: #4a4330;"></div>
@@ -139,7 +135,6 @@
   var buyButton = document.getElementById('buyButton');
   var securityNote = document.getElementById('securityNote');
   var emailInput = document.getElementById('emailInput');
-  var collectionNameInput = document.getElementById('collectionNameInput');
   var orderMessage = document.getElementById('orderMessage');
 
   function render() {
@@ -175,15 +170,10 @@
 
   buyButton.addEventListener('click', function () {
     var email = emailInput.value.trim();
-    var collectionName = collectionNameInput.value.trim();
 
     orderMessage.style.color = '#a33';
     if (!email || email.indexOf('@') === -1) {
       orderMessage.textContent = 'Enter a valid email address.';
-      return;
-    }
-    if (!collectionName) {
-      orderMessage.textContent = 'Enter a name for your collection.';
       return;
     }
 
@@ -197,8 +187,7 @@
       body: JSON.stringify({
         tier: state.tierKey,
         os: state.osKey,
-        email: email,
-        collectionName: collectionName
+        email: email
       })
     })
       .then(function (res) { return res.json(); })
