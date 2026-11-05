@@ -118,8 +118,18 @@
     <!-- QUESTIONS -->
     <div style="background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; padding: 28px 32px; text-align: center; margin-top: 32px;">
       <h3 style="font-size: 18px; color: #251f14; margin-bottom: 8px;">Already cataloging somewhere else?</h3>
-      <p style="font-size: 14px; color: #4a4330; line-height: 1.5; max-width: 620px; margin: 0 auto 16px auto;">If your collection is in PastPerfect or another program, it may be possible to bring it into Virtual Archive &mdash; it depends on what your export has to work with, but if the fields are there, it usually can be done. This isn't something you download and run yourself; it's a service we do by request. Email us a bit about your collection (what program it's in, roughly how many items) and we'll let you know.</p>
-      <a href="mailto:jgammans@gmail.com?subject=Importing%20my%20collection&body=What%20program%20is%20your%20collection%20in%2C%20and%20roughly%20how%20many%20items%3F" style="display: inline-block; text-decoration: none; background: #0d2a63; color: #fff; padding: 11px 24px; border-radius: 8px; font-weight: 700; font-size: 14px;">Email about your collection</a>
+      <p style="font-size: 14px; color: #4a4330; line-height: 1.5; max-width: 620px; margin: 0 auto 16px auto;">If your collection is in PastPerfect or another program, it may be possible to bring it into Virtual Archive &mdash; it depends on what your export has to work with, but if the fields are there, it usually can be done. This isn't something you download and run yourself; it's a service we do by request. Tell us a bit about your collection (what program it's in, roughly how many items) and we'll let you know.</p>
+
+      <div style="max-width: 460px; margin: 0 auto; text-align: left;">
+        <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Your email address</label>
+        <input id="collectionEmailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 14px;">
+
+        <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">What program is it in, and roughly how many items?</label>
+        <textarea id="collectionMessageInput" rows="4" placeholder="e.g. PastPerfect, about 2,400 items" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 16px; font-family: inherit; resize: vertical;"></textarea>
+
+        <button id="collectionSendButton" type="button" style="display: block; width: 100%; text-align: center; background: #0d2a63; color: #fff; padding: 11px 0; border-radius: 8px; font-weight: 700; font-size: 14px; border: none; cursor: pointer;">Send</button>
+        <div id="collectionMessageStatus" style="font-size: 13px; margin-top: 10px; text-align: center;"></div>
+      </div>
     </div>
   </div>
 
@@ -239,6 +249,55 @@
   });
 
   render();
+
+  (function () {
+    var collectionEmailInput = document.getElementById('collectionEmailInput');
+    var collectionMessageInput = document.getElementById('collectionMessageInput');
+    var collectionSendButton = document.getElementById('collectionSendButton');
+    var collectionMessageStatus = document.getElementById('collectionMessageStatus');
+
+    collectionSendButton.addEventListener('click', function () {
+      var email = collectionEmailInput.value.trim();
+      var message = collectionMessageInput.value.trim();
+
+      collectionMessageStatus.style.color = '#a33';
+      if (!email || email.indexOf('@') === -1) {
+        collectionMessageStatus.textContent = 'Enter a valid email address.';
+        return;
+      }
+      if (!message) {
+        collectionMessageStatus.textContent = 'Tell us a bit about your collection first.';
+        return;
+      }
+
+      collectionMessageStatus.style.color = '#4a4330';
+      collectionMessageStatus.textContent = 'Sending…';
+      collectionSendButton.disabled = true;
+
+      fetch(WORKER_URL + '/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, message: message })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.ok) {
+            collectionMessageStatus.style.color = '#1f6b4a';
+            collectionMessageStatus.textContent = 'Sent — we’ll get back to you soon.';
+            collectionMessageInput.value = '';
+          } else {
+            collectionMessageStatus.style.color = '#a33';
+            collectionMessageStatus.textContent = 'Something went wrong: ' + (data.error || 'unknown error');
+            collectionSendButton.disabled = false;
+          }
+        })
+        .catch(function () {
+          collectionMessageStatus.style.color = '#a33';
+          collectionMessageStatus.textContent = 'Could not reach the server. Try again in a moment.';
+          collectionSendButton.disabled = false;
+        });
+    });
+  })();
 
   (function () {
     var params = new URLSearchParams(window.location.search);
