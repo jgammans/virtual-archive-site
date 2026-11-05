@@ -116,19 +116,25 @@
     </div>
 
     <!-- QUESTIONS -->
-    <div style="background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; padding: 28px 32px; text-align: center; margin-top: 32px;">
-      <h3 style="font-size: 18px; color: #251f14; margin-bottom: 8px;">Already cataloging somewhere else?</h3>
-      <p style="font-size: 14px; color: #4a4330; line-height: 1.5; max-width: 620px; margin: 0 auto 16px auto;">If your collection is in PastPerfect or another program, it may be possible to bring it into Virtual Archive &mdash; it depends on what your export has to work with, but if the fields are there, it usually can be done. This isn't something you download and run yourself; it's a service we do by request. Tell us a bit about your collection (what program it's in, roughly how many items) and we'll let you know.</p>
+    <div style="background: #fff; border: 1px solid #e3d8bf; border-radius: 10px; padding: 28px 32px; margin-top: 32px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;">
 
-      <div style="max-width: 460px; margin: 0 auto; text-align: left;">
-        <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Your email address</label>
-        <input id="collectionEmailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 14px;">
+        <div style="flex: 1 1 320px; min-width: 0; text-align: left;">
+          <h3 style="font-size: 18px; color: #251f14; margin-bottom: 8px;">Already cataloging somewhere else?</h3>
+          <p style="font-size: 14px; color: #4a4330; line-height: 1.5; margin: 0;">If your collection is in PastPerfect or another program, it may be possible to bring it into Virtual Archive &mdash; it depends on what your export has to work with, but if the fields are there, it usually can be done. This isn't something you download and run yourself; it's a service we do by request. Tell us a bit about your collection and we'll let you know.</p>
+        </div>
 
-        <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">What program is it in, and roughly how many items?</label>
-        <textarea id="collectionMessageInput" rows="4" placeholder="e.g. PastPerfect, about 2,400 items" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 16px; font-family: inherit; resize: vertical;"></textarea>
+        <div style="flex: 1 1 320px; min-width: 0; max-width: 460px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Your email address</label>
+          <input id="collectionEmailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 14px;">
 
-        <button id="collectionSendButton" type="button" style="display: block; width: 100%; text-align: center; background: #0d2a63; color: #fff; padding: 11px 0; border-radius: 8px; font-weight: 700; font-size: 14px; border: none; cursor: pointer;">Send</button>
-        <div id="collectionMessageStatus" style="font-size: 13px; margin-top: 10px; text-align: center;"></div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">What program is it in, roughly how many items, and anything else we should know?</label>
+          <textarea id="collectionMessageInput" rows="4" placeholder="e.g. PastPerfect, about 2,400 items, mostly photos and a few donor records" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 16px; font-family: inherit; resize: vertical;"></textarea>
+
+          <button id="collectionSendButton" type="button" style="display: block; width: 100%; text-align: center; background: #0d2a63; color: #fff; padding: 11px 0; border-radius: 8px; font-weight: 700; font-size: 14px; border: none; cursor: pointer;">Send</button>
+          <div id="collectionMessageStatus" style="font-size: 13px; margin-top: 10px; text-align: center;"></div>
+        </div>
+
       </div>
     </div>
   </div>
