@@ -34,6 +34,7 @@
 
   <!-- GET IT -->
   <div id="get" style="padding: 20px 48px 40px 48px; max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+    <div id="orderStatusBanner" style="display: none; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; font-size: 14px; line-height: 1.5; text-align: center;"></div>
     <p style="font-size: 14px; color: #000; text-align: center; margin-bottom: 20px; white-space: nowrap;">Pick your edition and operating system, then check out securely &mdash; we'll follow up by email with your download and registration code.</p>
 
     <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch;">
@@ -238,6 +239,25 @@
   });
 
   render();
+
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var order = params.get('order');
+    var banner = document.getElementById('orderStatusBanner');
+    if (order === 'success') {
+      banner.style.display = 'block';
+      banner.style.background = '#e9f5ee';
+      banner.style.border = '1px solid #1f6b4a';
+      banner.style.color = '#1f6b4a';
+      banner.textContent = 'Payment received — thank you! Check your email in the next few minutes for your download link and registration code. If it doesn’t arrive, check spam, or reply to the receipt from Stripe and we’ll sort it out.';
+    } else if (order === 'canceled') {
+      banner.style.display = 'block';
+      banner.style.background = '#fbeeee';
+      banner.style.border = '1px solid #a33';
+      banner.style.color = '#a33';
+      banner.textContent = 'Checkout was canceled — you were not charged. Feel free to try again whenever you’re ready.';
+    }
+  })();
 </script>
 </body>
 </html>
