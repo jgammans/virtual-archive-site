@@ -80,6 +80,17 @@
           <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Email address</label>
           <input id="emailInput" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 20px;">
 
+          <div style="font-size: 11px; color: #8a7f63; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;">Optional &mdash; not required to check out</div>
+
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Name <span style="font-weight: 400; color: #8a7f63;">(optional)</span></label>
+          <input id="nameInput" type="text" placeholder="Your name" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 14px;">
+
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">Phone <span style="font-weight: 400; color: #8a7f63;">(optional)</span></label>
+          <input id="phoneInput" type="tel" placeholder="Phone number" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 14px;">
+
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #251f14; margin-bottom: 5px;">What will you use it for? <span style="font-weight: 400; color: #8a7f63;">(optional)</span></label>
+          <input id="useInput" type="text" placeholder="e.g. family photo archive, museum accessions" style="width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1px solid #d8cba8; border-radius: 6px; font-size: 14px; margin-bottom: 20px;">
+
           <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #e3d8bf; padding-top: 20px; margin-bottom: 20px;">
             <div id="summaryLabel" style="font-size: 15px; color: #4a4330;"></div>
             <div id="summaryPrice" style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #251f14;"></div>
@@ -135,6 +146,9 @@
   var buyButton = document.getElementById('buyButton');
   var securityNote = document.getElementById('securityNote');
   var emailInput = document.getElementById('emailInput');
+  var nameInput = document.getElementById('nameInput');
+  var phoneInput = document.getElementById('phoneInput');
+  var useInput = document.getElementById('useInput');
   var orderMessage = document.getElementById('orderMessage');
 
   function render() {
@@ -187,7 +201,10 @@
       body: JSON.stringify({
         tier: state.tierKey,
         os: state.osKey,
-        email: email
+        email: email,
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        use: useInput.value.trim()
       })
     })
       .then(function (res) { return res.json(); })
